@@ -20,7 +20,9 @@ export default function Home() {
     <>
       <header className="site-header">
         <nav className="shell nav" aria-label="Primary navigation">
-          <a className="wordmark" href="#top" aria-label="Onzio home">onzio</a>
+          <a className="wordmark" href="#top" aria-label="Onzio home">
+            onzio <span className="wordmark-emoji" aria-hidden="true">⚽</span>
+          </a>
           <div className="nav-links">
             <a className="nav-text-link" href="#work">Work</a>
             <a className="nav-text-link" href="#about">About</a>

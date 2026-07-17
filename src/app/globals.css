@@ -42,7 +42,20 @@ svg { flex: none; }
   backdrop-filter: blur(20px) saturate(140%);
 }
 .nav { min-height: 66px; display: flex; align-items: center; justify-content: space-between; }
-.wordmark { font-size: 19px; font-weight: 720; letter-spacing: -0.055em; }
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 19px;
+  font-weight: 720;
+  letter-spacing: -0.055em;
+}
+
+.wordmark-emoji {
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 1;
+}
 .nav-links { display: flex; align-items: center; gap: 26px; font-size: 14px; }
 .nav-text-link { color: var(--muted); transition: color 180ms ease; }
 .nav-text-link:hover { color: var(--ink); }
