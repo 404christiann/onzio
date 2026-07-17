@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Onzio builds modern digital homes for ambitious soccer clubs." />
+  <title>Onzio — Digital homes for soccer clubs</title>
+  <style>
+    :root {
+      --ink: #101114;
+      --muted: #656a73;
+      --paper: #f7f8fa;
+      --white: #ffffff;
+      --line: #dedfe3;
+      --blue: #1268f3;
+      --blue-dark: #0755cc;
+      --shadow: 0 32px 80px rgba(17, 24, 39, 0.13);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea { font: inherit; }
+    :focus-visible { outline: 3px solid rgba(18, 104, 243, .35); outline-offset: 4px; }
+
+    .wrap { width: min(1180px, calc(100% - 48px)); margin: 0 auto; }
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(222, 223, 227, .7);
+      background: rgba(247, 248, 250, .82);
+      backdrop-filter: blur(20px) saturate(140%);
+    }
+    .nav-inner { height: 66px; display: flex; align-items: center; justify-content: space-between; }
+    .brand { font-size: 19px; font-weight: 700; letter-spacing: -.04em; }
+    .nav-links { display: flex; align-items: center; gap: 26px; font-size: 14px; }
+    .nav-links a:not(.pill) { color: var(--muted); }
+    .nav-links a:hover { color: var(--ink); }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 20px;
+      border-radius: 999px;
+      background: var(--blue);
+      color: white;
+      border: 0;
+      cursor: pointer;
+      font-weight: 600;
+      transition: transform .2s ease, background .2s ease;
+    }
+    .pill:hover { transform: translateY(-1px); background: var(--blue-dark); }
+    .pill.secondary { color: var(--blue); background: transparent; padding-inline: 8px; }
+    .pill.secondary:hover { background: transparent; }
+
+    .hero { padding: 126px 0 98px; text-align: center; overflow: hidden; }
+    .eyebrow { color: var(--blue); font-size: 14px; font-weight: 650; letter-spacing: .01em; margin-bottom: 22px; }
+    h1 {
+      max-width: 920px;
+      margin: 0 auto;
+      font-size: clamp(54px, 7.5vw, 96px);
+      line-height: .94;
+      letter-spacing: -.065em;
+      font-weight: 720;
+    }
+    .hero p {
+      max-width: 650px;
+      margin: 30px auto 0;
+      color: var(--muted);
+      font-size: clamp(19px, 2.2vw, 24px);
+      line-height: 1.45;
+      letter-spacing: -.02em;
+    }
+    .hero-actions { display: flex; justify-content: center; gap: 20px; margin-top: 36px; align-items: center; }
+
+    .showcase { padding: 28px 0 140px; }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 30px; margin-bottom: 34px; }
+    .label { color: var(--muted); font-size: 13px; font-weight: 650; text-transform: uppercase; letter-spacing: .12em; }
+    h2 { margin: 9px 0 0; font-size: clamp(34px, 5vw, 62px); line-height: 1; letter-spacing: -.05em; }
+    .case-link { color: var(--blue); font-weight: 600; white-space: nowrap; }
+
+    .browser {
+      overflow: hidden;
+      border: 1px solid #d4d6da;
+      border-radius: 24px;
+      background: #111;
+      box-shadow: var(--shadow);
+      transform: translateZ(0);
+    }
+    .browser-bar { height: 52px; background: #eceef1; display: flex; align-items: center; padding: 0 18px; gap: 8px; }
+    .dot { width: 11px; height: 11px; border-radius: 50%; background: #c7c9ce; }
+    .address { margin: 0 auto; width: min(430px, 55%); height: 28px; border-radius: 9px; background: white; color: #787d86; display: grid; place-items: center; font-size: 12px; }
+    .browser iframe { width: 100%; height: min(720px, 64vw); min-height: 520px; display: block; border: 0; background: #111; }
+    .case-caption { display: flex; justify-content: space-between; gap: 30px; padding-top: 25px; color: var(--muted); }
+    .case-caption strong { color: var(--ink); }
+
+    .about { padding: 140px 0; background: var(--white); }
+    .about-grid { display: grid; grid-template-columns: .7fr 1.3fr; gap: 80px; align-items: start; }
+    .about-copy { max-width: 750px; font-size: clamp(30px, 4vw, 52px); line-height: 1.1; letter-spacing: -.045em; margin: 0; }
+    .about-note { color: var(--muted); font-size: 17px; line-height: 1.6; margin-top: 32px; max-width: 570px; }
+
+    .contact { padding: 150px 0; text-align: center; }
+    .contact h2 { max-width: 760px; margin-inline: auto; }
+    .contact > .wrap > p { max-width: 570px; margin: 24px auto 38px; color: var(--muted); font-size: 19px; line-height: 1.5; }
+    .form { max-width: 700px; margin: 50px auto 0; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; text-align: left; }
+    .field { display: grid; gap: 8px; }
+    .field.full { grid-column: 1 / -1; }
+    label { color: var(--muted); font-size: 13px; font-weight: 600; }
+    input, textarea {
+      width: 100%; border: 1px solid var(--line); background: white; border-radius: 14px;
+      padding: 15px 16px; color: var(--ink); outline: none;
+    }
+    textarea { min-height: 110px; resize: vertical; }
+    input:focus, textarea:focus { border-color: var(--blue); box-shadow: 0 0 0 4px rgba(18, 104, 243, .1); }
+    .form .pill { grid-column: 1 / -1; justify-self: center; margin-top: 10px; min-width: 170px; }
+    .form-status { grid-column: 1 / -1; text-align: center; color: var(--blue); min-height: 22px; }
+
+    footer { border-top: 1px solid var(--line); padding: 30px 0; color: var(--muted); font-size: 13px; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 760px) {
+      .wrap { width: min(100% - 30px, 1180px); }
+      .nav-links a:not(.pill) { display: none; }
+      .hero { padding: 92px 0 70px; }
+      .hero-actions { flex-direction: column; gap: 8px; }
+      .section-head, .case-caption, .footer-inner { align-items: flex-start; flex-direction: column; }
+      .browser { border-radius: 15px; }
+      .browser-bar { height: 40px; padding: 0 12px; }
+      .dot { width: 8px; height: 8px; }
+      .address { height: 23px; font-size: 9px; }
+      .browser iframe { min-height: 540px; }
+      .showcase { padding-bottom: 95px; }
+      .about { padding: 95px 0; }
+      .about-grid { grid-template-columns: 1fr; gap: 30px; }
+      .contact { padding: 100px 0; }
+      .form { grid-template-columns: 1fr; }
+      .field.full, .form .pill, .form-status { grid-column: 1; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav" aria-label="Primary navigation">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top">onzio</a>
+      <div class="nav-links">
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a class="pill" href="#contact">Book a demo</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap reveal">
+        <div class="eyebrow">Digital platforms for soccer clubs</div>
+        <h1>Your club deserves a better home.</h1>
+        <p>I design, build, and manage modern club websites that look professional and work beautifully.</p>
+        <div class="hero-actions">
+          <a class="pill" href="#contact">Book a demo</a>
+          <a class="pill secondary" href="#work">View the work&nbsp; ↓</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="showcase" id="work">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <div class="label">Featured work</div>
+            <h2>Rose City FC</h2>
+          </div>
+          <a class="case-link" href="https://rose-city-website.vercel.app" target="_blank" rel="noreferrer">Visit the live site ↗</a>
+        </div>
+
+        <div class="browser reveal">
+          <div class="browser-bar" aria-hidden="true">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <div class="address">rose-city-website.vercel.app</div>
+          </div>
+          <iframe src="https://rose-city-website.vercel.app" title="Live preview of the Rose City FC website" loading="lazy"></iframe>
+        </div>
+
+        <div class="case-caption reveal">
+          <span><strong>A complete digital home</strong> for a semi-professional soccer club.</span>
+          <span>Pasadena, California</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <div class="wrap about-grid reveal">
+        <div class="label">About</div>
+        <div>
+          <p class="about-copy">Built by someone who understands both software and the game.</p>
+          <p class="about-note">I’m Christian Alcala, a software engineer building thoughtful digital experiences for soccer organizations. You work directly with me from the first conversation through launch and ongoing support.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="wrap reveal">
+        <div class="label">Start a conversation</div>
+        <h2>Let’s build your club’s digital home.</h2>
+        <p>Tell me a little about your club and I’ll follow up to schedule a short demo.</p>
+
+        <form class="form" id="demo-form">
+          <div class="field">
+            <label for="name">Your name</label>
+            <input id="name" name="name" autocomplete="name" required placeholder="Alex Morgan" />
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required placeholder="alex@yourclub.com" />
+          </div>
+          <div class="field full">
+            <label for="club">Club</label>
+            <input id="club" name="club" autocomplete="organization" placeholder="Your club name" />
+          </div>
+          <div class="field full">
+            <label for="message">What are you looking for?</label>
+            <textarea id="message" name="message" placeholder="A new website, easier roster updates, a better way to share match information…"></textarea>
+          </div>
+          <button class="pill" type="submit">Request a demo</button>
+          <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <span>© 2026 Onzio</span>
+      <span>Built for the world’s game.</span>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
+
+    document.getElementById('demo-form').addEventListener('submit', (event) => {
+      event.preventDefault();
+      document.getElementById('form-status').textContent = 'Prototype only — we’ll connect this to your booking flow in the real build.';
+    });
+  </script>
+</body>
+</html>
