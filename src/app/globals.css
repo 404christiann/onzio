@@ -127,31 +127,6 @@ svg { flex: none; }
 .section-heading .eyebrow { margin-bottom: 10px; }
 .case-link { margin-bottom: 5px; }
 .platform-intro { max-width: 680px; margin: -8px 0 27px; color: var(--muted); font-size: 18px; line-height: 1.55; letter-spacing: -0.02em; }
-.showcase-switcher {
-  width: fit-content;
-  margin-bottom: 18px;
-  padding: 4px;
-  display: flex;
-  gap: 3px;
-  border: 1px solid #dfe1e5;
-  border-radius: 999px;
-  background: #ebecef;
-}
-.showcase-tab {
-  min-height: 40px;
-  padding-inline: 18px;
-  border: 0;
-  border-radius: 999px;
-  color: var(--muted);
-  background: transparent;
-  font: inherit;
-  font-size: 14px;
-  font-weight: 620;
-  cursor: pointer;
-  transition: color 180ms ease, background 180ms ease, box-shadow 180ms ease;
-}
-.showcase-tab[aria-pressed="true"] { color: var(--ink); background: var(--white); box-shadow: 0 2px 8px rgba(17, 24, 39, 0.1); }
-.showcase-tab:hover { color: var(--ink); }
 .browser-frame {
   overflow: hidden;
   border: 1px solid #d4d6da;
@@ -166,7 +141,6 @@ svg { flex: none; }
 .browser-address { height: 28px; display: grid; place-items: center; border-radius: 9px; background: var(--white); color: #787d86; font-size: 12px; }
 .browser-spacer { height: 1px; }
 .browser-frame iframe { width: 100%; height: min(720px, 64vw); min-height: 520px; display: block; border: 0; background: #111; }
-.browser-frame video { width: 100%; aspect-ratio: 16 / 9; display: block; background: #101010; object-fit: cover; }
 .case-caption { padding-top: 25px; display: flex; justify-content: space-between; gap: 30px; color: var(--muted); font-size: 15px; }
 .case-caption p { margin: 0; }
 .case-caption strong { color: var(--ink); font-weight: 620; }
@@ -202,8 +176,6 @@ footer { border-top: 1px solid var(--line); color: var(--muted); font-size: 13px
   .work-section { padding-block: 42px 100px; }
   .section-heading { align-items: flex-start; flex-direction: column; gap: 25px; }
   .platform-intro { margin-top: -5px; font-size: 17px; }
-  .showcase-switcher { width: 100%; }
-  .showcase-tab { flex: 1; padding-inline: 10px; }
   .browser-frame { border-radius: 16px; }
   .browser-toolbar { height: 42px; padding-inline: 12px; grid-template-columns: 1fr minmax(150px, 58%) 1fr; }
   .browser-dots { gap: 5px; }

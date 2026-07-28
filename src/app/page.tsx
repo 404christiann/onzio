@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { PlatformShowcase } from "@/components/platform-showcase";
 
-const roseCityUrl = "https://rosecityfutbolclub.com/";
+const deportivoOlimpicoUrl = "https://deportivo-olimpico.vercel.app/";
 const bookingUrl = process.env.NEXT_PUBLIC_BOOKING_URL ?? "https://calendly.com/onzio";
 
 const ArrowUpRight = () => (
@@ -53,12 +53,12 @@ export default function Home() {
         <section className="work-section shell" id="work" aria-labelledby="work-title">
           <div className="section-heading">
             <div>
-              <p className="eyebrow">Featured platform</p>
-              <h2 id="work-title">Rose City FC</h2>
+              <p className="eyebrow">Featured concept</p>
+              <h2 id="work-title">Deportivo Olimpico</h2>
             </div>
-            <a className="text-action case-link" href={roseCityUrl} target="_blank" rel="noreferrer">Visit the live site <ArrowUpRight /></a>
+            <a className="text-action case-link" href={deportivoOlimpicoUrl} target="_blank" rel="noreferrer">Visit the live site <ArrowUpRight /></a>
           </div>
-          <p className="platform-intro">A public home for supporters, connected to a private workspace for the people running the club.</p>
+          <p className="platform-intro">A tailored public website concept built around the identity and history of a Central Coast club.</p>
           <PlatformShowcase />
         </section>
 
