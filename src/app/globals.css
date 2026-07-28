@@ -6,8 +6,9 @@
   --paper: #f7f8fa;
   --white: #ffffff;
   --line: #dedfe3;
-  --blue: #1268f3;
-  --blue-dark: #0755cc;
+  --green: #12a140;
+  --green-hover: #0f9139;
+  --green-ink: #08752c;
   --shadow: 0 32px 80px rgba(17, 24, 39, 0.13);
 }
 
@@ -30,7 +31,7 @@ body {
 
 a { color: inherit; text-decoration: none; }
 svg { flex: none; }
-:focus-visible { outline: 3px solid rgba(18, 104, 243, 0.3); outline-offset: 4px; }
+:focus-visible { outline: 3px solid rgba(18, 161, 64, 0.32); outline-offset: 4px; }
 
 .shell { width: min(1180px, calc(100% - 48px)); margin-inline: auto; }
 .site-header {
@@ -72,16 +73,16 @@ svg { flex: none; }
   padding: 0 23px;
   border-radius: 999px;
   color: var(--white);
-  background: var(--blue);
+  background: var(--green);
   font-size: 15px;
   font-weight: 640;
   transition: background 180ms ease, transform 180ms ease, box-shadow 180ms ease;
 }
-.button:hover { background: var(--blue-dark); transform: translateY(-1px); box-shadow: 0 9px 22px rgba(18, 104, 243, 0.22); }
+.button:hover { background: var(--green-hover); transform: translateY(-1px); box-shadow: 0 9px 22px rgba(18, 161, 64, 0.22); }
 .button-small { min-height: 40px; padding-inline: 18px; font-size: 14px; }
 .button-large { min-height: 54px; padding-inline: 28px; }
-.text-action { display: inline-flex; align-items: center; gap: 7px; color: var(--blue); font-size: 15px; font-weight: 620; }
-.text-action:hover { color: var(--blue-dark); }
+.text-action { display: inline-flex; align-items: center; gap: 7px; color: var(--green-ink); font-size: 15px; font-weight: 620; }
+.text-action:hover { color: var(--ink); }
 
 .hero {
   min-height: calc(100svh - 66px);
@@ -92,7 +93,7 @@ svg { flex: none; }
   justify-content: center;
   text-align: center;
 }
-.eyebrow { margin: 0 0 21px; color: var(--blue); font-size: 13px; font-weight: 680; letter-spacing: 0.01em; }
+.eyebrow { margin: 0 0 21px; color: var(--green-ink); font-size: 13px; font-weight: 680; letter-spacing: 0.01em; }
 .hero-eyebrow { animation: rise 650ms 80ms both; }
 .hero h1 {
   max-width: 1000px;
