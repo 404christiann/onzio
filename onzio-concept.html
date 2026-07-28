@@ -41,7 +41,8 @@
       backdrop-filter: blur(20px) saturate(140%);
     }
     .nav-inner { height: 66px; display: flex; align-items: center; justify-content: space-between; }
-    .brand { font-size: 19px; font-weight: 700; letter-spacing: -.04em; }
+    .brand { position: relative; display: block; width: 96px; height: 32px; overflow: hidden; }
+    .brand img { position: absolute; top: 50%; left: 50%; width: 132px; height: 132px; max-width: none; transform: translate(-50%, -50%); }
     .nav-links { display: flex; align-items: center; gap: 26px; font-size: 14px; }
     .nav-links a:not(.pill) { color: var(--muted); }
     .nav-links a:hover { color: var(--ink); }
@@ -161,7 +162,7 @@
 <body>
   <nav class="nav" aria-label="Primary navigation">
     <div class="wrap nav-inner">
-      <a class="brand" href="#top">onzio</a>
+      <a class="brand" href="#top" aria-label="Onzio home"><img src="./public/onzio-logo.png" alt=""></a>
       <div class="nav-links">
         <a href="#work">Work</a>
         <a href="#about">About</a>
@@ -190,15 +191,15 @@
             <div class="label">Featured work</div>
             <h2>Rose City FC</h2>
           </div>
-          <a class="case-link" href="https://rose-city-website.vercel.app" target="_blank" rel="noreferrer">Visit the live site ↗</a>
+          <a class="case-link" href="https://rosecityfutbolclub.com/" target="_blank" rel="noreferrer">Visit the live site ↗</a>
         </div>
 
         <div class="browser reveal">
           <div class="browser-bar" aria-hidden="true">
             <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-            <div class="address">rose-city-website.vercel.app</div>
+            <div class="address">rosecityfutbolclub.com</div>
           </div>
-          <iframe src="https://rose-city-website.vercel.app" title="Live preview of the Rose City FC website" loading="lazy"></iframe>
+          <iframe src="https://rosecityfutbolclub.com/" title="Live preview of the Rose City FC website" loading="lazy"></iframe>
         </div>
 
         <div class="case-caption reveal">

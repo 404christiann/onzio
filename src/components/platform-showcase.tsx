@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const roseCityUrl = "https://rose-city-website.vercel.app";
+const roseCityUrl = "https://rosecityfutbolclub.com/";
 
 type PlatformSurface = "website" | "admin";
 
@@ -63,7 +63,7 @@ export function PlatformShowcase() {
         <div className="browser-toolbar" aria-hidden="true">
           <div className="browser-dots"><span /><span /><span /></div>
           <div className="browser-address">
-            {isWebsite ? "rose-city-website.vercel.app" : "Private club workspace"}
+            {isWebsite ? "rosecityfutbolclub.com" : "Private club workspace"}
           </div>
           <div className="browser-spacer" />
         </div>

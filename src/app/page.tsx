@@ -1,6 +1,7 @@
+import Image from "next/image";
 import { PlatformShowcase } from "@/components/platform-showcase";
 
-const roseCityUrl = "https://rose-city-website.vercel.app";
+const roseCityUrl = "https://rosecityfutbolclub.com/";
 const bookingUrl = process.env.NEXT_PUBLIC_BOOKING_URL ?? "https://calendly.com/onzio";
 
 const ArrowUpRight = () => (
@@ -21,7 +22,14 @@ export default function Home() {
       <header className="site-header">
         <nav className="shell nav" aria-label="Primary navigation">
           <a className="wordmark" href="#top" aria-label="Onzio home">
-            onzio <span className="wordmark-emoji" aria-hidden="true">⚽</span>
+            <Image
+              className="wordmark-image"
+              src="/onzio-logo.png"
+              alt=""
+              width={500}
+              height={500}
+              priority
+            />
           </a>
           <div className="nav-links">
             <a className="nav-text-link" href="#work">Work</a>

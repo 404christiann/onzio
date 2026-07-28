@@ -43,18 +43,21 @@ svg { flex: none; }
 }
 .nav { min-height: 66px; display: flex; align-items: center; justify-content: space-between; }
 .wordmark {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 19px;
-  font-weight: 720;
-  letter-spacing: -0.055em;
+  position: relative;
+  display: block;
+  width: 96px;
+  height: 32px;
+  overflow: hidden;
 }
 
-.wordmark-emoji {
-  font-size: 16px;
-  letter-spacing: 0;
-  line-height: 1;
+.wordmark-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 132px;
+  height: 132px;
+  max-width: none;
+  transform: translate(-50%, -50%);
 }
 .nav-links { display: flex; align-items: center; gap: 26px; font-size: 14px; }
 .nav-text-link { color: var(--muted); transition: color 180ms ease; }
