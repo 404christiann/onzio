@@ -29,6 +29,7 @@ export default function Home() {
               width={500}
               height={500}
               priority
+              unoptimized
             />
           </a>
           <div className="nav-links">
