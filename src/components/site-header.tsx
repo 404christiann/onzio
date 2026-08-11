@@ -7,6 +7,7 @@ const links = [
   { href: "#product", label: "Product" },
   { href: "#club-sites", label: "Club sites" },
   { href: "#pricing", label: "Pricing" },
+  { href: "#faq", label: "FAQ" },
 ];
 
 export function SiteHeader() {

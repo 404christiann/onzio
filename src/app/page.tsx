@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { ContactForm } from "@/components/contact-form";
+import { Faq } from "@/components/faq";
 import { PlatformShowcase } from "@/components/platform-showcase";
 import { ProductTour } from "@/components/product-tour";
 import { SiteHeader } from "@/components/site-header";
@@ -185,6 +186,15 @@ export default function Home() {
               <a className="button button-primary pricing-button" href="#contact">Get started <ArrowRight /></a>
             </article>
           </div>
+        </section>
+
+        <section className="faq-section shell" id="faq" aria-labelledby="faq-title">
+          <div className="faq-heading">
+            <p className="eyebrow eyebrow-quiet">Common questions</p>
+            <h2 id="faq-title">The details, clearly answered.</h2>
+            <p>What clubs usually want to know before starting with Onzio.</p>
+          </div>
+          <Faq />
         </section>
 
         <section className="contact-section" id="contact" aria-labelledby="contact-title">
