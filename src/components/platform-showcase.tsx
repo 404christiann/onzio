@@ -1,27 +1,23 @@
 export function PlatformShowcase() {
   return (
-    <>
-      <div
-        className="browser-frame"
-        role="region"
-        aria-label="Deportivo Olimpico public website concept"
-      >
-        <div className="browser-toolbar" aria-hidden="true">
-          <div className="browser-dots"><span /><span /><span /></div>
-          <div className="browser-address">deportivo-olimpico.vercel.app</div>
-          <div className="browser-spacer" />
+    <div
+      className="browser-frame"
+      role="region"
+      aria-label="Deportivo Olimpico public website"
+    >
+      <div className="browser-toolbar" aria-hidden="true">
+        <div className="browser-dots"><span /><span /><span /></div>
+        <div className="browser-address">
+          <svg viewBox="0 0 16 16" width="12" height="12"><rect x="3" y="7" width="10" height="7" rx="2"/><path d="M5.5 7V5.5a2.5 2.5 0 0 1 5 0V7"/></svg>
+          deportivo-olimpico.vercel.app
         </div>
-        <iframe
-          src="https://deportivo-olimpico.vercel.app/"
-          title="Interactive preview of the Deportivo Olimpico public website"
-          loading="lazy"
-        />
+        <div className="browser-toolbar-actions"><span /><span /></div>
       </div>
-
-      <div className="case-caption">
-        <p><strong>A club-first digital home</strong> shaped around local identity and ambition.</p>
-        <p>Guadalupe, California</p>
-      </div>
-    </>
+      <iframe
+        src="https://deportivo-olimpico.vercel.app/"
+        title="Interactive preview of the Deportivo Olimpico public website"
+        loading="lazy"
+      />
+    </div>
   );
 }

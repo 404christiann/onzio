@@ -1,6 +1,6 @@
 # Onzio
 
-Minimal, product-led website for Onzio, a digital platform studio for soccer clubs.
+Onzio's public marketing site, built with Next.js and React.
 
 ## Local development
 
@@ -10,7 +10,7 @@ cp .env.example .env.local
 npm run dev
 ```
 
-Set `NEXT_PUBLIC_BOOKING_URL` to the live Calendly or Cal.com booking page before deployment.
+Add the Resend API key to `.env.local` to enable contact-form delivery. The configured sender uses the verified `auth.onziofutbol.com` domain.
 
 ## Commands
 

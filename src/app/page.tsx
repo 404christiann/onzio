@@ -1,90 +1,219 @@
 import Image from "next/image";
+import { ContactForm } from "@/components/contact-form";
 import { PlatformShowcase } from "@/components/platform-showcase";
+import { ProductTour } from "@/components/product-tour";
+import { SiteHeader } from "@/components/site-header";
 
 const deportivoOlimpicoUrl = "https://deportivo-olimpico.vercel.app/";
-const bookingUrl = process.env.NEXT_PUBLIC_BOOKING_URL ?? "https://calendly.com/onzio";
 
-const ArrowUpRight = () => (
-  <svg aria-hidden="true" viewBox="0 0 16 16" width="16" height="16">
-    <path d="M4 12 12 4M5 4h7v7" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" />
+const ArrowRight = ({ diagonal = false }: { diagonal?: boolean }) => (
+  <svg aria-hidden="true" viewBox="0 0 18 18" width="18" height="18">
+    <path
+      d={diagonal ? "M5 13 13 5M6 5h7v7" : "M3.5 9h11m-4-4 4 4-4 4"}
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="1.6"
+    />
   </svg>
 );
 
-const ArrowDown = () => (
-  <svg aria-hidden="true" viewBox="0 0 16 16" width="15" height="15">
-    <path d="M8 3v10m0 0 4-4m-4 4L4 9" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" />
+const Check = () => (
+  <svg aria-hidden="true" viewBox="0 0 18 18" width="18" height="18">
+    <path d="m4 9.5 3.1 3L14 5.8" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" />
   </svg>
 );
+
+const FeatureIcon = ({ type }: { type: "publish" | "competition" | "access" | "analytics" }) => {
+  if (type === "publish") {
+    return <svg aria-hidden="true" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 9h16M8 6.5h.01M11 6.5h.01M8 13h8M8 16h5"/></svg>;
+  }
+  if (type === "competition") {
+    return <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0V4ZM9 18h6M12 13v5M7.5 6H5v2a4 4 0 0 0 4 4M16.5 6H19v2a4 4 0 0 1-4 4"/></svg>;
+  }
+  if (type === "access") {
+    return <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="9" cy="9" r="3"/><path d="M3.5 19c.7-3.2 2.5-5 5.5-5s4.8 1.8 5.5 5M16 10.5a2.5 2.5 0 1 0 0-5M16 14c2.5.1 4 1.5 4.5 4"/></svg>;
+  }
+  return <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 19V9M12 19V5M19 19v-7M3 19h18"/></svg>;
+};
+
+const features = [
+  {
+    type: "publish" as const,
+    title: "Publish without a developer",
+    copy: "Keep your homepage, programs, tryouts, sponsors, and club details current from a focused admin portal.",
+  },
+  {
+    type: "competition" as const,
+    title: "Keep the season organized",
+    copy: "Manage rosters, schedules, match results, standings, and season stats from the same place.",
+  },
+  {
+    type: "access" as const,
+    title: "Give staff the right access",
+    copy: "Invite approved club staff and keep sensitive administrative tools separate from the public site.",
+  },
+  {
+    type: "analytics" as const,
+    title: "See the season clearly",
+    copy: "Turn match and player performance data into a clean view of how the club is progressing.",
+  },
+];
+
+const inclusions = ["Professional club website", "Hosting", "Admin portal", "Platform updates"];
 
 export default function Home() {
   return (
     <>
-      <header className="site-header">
-        <nav className="shell nav" aria-label="Primary navigation">
-          <a className="wordmark" href="#top" aria-label="Onzio home">
-            <Image
-              className="wordmark-image"
-              src="/onzio-logo.png"
-              alt=""
-              width={500}
-              height={500}
-              priority
-              unoptimized
-            />
-          </a>
-          <div className="nav-links">
-            <a className="nav-text-link" href="#work">Work</a>
-            <a className="nav-text-link" href="#about">About</a>
-            <a className="button button-small" href={bookingUrl} target="_blank" rel="noreferrer">Book a demo</a>
-          </div>
-        </nav>
-      </header>
+      <SiteHeader />
 
       <main id="top">
         <section className="hero shell" aria-labelledby="hero-title">
-          <p className="eyebrow hero-eyebrow">Digital platforms for soccer clubs</p>
-          <h1 id="hero-title">Your club deserves<br className="desktop-break" /> a better home.</h1>
-          <p className="hero-copy">I design, build, and manage modern club websites that look professional and work beautifully.</p>
+          <div className="hero-orbit hero-orbit-left" aria-hidden="true" />
+          <div className="hero-orbit hero-orbit-right" aria-hidden="true" />
+          <p className="eyebrow hero-eyebrow"><span /> Website and club platform</p>
+          <h1 id="hero-title">Your club deserves<br />a better home.</h1>
+          <p className="hero-copy">
+            Onzio combines a professional club website with simple tools for keeping content, rosters, schedules, match stats, and programs up to date.
+          </p>
           <div className="hero-actions">
-            <a className="button" href={bookingUrl} target="_blank" rel="noreferrer">Book a demo</a>
-            <a className="text-action" href="#work">View the work <ArrowDown /></a>
+            <a className="button button-primary" href="#contact">Get started <ArrowRight /></a>
+            <a className="button button-secondary" href="#product">See the platform</a>
+          </div>
+          <div className="hero-proof" aria-label="Onzio platform summary">
+            <span>One managed platform</span>
+            <span className="hero-proof-divider" />
+            <span>Built for soccer clubs</span>
+            <span className="hero-proof-divider" />
+            <span>Month-to-month</span>
           </div>
         </section>
 
-        <section className="work-section shell" id="work" aria-labelledby="work-title">
-          <div className="section-heading">
-            <div>
-              <p className="eyebrow">Featured concept</p>
-              <h2 id="work-title">Deportivo Olimpico</h2>
+        <section className="product-section" id="product" aria-labelledby="product-title">
+          <div className="shell">
+            <div className="section-intro section-intro-light">
+              <p className="eyebrow"><span /> Inside Onzio</p>
+              <div className="section-intro-grid">
+                <h2 id="product-title">One place to run your club&apos;s digital home.</h2>
+                <p>Move from the public website to the details behind it without juggling separate systems or waiting on a developer for every update.</p>
+              </div>
             </div>
-            <a className="text-action case-link" href={deportivoOlimpicoUrl} target="_blank" rel="noreferrer">Visit the live site <ArrowUpRight /></a>
+            <ProductTour />
           </div>
-          <p className="platform-intro">A tailored public website concept built around the identity and history of a Central Coast club.</p>
-          <PlatformShowcase />
         </section>
 
-        <section className="about-section" id="about" aria-labelledby="about-title">
-          <div className="shell about-grid">
-            <p className="eyebrow">About</p>
-            <div>
-              <h2 id="about-title">Built by someone who understands both software and the game.</h2>
-              <p className="about-copy">I&apos;m Christian Alcala, a software engineer building thoughtful digital experiences for soccer organizations. You work directly with me from the first conversation through launch and ongoing support.</p>
+        <section className="feature-section shell" aria-labelledby="feature-title">
+          <div className="section-intro compact-intro">
+            <p className="eyebrow eyebrow-quiet">Built around club work</p>
+            <div className="section-intro-grid">
+              <h2 id="feature-title">The tools your staff will actually use.</h2>
+              <p>Onzio keeps the everyday jobs visible, focused, and easy to hand off across your organization.</p>
             </div>
           </div>
+          <div className="feature-grid">
+            {features.map((feature) => (
+              <article className="feature-card" key={feature.title}>
+                <span className="feature-icon"><FeatureIcon type={feature.type} /></span>
+                <h3>{feature.title}</h3>
+                <p>{feature.copy}</p>
+              </article>
+            ))}
+          </div>
         </section>
 
-        <section className="contact-section shell" id="contact" aria-labelledby="contact-title">
-          <p className="eyebrow">Start a conversation</p>
-          <h2 id="contact-title">Let&apos;s build your club&apos;s digital home.</h2>
-          <p className="contact-copy">Book a short call to see the platform and talk about what your club needs.</p>
-          <a className="button button-large" href={bookingUrl} target="_blank" rel="noreferrer">Book a demo <ArrowUpRight /></a>
+        <section className="club-site-section" id="club-sites" aria-labelledby="club-sites-title">
+          <div className="shell">
+            <div className="section-intro">
+              <p className="eyebrow"><span /> A club site in the wild</p>
+              <div className="section-intro-grid">
+                <h2 id="club-sites-title">A public home shaped around the club.</h2>
+                <p>Deportivo Olimpico shows how Onzio can turn a club&apos;s identity, history, and ambitions into a distinctive public experience.</p>
+              </div>
+            </div>
+
+            <div className="case-study-heading">
+              <div className="case-study-club">
+                <Image
+                  className="club-crest"
+                  src="/deportivo-olimpico-logo.png"
+                  alt="Deportivo Olimpico crest"
+                  width={960}
+                  height={944}
+                  sizes="72px"
+                  unoptimized
+                />
+                <div>
+                  <p className="case-study-label">Featured club site</p>
+                  <h3>Deportivo Olimpico</h3>
+                  <p>Guadalupe, California</p>
+                </div>
+              </div>
+              <a className="text-link" href={deportivoOlimpicoUrl} target="_blank" rel="noreferrer">
+                View live site <ArrowRight diagonal />
+              </a>
+            </div>
+            <PlatformShowcase />
+          </div>
+        </section>
+
+        <section className="pricing-section" id="pricing" aria-labelledby="pricing-title">
+          <div className="shell pricing-shell">
+            <div className="pricing-copy">
+              <p className="eyebrow"><span /> Simple monthly pricing</p>
+              <h2 id="pricing-title">A professional platform without the agency overhead.</h2>
+              <p>Start with the essentials your club needs today, on a month-to-month subscription that can grow with you.</p>
+            </div>
+
+            <article className="pricing-card">
+              <div className="pricing-card-top">
+                <p className="pricing-label">Onzio managed platform</p>
+                <div className="price-row">
+                  <span className="price-prefix">Starting at</span>
+                  <span className="price">$65</span>
+                  <span className="price-period">/ month</span>
+                </div>
+                <p className="pricing-subline">Month-to-month. No annual commitment.</p>
+              </div>
+              <div className="pricing-inclusions">
+                <p>Every subscription includes:</p>
+                <ul>
+                  {inclusions.map((item) => <li key={item}><span><Check /></span>{item}</li>)}
+                </ul>
+              </div>
+              <p className="pricing-note">Initial website setup is quoted separately. Domain registration is not included.</p>
+              <a className="button button-primary pricing-button" href="#contact">Get started <ArrowRight /></a>
+            </article>
+          </div>
+        </section>
+
+        <section className="contact-section" id="contact" aria-labelledby="contact-title">
+          <div className="shell contact-grid">
+            <div className="contact-copy">
+              <p className="eyebrow"><span /> Start a conversation</p>
+              <h2 id="contact-title">Tell us about your club.</h2>
+              <p>Share a few details and your inquiry will go directly to Onzio.</p>
+              <div className="contact-detail">
+                <span className="contact-detail-icon" aria-hidden="true">01</span>
+                <div><strong>Keep it simple</strong><p>Four quick fields. No long questionnaire.</p></div>
+              </div>
+              <div className="contact-detail">
+                <span className="contact-detail-icon" aria-hidden="true">02</span>
+                <div><strong>Talk to the builder</strong><p>Your inquiry goes directly to Christian.</p></div>
+              </div>
+            </div>
+            <ContactForm />
+          </div>
         </section>
       </main>
 
-      <footer>
+      <footer className="site-footer">
         <div className="shell footer-inner">
-          <span>© {new Date().getFullYear()} Onzio</span>
-          <span>Built for the world&apos;s game.</span>
+          <a className="footer-brand" href="#top" aria-label="Onzio home">
+            <Image src="/onzio-logo.png" alt="Onzio" width={500} height={500} unoptimized />
+          </a>
+          <p>Built for the world&apos;s game.</p>
+          <p>© {new Date().getFullYear()} Onzio</p>
         </div>
       </footer>
     </>
