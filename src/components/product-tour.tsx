@@ -214,7 +214,6 @@ export function ProductTour() {
         ))}
       </div>
       <div className="product-stage">
-        <div className="sample-data-label"><span /> Sample club data</div>
         <div id={`product-panel-${active}`} role="tabpanel" aria-labelledby={`product-tab-${active}`} className="product-panel" key={active}>
           <AppChrome active={active}>{panels[active]}</AppChrome>
         </div>

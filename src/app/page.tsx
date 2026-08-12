@@ -71,9 +71,6 @@ export default function Home() {
 
       <main id="top">
         <section className="hero shell" aria-labelledby="hero-title">
-          <div className="hero-orbit hero-orbit-left" aria-hidden="true" />
-          <div className="hero-orbit hero-orbit-right" aria-hidden="true" />
-          <p className="eyebrow hero-eyebrow"><span /> Website and club platform</p>
           <h1 id="hero-title">Your club deserves<br />a better home.</h1>
           <p className="hero-copy">
             Onzio combines a professional club website with simple tools for keeping content, rosters, schedules, match stats, and programs up to date.
@@ -93,8 +90,7 @@ export default function Home() {
 
         <section className="product-section" id="product" aria-labelledby="product-title">
           <div className="shell">
-            <div className="section-intro section-intro-light">
-              <p className="eyebrow"><span /> Inside Onzio</p>
+            <div className="section-intro section-intro-light section-intro-direct">
               <div className="section-intro-grid">
                 <h2 id="product-title">One place to run your club&apos;s digital home.</h2>
                 <p>Move from the public website to the details behind it without juggling separate systems or waiting on a developer for every update.</p>
@@ -105,8 +101,7 @@ export default function Home() {
         </section>
 
         <section className="feature-section shell" aria-labelledby="feature-title">
-          <div className="section-intro compact-intro">
-            <p className="eyebrow eyebrow-quiet">Built around club work</p>
+          <div className="section-intro compact-intro section-intro-direct">
             <div className="section-intro-grid">
               <h2 id="feature-title">The tools your staff will actually use.</h2>
               <p>Onzio keeps the everyday jobs visible, focused, and easy to hand off across your organization.</p>
@@ -125,8 +120,7 @@ export default function Home() {
 
         <section className="club-site-section" id="club-sites" aria-labelledby="club-sites-title">
           <div className="shell">
-            <div className="section-intro">
-              <p className="eyebrow"><span /> A club site in the wild</p>
+            <div className="section-intro section-intro-direct">
               <div className="section-intro-grid">
                 <h2 id="club-sites-title">A public home shaped around the club.</h2>
                 <p>Deportivo Olimpico shows how Onzio can turn a club&apos;s identity, history, and ambitions into a distinctive public experience.</p>
@@ -161,7 +155,6 @@ export default function Home() {
         <section className="pricing-section" id="pricing" aria-labelledby="pricing-title">
           <div className="shell pricing-shell">
             <div className="pricing-copy">
-              <p className="eyebrow"><span /> Simple monthly pricing</p>
               <h2 id="pricing-title">A professional platform without the agency overhead.</h2>
               <p>Start with the essentials your club needs today, on a month-to-month subscription that can grow with you.</p>
             </div>
@@ -190,8 +183,7 @@ export default function Home() {
 
         <section className="faq-section shell" id="faq" aria-labelledby="faq-title">
           <div className="faq-heading">
-            <p className="eyebrow eyebrow-quiet">Common questions</p>
-            <h2 id="faq-title">The details, clearly answered.</h2>
+            <h2 id="faq-title">Common Questions</h2>
             <p>What clubs usually want to know before starting with Onzio.</p>
           </div>
           <Faq />
@@ -203,14 +195,14 @@ export default function Home() {
               <p className="eyebrow"><span /> Start a conversation</p>
               <h2 id="contact-title">Tell us about your club.</h2>
               <p>Share a few details and your inquiry will go directly to Onzio.</p>
-              <div className="contact-detail">
-                <span className="contact-detail-icon" aria-hidden="true">01</span>
-                <div><strong>Keep it simple</strong><p>Four quick fields. No long questionnaire.</p></div>
-              </div>
-              <div className="contact-detail">
-                <span className="contact-detail-icon" aria-hidden="true">02</span>
-                <div><strong>Talk to the builder</strong><p>Your inquiry goes directly to Christian.</p></div>
-              </div>
+              <ul className="contact-points" aria-label="What to expect">
+                <li className="contact-point">
+                  <div><strong>Keep it simple</strong><p>Four quick fields. No long questionnaire.</p></div>
+                </li>
+                <li className="contact-point">
+                  <div><strong>Talk to the builder</strong><p>Your inquiry goes directly to Christian.</p></div>
+                </li>
+              </ul>
             </div>
             <ContactForm />
           </div>
