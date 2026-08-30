@@ -5,7 +5,7 @@ import { PlatformShowcase } from "@/components/platform-showcase";
 import { ProductTour } from "@/components/product-tour";
 import { SiteHeader } from "@/components/site-header";
 
-const deportivoOlimpicoUrl = "https://deportivo-olimpico.vercel.app/";
+const diverseCityUrl = "https://diversecityfc.com/";
 
 const ArrowRight = ({ diagonal = false }: { diagonal?: boolean }) => (
   <svg aria-hidden="true" viewBox="0 0 18 18" width="18" height="18">
@@ -123,28 +123,26 @@ export default function Home() {
             <div className="section-intro section-intro-direct">
               <div className="section-intro-grid">
                 <h2 id="club-sites-title">A public home shaped around the club.</h2>
-                <p>Deportivo Olimpico shows how Onzio can turn a club&apos;s identity, history, and ambitions into a distinctive public experience.</p>
+                <p>Diverse City FC shows how Onzio can turn a club&apos;s identity, programs, and community mission into a distinctive public experience.</p>
               </div>
             </div>
 
             <div className="case-study-heading">
               <div className="case-study-club">
                 <Image
-                  className="club-crest"
-                  src="/deportivo-olimpico-logo.png"
-                  alt="Deportivo Olimpico crest"
-                  width={960}
-                  height={944}
-                  sizes="72px"
-                  unoptimized
+                  className="club-crest diverse-city-crest"
+                  src="/diverse-city-fc-logo.png"
+                  alt="Diverse City FC crest"
+                  width={750}
+                  height={750}
                 />
                 <div>
                   <p className="case-study-label">Featured club site</p>
-                  <h3>Deportivo Olimpico</h3>
-                  <p>Guadalupe, California</p>
+                  <h3>Diverse City FC</h3>
+                  <p>Chicago, Illinois</p>
                 </div>
               </div>
-              <a className="text-link" href={deportivoOlimpicoUrl} target="_blank" rel="noreferrer">
+              <a className="text-link" href={diverseCityUrl} target="_blank" rel="noreferrer">
                 View live site <ArrowRight diagonal />
               </a>
             </div>

@@ -2,6 +2,11 @@ import type { Metadata, Viewport } from "next";
 import { Barlow_Condensed, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
+const title = "Onzio — A better digital home for your soccer club";
+const description =
+  "A professional soccer club website and simple tools for managing content, rosters, schedules, match stats, and programs.";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://onziofutbol.com";
+
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"], display: "swap" });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"], display: "swap" });
 const barlowCondensed = Barlow_Condensed({
@@ -12,12 +17,20 @@ const barlowCondensed = Barlow_Condensed({
 });
 
 export const metadata: Metadata = {
-  title: "Onzio — A better digital home for your soccer club",
-  description: "A professional soccer club website and simple tools for managing content, rosters, schedules, match stats, and programs.",
+  metadataBase: new URL(siteUrl),
+  title,
+  description,
   openGraph: {
-    title: "Onzio — A better digital home for your soccer club",
-    description: "Professional club websites with the tools to keep every part of the season current.",
+    title,
+    description,
     type: "website",
+    url: "/",
+    siteName: "Onzio",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
   },
 };
 

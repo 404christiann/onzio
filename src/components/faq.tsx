@@ -25,7 +25,7 @@ const items = [
   },
   {
     question: "Does Onzio handle player registration or participant payments?",
-    answer: "No. Registration, participant records, waivers, and participant payments remain separate from Onzio. Your public website can direct families to the registration process your club chooses.",
+    answer: "Yes. Clubs can create native registration forms, collect participant details and waivers, and accept payments through their connected Stripe account. Existing external registration links can stay in place wherever a club prefers them.",
   },
 ];
 
