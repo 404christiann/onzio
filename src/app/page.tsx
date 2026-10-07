@@ -26,6 +26,15 @@ const Check = () => (
   </svg>
 );
 
+const GridIcon = () => (
+  <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="3" width="7" height="7" rx="1" />
+    <rect x="14" y="3" width="7" height="7" rx="1" />
+    <rect x="3" y="14" width="7" height="7" rx="1" />
+    <rect x="14" y="14" width="7" height="7" rx="1" />
+  </svg>
+);
+
 const FeatureIcon = ({ type }: { type: "publish" | "competition" | "access" | "analytics" }) => {
   if (type === "publish") {
     return <svg aria-hidden="true" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 9h16M8 6.5h.01M11 6.5h.01M8 13h8M8 16h5"/></svg>;
@@ -70,21 +79,28 @@ export default function Home() {
       <SiteHeader />
 
       <main id="top">
-        <section className="hero shell" aria-labelledby="hero-title">
-          <h1 id="hero-title">Your club deserves<br />a better home.</h1>
-          <p className="hero-copy">
-            Onzio combines a professional club website with simple tools for keeping content, rosters, schedules, match stats, and programs up to date.
-          </p>
-          <div className="hero-actions">
-            <a className="button button-primary" href="#contact">Get started <ArrowRight /></a>
-            <a className="button button-secondary" href="#product">See the platform</a>
-          </div>
-          <div className="hero-proof" aria-label="Onzio platform summary">
-            <span>One managed platform</span>
-            <span className="hero-proof-divider" />
-            <span>Built for soccer clubs</span>
-            <span className="hero-proof-divider" />
-            <span>Month-to-month</span>
+        <section className="hero" aria-labelledby="hero-title">
+          <div className="hero-inner shell">
+            <h1 id="hero-title"><span>Your club deserves</span>{" "}<em>a better home.</em></h1>
+            <p className="hero-copy">
+              A professional website for your community. A simple place for your staff to keep it all moving.
+            </p>
+            <div className="hero-actions">
+              <a className="button button-primary" href="#product"><GridIcon /> Explore the platform</a>
+              <a className="hero-text-link" href="#contact">Start a conversation</a>
+            </div>
+            <figure className="hero-product">
+              <Image
+                src="/onzio-diverse-city-product-mockup-white-v3.png"
+                alt="Illustrative phones showing the Diverse City FC public website and the Onzio club admin portal"
+                width={1448}
+                height={1086}
+                sizes="(max-width: 640px) 130vw, (max-width: 1000px) 95vw, 940px"
+                loading="eager"
+                unoptimized
+              />
+              <figcaption><span>What your community sees</span><span>What your staff controls</span></figcaption>
+            </figure>
           </div>
         </section>
 
