@@ -91,7 +91,7 @@ export default function Home() {
             </div>
             <figure className="hero-product">
               <Image
-                src="/onzio-diverse-city-product-mockup-white-v3.png"
+                src="/onzio-diverse-city-product-mockup-white-v4.png"
                 alt="Illustrative phones showing the Diverse City FC public website and the Onzio club admin portal"
                 width={1448}
                 height={1086}
