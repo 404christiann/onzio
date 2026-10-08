@@ -149,7 +149,7 @@ export function SiteHeader() {
               aria-current={activeHref === link.href ? "location" : undefined}
               onClick={() => selectDestination(link.href)}
             >
-              {link.label}<span aria-hidden="true">↗</span>
+              {link.label}
             </a>
           ))}
         </nav>

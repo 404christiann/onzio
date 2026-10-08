@@ -48,7 +48,7 @@ svg { flex: none; }
 .nav-actions { display: flex; align-items: center; justify-content: flex-end; gap: 10px; flex-shrink: 0; }
 .nav-actions .button { min-height: 44px; border-radius: 24px; box-shadow: none; white-space: nowrap; flex-shrink: 0; }
 
-.nav-toggle { position: relative; width: 44px; height: 44px; display: none; place-items: center; padding: 0; flex: none; border: 1px solid var(--line); border-radius: 50%; background: var(--paper); transition: transform 160ms ease; }
+.nav-toggle { position: relative; width: 44px; height: 44px; display: none; place-items: center; padding: 0; flex: none; border: 0; background: transparent; transition: transform 160ms ease; }
 .nav-toggle:active { transform: scale(.96); }
 .nav-toggle span { position: absolute; width: 18px; height: 1.5px; background: var(--ink); transition: transform 180ms ease; }
 .nav-toggle span:first-child { transform: translateY(-3px); }
@@ -57,10 +57,8 @@ svg { flex: none; }
 .nav-toggle[aria-expanded="true"] span:last-child { transform: rotate(-45deg); }
 .nav-mobile-menu { position: fixed; inset: 80px 16px auto auto; width: min(360px, calc(100% - 32px)); max-height: calc(100dvh - 100px - env(safe-area-inset-bottom)); overflow-y: auto; margin: 0; padding: 12px 20px; border: 1px solid var(--line); border-radius: 20px; color: var(--ink); background: var(--white); box-shadow: 0 16px 40px rgba(10, 37, 20, .12); }
 .nav-mobile-menu nav { display: grid; }
-.nav-mobile-menu a { display: flex; align-items: center; justify-content: space-between; min-height: 56px; gap: 20px; border-bottom: 1px solid var(--line); font-size: 16px; font-weight: 550; }
-.nav-mobile-menu a:last-child { border-bottom: 0; }
+.nav-mobile-menu a { display: flex; align-items: center; min-height: 56px; font-size: 16px; font-weight: 550; }
 .nav-mobile-menu a[aria-current="location"] { color: var(--green-hover); }
-.nav-mobile-menu a span { color: var(--muted); font-size: 18px; }
 
 .button { min-height: 48px; display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 0 23px; border: 1px solid transparent; border-radius: 12px; font-size: 15px; font-weight: 650; letter-spacing: -0.01em; transition: transform 180ms ease, background 180ms ease, border-color 180ms ease, box-shadow 180ms ease; }
 .button-primary { color: var(--white); background: var(--green); box-shadow: 0 10px 24px rgba(18, 161, 64, 0.16); }
