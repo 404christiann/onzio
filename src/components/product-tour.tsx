@@ -131,6 +131,7 @@ const previews = { website: WebsitePreview, competition: CompetitionPreview, sta
 
 export function ProductTour() {
   const [active, setActive] = useState<TabId>("website");
+  const activeIndex = tabs.findIndex(tab => tab.id === active);
   const tourId = useId();
   const buttons = useRef<(HTMLButtonElement | null)[]>([]);
 
@@ -150,7 +151,8 @@ export function ProductTour() {
 
   return (
     <div className="focused-tour">
-      <div className="focused-tabs" role="tablist" aria-label="Explore Onzio club tools">
+      <div className="focused-tabs" role="tablist" aria-label="Explore Onzio club tools" style={{ "--active-index": activeIndex, "--active-column": activeIndex % 2, "--active-row": Math.floor(activeIndex / 2) } as CSSProperties}>
+        <span className="focused-tab-indicator" aria-hidden="true" />
         {tabs.map((tab, index) => <button key={tab.id} type="button" id={`${tourId}-tab-${tab.id}`} role="tab" aria-selected={active === tab.id} aria-controls={`${tourId}-panel-${tab.id}`} tabIndex={active === tab.id ? 0 : -1} ref={node => { buttons.current[index] = node; }} onClick={() => setActive(tab.id)} onKeyDown={event => handleKeyDown(event, index)}><Icon name={tab.id} />{tab.label}</button>)}
       </div>
       {tabs.map(tab => {

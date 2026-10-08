@@ -103,12 +103,14 @@ svg { flex: none; }
 .product-section .section-intro-grid > p { max-width: 440px; margin: 0; color: #bed2c5; font-size: 15px; line-height: 1.65; letter-spacing: 0; }
 .focused-tour .tour-icon { width: 20px; height: 20px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 .focused-tour :focus-visible { outline: 3px solid #82d8a3; outline-offset: 4px; }
-.focused-tabs { width: max-content; max-width: 100%; display: flex; gap: 4px; margin: 0 auto 36px; padding: 5px; border: 1px solid #ffffff17; border-radius: 10px; background: #ffffff0b; }
-.focused-tabs button { min-height: 44px; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 0 22px; border: 0; border-radius: 6px; color: #bed2c5; background: transparent; font-size: 12px; font-weight: 550; transition: background-color 150ms ease, color 150ms ease, transform 120ms ease; }
-.focused-tabs button:hover { background: #ffffff12; color: var(--white); }
+.focused-tabs { position: relative; isolation: isolate; width: 560px; max-width: 100%; display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 0; margin: 0 auto 36px; padding: 5px; border-radius: 32px; color: #252a27; background: #efefef; box-shadow: 0 2px 4px #00000010,0 12px 26px #00000016; }
+.focused-tab-indicator { position: absolute; z-index: -1; top: 5px; bottom: 5px; left: 5px; width: calc((100% - 10px)/4); border-radius: 26px; background: #191b1a; transform: translateX(calc(var(--active-index,0)*100%)); transition: transform 300ms cubic-bezier(.22,1,.36,1); pointer-events: none; }
+.focused-tabs button { position: relative; min-width: 0; min-height: 44px; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 0 10px; border: 0; border-radius: 26px; color: inherit; background: transparent; font-size: 12px; font-weight: 550; white-space: nowrap; transition: color 180ms ease, transform 120ms ease; }
+.focused-tabs button:hover { color: var(--green-hover); }
 .focused-tabs button:active { transform: scale(.96); }
-.focused-tabs button[aria-selected="true"] { color: #17482b; background: var(--white); box-shadow: 0 2px 8px #00000014; }
-.focused-tabs .tour-icon { width: 17px; height: 17px; }
+.focused-tabs button[aria-selected="true"] { color: var(--white); }
+.focused-tabs button:focus-visible { outline-color: var(--green); }
+.focused-tabs .tour-icon { width: 16px; height: 16px; }
 .focused-tour-panel { display: grid; grid-template-columns: minmax(0,.7fr) minmax(0,1.3fr); align-items: center; gap: 60px; }
 .focused-tour-panel[hidden] { display: none; }
 .focused-tour-copy h3 { margin: 0 0 16px; font-size: 32px; font-weight: 650; line-height: 1.14; letter-spacing: -.05em; text-wrap: balance; }
@@ -169,7 +171,7 @@ svg { flex: none; }
   .product-section .section-intro h2 { max-width: 540px; font-size: 52px; }
   .product-section .section-intro-grid > p { max-width: 480px; font-size: 14px; }
   .product-section .section-intro { margin-bottom: 30px; }
-  .focused-tabs { width: 100%; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); margin: 0 0 28px; }
+  .focused-tabs { margin-bottom: 28px; }
   .focused-tabs button { padding-inline: 10px; }
   .focused-tour-panel { grid-template-columns: 1fr; gap: 30px; }
   .focused-tour-copy h3 { max-width: 430px; font-size: 28px; }
@@ -178,13 +180,17 @@ svg { flex: none; }
   .focused-preview { min-height: 0; }
 }
 
+@media (max-width: 600px) {
+  .focused-tabs { width: 100%; max-width: 360px; grid-template-columns: repeat(2,minmax(0,1fr)); border-radius: 30px; }
+  .focused-tab-indicator { bottom: auto; width: calc((100% - 10px)/2); height: 44px; transform: translate(calc(var(--active-column,0)*100%),calc(var(--active-row,0)*100%)); }
+}
+
 @media (max-width: 480px) {
   .product-section { padding-block: 44px 38px; }
   .product-section .shell { width: calc(100% - 44px); }
   .product-section .section-intro-grid { gap: 19px; }
   .product-section .section-intro h2 { max-width: 540px; font-size: 45px; line-height: .97; }
   .product-section .section-intro-grid > p { font-size: 13px; }
-  .focused-tabs { gap: 3px; padding: 4px; border-radius: 10px; }
   .focused-tabs button { min-width: 0; gap: 7px; font-size: 11px; }
   .focused-tabs .tour-icon { width: 15px; height: 15px; }
   .focused-tour-panel { gap: 25px; }
