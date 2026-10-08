@@ -12,12 +12,15 @@ const links = [
 
 export function SiteHeader() {
   const [activeHref, setActiveHref] = useState<string | null>(links[0].href);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
   const pendingHref = useRef<string | null>(null);
   const pendingTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const activeIndex = links.findIndex((link) => link.href === activeHref);
 
   const selectDestination = (href: string) => {
+    if (mobileMenuRef.current?.matches(":popover-open")) mobileMenuRef.current.hidePopover();
     pendingHref.current = href;
     setActiveHref(href);
     if (pendingTimeout.current) clearTimeout(pendingTimeout.current);
@@ -82,6 +85,17 @@ export function SiteHeader() {
     };
   }, []);
 
+  useEffect(() => {
+    const desktop = window.matchMedia("(min-width: 821px)");
+    const closeOnDesktop = () => {
+      if (desktop.matches && mobileMenuRef.current?.matches(":popover-open")) {
+        mobileMenuRef.current.hidePopover();
+      }
+    };
+    desktop.addEventListener("change", closeOnDesktop);
+    return () => desktop.removeEventListener("change", closeOnDesktop);
+  }, []);
+
   return (
     <header className="site-header" ref={headerRef}>
       <nav className="shell nav" aria-label="Primary navigation">
@@ -108,8 +122,38 @@ export function SiteHeader() {
 
         <div className="nav-actions">
           <a className="button button-primary button-small" href="#contact" onClick={() => selectDestination("#contact")}>Get started</a>
+          <button
+            className="nav-toggle"
+            type="button"
+            popoverTarget="mobile-navigation"
+            aria-controls="mobile-navigation"
+            aria-expanded={isMenuOpen}
+            aria-label={isMenuOpen ? "Close navigation" : "Open navigation"}
+          >
+            <span /><span />
+          </button>
         </div>
       </nav>
+      <div
+        className="nav-mobile-menu"
+        id="mobile-navigation"
+        ref={mobileMenuRef}
+        popover="auto"
+        onToggle={(event) => setIsMenuOpen(event.currentTarget.matches(":popover-open"))}
+      >
+        <nav aria-label="Mobile navigation">
+          {links.map((link) => (
+            <a
+              href={link.href}
+              key={link.href}
+              aria-current={activeHref === link.href ? "location" : undefined}
+              onClick={() => selectDestination(link.href)}
+            >
+              {link.label}<span aria-hidden="true">↗</span>
+            </a>
+          ))}
+        </nav>
+      </div>
     </header>
   );
 }
