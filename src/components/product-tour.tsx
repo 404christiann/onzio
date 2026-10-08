@@ -1,194 +1,166 @@
 "use client";
 
 import Image from "next/image";
-import type { CSSProperties, KeyboardEvent, ReactNode } from "react";
-import { useState } from "react";
+import { useId, useRef, useState, type CSSProperties, type KeyboardEvent, type ReactNode } from "react";
 
 const tabs = [
-  { id: "dashboard", label: "Dashboard", icon: "dashboard" },
-  { id: "website", label: "Website", icon: "website" },
-  { id: "competition", label: "Competition", icon: "competition" },
-  { id: "analytics", label: "Analytics", icon: "analytics" },
+  {
+    id: "website",
+    label: "Website",
+    title: <>Keep your website<br />as current as your club.</>,
+    description: "Update the pages your community sees from one focused workspace.",
+    benefits: ["Homepage, programs, and tryouts", "Club details and sponsors", "Updates without a developer"],
+  },
+  {
+    id: "competition",
+    label: "Competition",
+    title: <>All the details.<br />One organized season.</>,
+    description: "Keep your roster, schedule, results, and standings close at hand.",
+    benefits: ["Players and staff in one roster", "Fixtures and match results", "Standings and season stats"],
+  },
+  {
+    id: "staff",
+    label: "Staff access",
+    title: <>The right people.<br />The right access.</>,
+    description: "Give approved club staff a shared place to keep the club moving.",
+    benefits: ["Approved staff invitations", "Clear administrative access", "Public and staff spaces kept separate"],
+  },
+  {
+    id: "analytics",
+    label: "Analytics",
+    title: <>A clearer view<br />of your club’s progress.</>,
+    description: "See website activity alongside the numbers that tell your season’s story.",
+    benefits: ["Website activity at a glance", "Match and player performance", "A clear season overview"],
+  },
 ] as const;
 
 type TabId = (typeof tabs)[number]["id"];
-type IconName =
-  | "dashboard"
-  | "website"
-  | "competition"
-  | "analytics"
-  | "registrations"
-  | "settings"
-  | "payments"
-  | "search"
-  | "sun"
-  | "chevron"
-  | "users"
-  | "calendar"
-  | "file"
-  | "card"
-  | "arrow";
+type IconName = TabId | "grid" | "check" | "arrow" | "calendar" | "lock";
 
-const Icon = ({ name }: { name: IconName }) => {
+function Icon({ name }: { name: IconName }) {
   const paths: Record<IconName, ReactNode> = {
-    dashboard: <path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z" />,
-    website: <><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c3 3.3 3 14.7 0 18M12 3c-3 3.3-3 14.7 0 18" /></>,
-    competition: <path d="M8 4h8v5a4 4 0 0 1-8 0V4ZM9 19h6M12 13v6M7.5 6H5v2a4 4 0 0 0 4 4M16.5 6H19v2a4 4 0 0 1-4 4" />,
+    website: <><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c5 5 5 13 0 18M12 3c-5 5-5 13 0 18" /></>,
+    competition: <path d="M8 4h8v5a4 4 0 0 1-8 0V4ZM12 13v6M8 21h8M8 6H5v2a4 4 0 0 0 4 4M16 6h3v2a4 4 0 0 1-4 4" />,
+    staff: <><circle cx="9" cy="8" r="3" /><path d="M3 20c0-4 2-6 6-6s6 2 6 6M16 5a3 3 0 0 1 0 6M18 15c2 1 3 2 3 5" /></>,
     analytics: <path d="M5 20V10M12 20V4M19 20v-7M3 20h18" />,
-    registrations: <path d="M7 3h10v4H7zM5 6h14v15H5zM8 11h8M8 15h5" />,
-    settings: <><circle cx="12" cy="12" r="3" /><path d="M19 13.5v-3l-2-.6-.7-1.7 1-1.8-2.1-2.1-1.8 1-1.7-.7L11 3H8l-.6 2-1.7.7-1.8-1-2.1 2.1 1 1.8-.7 1.7L0 11v3l2 .6.7 1.7-1 1.8 2.1 2.1 1.8-1 1.7.7L8 22h3l.6-2 1.7-.7 1.8 1 2.1-2.1-1-1.8.7-1.7z" transform="scale(.9) translate(1.3 1.3)" /></>,
-    payments: <><rect x="3" y="5" width="18" height="14" rx="3" /><path d="M3 10h18M7 15h4" /></>,
-    search: <><circle cx="10.5" cy="10.5" r="6.5" /><path d="m16 16 4 4" /></>,
-    sun: <><circle cx="12" cy="12" r="3.5" /><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" /></>,
-    chevron: <path d="m8 10 4 4 4-4" />,
-    users: <><circle cx="9" cy="9" r="3" /><path d="M3.5 19c.7-3.2 2.5-5 5.5-5s4.8 1.8 5.5 5M16 10.5a2.5 2.5 0 1 0 0-5M16 14c2.5.1 4 1.5 4.5 4" /></>,
-    calendar: <><rect x="4" y="5" width="16" height="15" rx="3" /><path d="M8 3v4M16 3v4M4 10h16" /></>,
-    file: <><path d="M6 3h8l4 4v14H6zM14 3v5h5M9 12h6M9 16h6" /></>,
-    card: <><rect x="3" y="5" width="18" height="14" rx="3" /><path d="M3 10h18" /></>,
+    grid: <><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /></>,
+    check: <path d="m5 12 4 4L19 6" />,
     arrow: <path d="M5 12h14m-5-5 5 5-5 5" />,
+    calendar: <><rect x="4" y="5" width="16" height="15" rx="2" /><path d="M8 3v4M16 3v4M4 10h16" /></>,
+    lock: <><rect x="5" y="10" width="14" height="11" rx="2" /><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3" /></>,
   };
-  return <svg aria-hidden="true" viewBox="0 0 24 24">{paths[name]}</svg>;
-};
-
-const tabLabel: Record<TabId, string> = {
-  dashboard: "Dashboard",
-  website: "Website",
-  competition: "Competition",
-  analytics: "Analytics",
-};
-
-function SidebarLink({ icon, label, active, onClick }: { icon: IconName; label: string; active?: boolean; onClick?: () => void }) {
-  return (
-    <button type="button" className={`admin-demo-nav-link${active ? " active" : ""}`} onClick={onClick} tabIndex={onClick ? 0 : -1}>
-      <Icon name={icon} />
-      <span>{label}</span>
-      {(label === "Website" || label === "Competition" || label === "Club Settings") && <Icon name="chevron" />}
-    </button>
-  );
+  return <svg className="tour-icon" aria-hidden="true" viewBox="0 0 24 24">{paths[name]}</svg>;
 }
 
-function AppChrome({ children, active, onSelect }: { children: ReactNode; active: TabId; onSelect: (tab: TabId) => void }) {
+function PreviewFrame({ children, icon, footer }: { children: ReactNode; icon: IconName; footer: string }) {
   return (
-    <div className="product-window">
-      <aside className="product-sidebar" aria-label="Demo admin navigation">
-        <div className="demo-club-mark"><Image className="demo-club-logo" src="/diverse-city-fc-logo.png" alt="" width={750} height={750} /><div><strong>Diverse City FC</strong><small>Club administration</small></div></div>
-        <nav className="product-side-nav">
-          <SidebarLink icon="dashboard" label="Dashboard" active={active === "dashboard"} onClick={() => onSelect("dashboard")} />
-          <SidebarLink icon="website" label="Website" active={active === "website"} onClick={() => onSelect("website")} />
-          {active === "website" && <div className="admin-demo-subnav" aria-hidden="true"><span className="active">Homepage</span><span>Programs</span><span>Tryouts</span><span>Sponsors</span></div>}
-          <SidebarLink icon="competition" label="Competition" active={active === "competition"} onClick={() => onSelect("competition")} />
-          {active === "competition" && <div className="admin-demo-subnav" aria-hidden="true"><span>Seasons</span><span className="active">Roster</span><span>Schedule</span><span>Standings</span></div>}
-          <SidebarLink icon="registrations" label="Registrations" />
-          <SidebarLink icon="analytics" label="Analytics" active={active === "analytics"} onClick={() => onSelect("analytics")} />
-          <SidebarLink icon="settings" label="Club Settings" />
-          <SidebarLink icon="payments" label="Payments" />
-        </nav>
-        <div className="product-side-bottom"><span>Powered by</span><strong>ONZIO</strong></div>
-      </aside>
-      <div className="product-main">
-        <header className="product-topbar">
-          <Image className="mobile-demo-mark" src="/diverse-city-fc-logo.png" alt="" width={750} height={750} />
-          <strong className="admin-demo-current-route">{tabLabel[active]}</strong>
-          <button type="button" className="product-search" tabIndex={-1} aria-hidden="true"><Icon name="search" /><span>Search admin</span><kbd>⌘ K</kbd></button>
-          <button type="button" className="admin-demo-icon-button" tabIndex={-1} aria-hidden="true"><Icon name="sun" /></button>
-          <span className="product-user" aria-hidden="true">CA</span>
-        </header>
-        {children}
-      </div>
+    <div className="focused-preview">
+      <header className="focused-preview-chrome">
+        <div className="focused-club-mark">
+          <Image src="/diverse-city-fc-logo.png" alt="" width={28} height={28} unoptimized />
+          <div><strong>Diverse City FC</strong><small>Onzio workspace</small></div>
+        </div>
+        <span>Sample view</span>
+      </header>
+      <div className="focused-preview-body">{children}</div>
+      <div className="focused-preview-footer"><Icon name={icon} />{footer}</div>
     </div>
   );
 }
 
-function PageHeading({ title, description }: { title: string; description: string }) {
-  return <header className="admin-demo-page-heading"><div><h3>{title}</h3><p>{description}</p></div></header>;
+function PreviewHeading({ title, status, description }: { title: string; status: string; description: string }) {
+  return <><div className="focused-preview-heading"><h3>{title}</h3><span className="focused-status">{status}</span></div><p className="focused-preview-description">{description}</p></>;
 }
 
-function MetricCard({ label, value }: { label: string; value: string }) {
-  return <article className="admin-demo-card admin-demo-metric"><span>{label}</span><strong>{value}</strong></article>;
+function Metric({ label, value }: { label: string; value: string }) {
+  return <div className="focused-metric"><span>{label}</span><strong>{value}</strong></div>;
 }
 
-function DashboardPanel() {
-  const actions = [["registrations", "Registrations", "Build and review forms"], ["users", "Manage Roster", "Players and staff"], ["calendar", "Manage Schedule", "Fixtures and events"], ["card", "Payments", "Plan and billing"]] as const;
+function WebsitePreview() {
+  const pages = [
+    { title: "Homepage", description: "Hero, announcements, and featured content", icon: "grid" },
+    { title: "Programs", description: "A place for every player", icon: "calendar" },
+    { title: "Tryouts", description: "Dates, details, and what to expect", icon: "competition" },
+    { title: "Sponsors", description: "The partners behind your club", icon: "staff" },
+  ] as const;
   return (
-    <div className="product-panel-content">
-      <PageHeading title="Dashboard" description="2026 season overview" />
-      <section className="admin-demo-metrics" aria-label="Club statistics"><MetricCard label="Active Players" value="24" /><MetricCard label="Active Staff" value="6" /><MetricCard label="Season Matches" value="18" /><MetricCard label="Paid Registrations" value="42" /></section>
-      <section className="admin-demo-section">
-        <h4>Quick Actions</h4>
-        <div className="admin-demo-actions">{actions.map(([icon, title, detail]) => <article className="admin-demo-action" key={title}><span><Icon name={icon} /></span><div><strong>{title}</strong><small>{detail}</small></div></article>)}</div>
-      </section>
-      <div className="admin-demo-two-column">
-        <section className="admin-demo-card admin-demo-list-card">
-          <div className="admin-demo-card-heading"><div><h4>Registration Forms</h4></div><span>View all</span></div>
-          <ul><li><div><strong>UPSL Open Tryouts</strong><small>Created Aug 24, 2026</small></div><span className="admin-demo-status">Open</span></li><li><div><strong>Special Kickers</strong><small>Created Aug 20, 2026</small></div><span className="admin-demo-status muted">Draft</span></li><li><div><strong>Fall Youth Program</strong><small>Created Aug 14, 2026</small></div><span className="admin-demo-status">Open</span></li></ul>
-        </section>
-        <section className="admin-demo-card admin-demo-list-card">
-          <div className="admin-demo-card-heading"><div><h4>Upcoming Fixtures &amp; Events</h4></div><span>View schedule</span></div>
-          <ul><li><time><small>SEP</small><strong>06</strong></time><div><strong>vs. Chicago Nation</strong><small>7:00 PM · Home</small></div><span className="admin-demo-event-type">Match</span></li><li><time><small>SEP</small><strong>12</strong></time><div><strong>UPSL Open Tryouts</strong><small>6:30 PM · Training Center</small></div><span className="admin-demo-event-type">Tryout</span></li><li><time><small>SEP</small><strong>19</strong></time><div><strong>at Edgewater Castle</strong><small>8:00 PM · Away</small></div><span className="admin-demo-event-type">Match</span></li></ul>
-        </section>
-      </div>
-    </div>
+    <PreviewFrame icon="website" footer="diversecityfc.com · Sample website">
+      <PreviewHeading title="Your club website" status="Live" description="Keep the pages your community visits up to date." />
+      <ul className="focused-page-list">
+        {pages.map(page => <li key={page.title}><span className="focused-page-icon"><Icon name={page.icon} /></span><div><strong>{page.title}</strong><small>{page.description}</small></div><span className="focused-status focused-status-muted">Published</span><span className="focused-page-arrow"><Icon name="arrow" /></span></li>)}
+      </ul>
+    </PreviewFrame>
   );
 }
 
-function WebsitePanel() {
-  const pages = ["Homepage", "Programs", "Tryouts", "Shop", "About", "Sponsors", "Contact"];
+function CompetitionPreview() {
+  const standings = [["Diverse City FC", 8, 2, 1, 26], ["Chicago Nation", 7, 2, 2, 23], ["Edgewater Castle", 6, 3, 2, 21]] as const;
   return (
-    <div className="product-panel-content">
-      <PageHeading title="Website" description="Manage the pages and content your supporters see." />
-      <div className="admin-demo-page-grid">{pages.map((page, index) => <article className="admin-demo-card admin-demo-page-card" key={page}><span><Icon name={index === 0 ? "dashboard" : index < 3 ? "calendar" : "file"} /></span><div><h4>{page}</h4><p>{index === 0 ? "Hero, announcements, and featured content" : "Published content and page settings"}</p></div><Icon name="arrow" /></article>)}</div>
-      <section className="admin-demo-card admin-demo-publish-card"><div><span className="admin-demo-live-dot" /><div><h4>Public website is live</h4><p>diversecityfc.com · Updated 2 hours ago</p></div></div><span className="admin-demo-outline-button">View live site ↗</span></section>
-    </div>
+    <PreviewFrame icon="competition" footer="Illustrative season data">
+      <PreviewHeading title="The season so far" status="2026" description="First team · Premier Division" />
+      <div className="focused-metrics"><Metric label="Rostered players" value="24" /><Metric label="Matches played" value="11" /><Metric label="League position" value="1st" /></div>
+      <table className="focused-standings"><caption>League standings</caption><thead><tr>{["Club", "W", "D", "L", "Pts"].map(label => <th scope="col" key={label}>{label}</th>)}</tr></thead><tbody>{standings.map(([club, ...stats]) => <tr key={club}><th scope="row">{club}</th>{stats.map((stat, i) => <td key={i}>{stat}</td>)}</tr>)}</tbody></table>
+    </PreviewFrame>
   );
 }
 
-function CompetitionPanel() {
-  const standings = [["1", "Diverse City FC", "8", "2", "1", "26"], ["2", "Chicago Nation", "7", "2", "2", "23"], ["3", "Edgewater Castle", "6", "3", "2", "21"], ["4", "Rockford United", "5", "2", "4", "17"]];
+function StaffPreview() {
+  const staff = [["CA", "Christian Alcala", "Club administrator"], ["JR", "Jamie Rivera", "Club staff"], ["AM", "Alex Morgan", "Club staff"]];
   return (
-    <div className="product-panel-content">
-      <PageHeading title="Competition" description="Roster, schedule, results, and standings." />
-      <section className="admin-demo-metrics admin-demo-metrics-three" aria-label="Season statistics"><MetricCard label="Rostered Players" value="24" /><MetricCard label="Matches Played" value="11" /><MetricCard label="League Position" value="1st" /></section>
-      <div className="admin-demo-two-column competition">
-        <section className="admin-demo-card admin-demo-standings"><div className="admin-demo-card-heading"><div><h4>League Standings</h4><p>Premier Division · Matchday 11</p></div><span>View all</span></div><div className="admin-demo-table-row header"><span>#</span><span>Club</span><span>W</span><span>D</span><span>L</span><span>Pts</span></div>{standings.map((row) => <div className={`admin-demo-table-row${row[0] === "1" ? " current" : ""}`} key={row[0]}>{row.map((cell, index) => <span key={`${row[0]}-${index}`}>{cell}</span>)}</div>)}</section>
-        <section className="admin-demo-card admin-demo-list-card"><div className="admin-demo-card-heading"><div><h4>Active Roster</h4><p>First team</p></div><span>Manage</span></div><ul>{[["01", "Mateo Cruz", "Goalkeeper"], ["04", "Elias Romero", "Defender"], ["08", "Noah Bennett", "Midfielder"], ["11", "Julian Torres", "Forward"]].map(([number, name, position]) => <li key={number}><b className="admin-demo-number">{number}</b><div><strong>{name}</strong><small>{position}</small></div><Icon name="arrow" /></li>)}</ul></section>
-      </div>
-    </div>
+    <PreviewFrame icon="lock" footer="Staff workspace · Sample access view">
+      <PreviewHeading title="Your club staff" status="3 members" description="A shared workspace for the people behind the club." />
+      <ul className="focused-staff-list">{staff.map(([initials, name, role]) => <li key={name}><span className="focused-avatar" aria-hidden="true">{initials}</span><div><strong>{name}</strong><small>{role}</small></div><span className="focused-status">Active</span></li>)}</ul>
+    </PreviewFrame>
   );
 }
 
-function AnalyticsPanel() {
-  const bars = [44, 72, 55, 88, 66, 92, 76, 100, 82, 96, 90, 100];
+function AnalyticsPreview() {
+  const bars = [32, 49, 43, 63, 55, 81, 70, 95, 84, 100];
   return (
-    <div className="product-panel-content">
-      <PageHeading title="Analytics" description="Understand club activity and season performance." />
-      <section className="admin-demo-metrics" aria-label="Performance statistics"><MetricCard label="Site Visits" value="8,426" /><MetricCard label="Goals Scored" value="26" /><MetricCard label="Clean Sheets" value="5" /><MetricCard label="League Points" value="26" /></section>
-      <div className="admin-demo-two-column analytics">
-        <section className="admin-demo-card admin-demo-chart-card"><div className="admin-demo-card-heading"><div><h4>Website Activity</h4><p>Last 12 months</p></div><span>+18.4%</span></div><div className="admin-demo-chart" aria-label="Decorative website activity chart">{bars.map((height, index) => <span key={index} style={{ "--bar-height": `${height}%` } as CSSProperties} />)}</div><div className="admin-demo-chart-labels"><span>Sep</span><span>Dec</span><span>Mar</span><span>Jun</span><span>Aug</span></div></section>
-        <section className="admin-demo-card admin-demo-list-card"><div className="admin-demo-card-heading"><div><h4>Top Performers</h4><p>2026 season</p></div></div><ul><li><b className="admin-demo-rank">1</b><div><strong>Julian Torres</strong><small>Forward</small></div><span className="admin-demo-stat">9 goals</span></li><li><b className="admin-demo-rank">2</b><div><strong>Noah Bennett</strong><small>Midfielder</small></div><span className="admin-demo-stat">7 assists</span></li><li><b className="admin-demo-rank">3</b><div><strong>Mateo Cruz</strong><small>Goalkeeper</small></div><span className="admin-demo-stat">5 clean sheets</span></li></ul></section>
-      </div>
-    </div>
+    <PreviewFrame icon="analytics" footer="Illustrative activity and performance data">
+      <PreviewHeading title="Your club in numbers" status="2026 season" description="Activity and performance, brought together." />
+      <div className="focused-metrics"><Metric label="Website visits" value="8,426" /><Metric label="Goals scored" value="26" /><Metric label="Clean sheets" value="5" /></div>
+      <h4 className="focused-chart-title">Website activity</h4>
+      <div className="focused-chart" role="img" aria-label="Illustrative website activity chart trending upward across the season">{bars.map((height, index) => <span key={index} style={{ "--bar-height": `${height}%` } as CSSProperties} />)}</div>
+      <div className="focused-chart-labels"><span>Start of season</span><span>Now</span></div>
+    </PreviewFrame>
   );
 }
 
-const panels: Record<TabId, ReactNode> = { dashboard: <DashboardPanel />, website: <WebsitePanel />, competition: <CompetitionPanel />, analytics: <AnalyticsPanel /> };
+const previews = { website: WebsitePreview, competition: CompetitionPreview, staff: StaffPreview, analytics: AnalyticsPreview };
 
 export function ProductTour() {
-  const [active, setActive] = useState<TabId>("dashboard");
-  const handleKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
-    if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+  const [active, setActive] = useState<TabId>("website");
+  const tourId = useId();
+  const buttons = useRef<(HTMLButtonElement | null)[]>([]);
+
+  function handleKeyDown(event: KeyboardEvent<HTMLButtonElement>, index: number) {
+    let nextIndex: number;
+    switch (event.key) {
+      case "ArrowRight": nextIndex = (index + 1) % tabs.length; break;
+      case "ArrowLeft": nextIndex = (index + tabs.length - 1) % tabs.length; break;
+      case "Home": nextIndex = 0; break;
+      case "End": nextIndex = tabs.length - 1; break;
+      default: return;
+    }
     event.preventDefault();
-    let nextIndex = index;
-    if (event.key === "ArrowRight") nextIndex = (index + 1) % tabs.length;
-    if (event.key === "ArrowLeft") nextIndex = (index - 1 + tabs.length) % tabs.length;
-    if (event.key === "Home") nextIndex = 0;
-    if (event.key === "End") nextIndex = tabs.length - 1;
     setActive(tabs[nextIndex].id);
-    document.getElementById(`product-tab-${tabs[nextIndex].id}`)?.focus();
-  };
+    buttons.current[nextIndex]?.focus();
+  }
+
   return (
-    <div className="product-tour">
-      <div className="product-tabs" role="tablist" aria-label="Onzio admin portal areas">{tabs.map((tab, index) => <button id={`product-tab-${tab.id}`} type="button" role="tab" aria-selected={active === tab.id} aria-controls={`product-panel-${tab.id}`} tabIndex={active === tab.id ? 0 : -1} className={active === tab.id ? "active" : ""} onClick={() => setActive(tab.id)} onKeyDown={(event) => handleKeyDown(event, index)} key={tab.id}><Icon name={tab.icon} />{tab.label}</button>)}</div>
-      <div className="product-stage"><div id={`product-panel-${active}`} role="tabpanel" aria-labelledby={`product-tab-${active}`} className="product-panel" key={active}><AppChrome active={active} onSelect={setActive}>{panels[active]}</AppChrome></div></div>
+    <div className="focused-tour">
+      <div className="focused-tabs" role="tablist" aria-label="Explore Onzio club tools">
+        {tabs.map((tab, index) => <button key={tab.id} type="button" id={`${tourId}-tab-${tab.id}`} role="tab" aria-selected={active === tab.id} aria-controls={`${tourId}-panel-${tab.id}`} tabIndex={active === tab.id ? 0 : -1} ref={node => { buttons.current[index] = node; }} onClick={() => setActive(tab.id)} onKeyDown={event => handleKeyDown(event, index)}><Icon name={tab.id} />{tab.label}</button>)}
+      </div>
+      {tabs.map(tab => {
+        const Preview = previews[tab.id];
+        return <div key={tab.id} className="focused-tour-panel" id={`${tourId}-panel-${tab.id}`} role="tabpanel" aria-labelledby={`${tourId}-tab-${tab.id}`} tabIndex={0} hidden={active !== tab.id}>
+          <div className="focused-tour-copy"><h3>{tab.title}</h3><p>{tab.description}</p><ul>{tab.benefits.map(benefit => <li key={benefit}><Icon name="check" />{benefit}</li>)}</ul></div>
+          <Preview />
+        </div>;
+      })}
+      <div className="focused-tour-caption"><span><Icon name="grid" />Illustrative Onzio workspace · Diverse City FC</span><span><Icon name="check" />One login. A clearer club day.</span></div>
     </div>
   );
 }

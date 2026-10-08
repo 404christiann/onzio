@@ -109,7 +109,7 @@ export default function Home() {
             <div className="section-intro section-intro-light section-intro-direct">
               <div className="section-intro-grid">
                 <h2 id="product-title">One place to run your club&apos;s digital home.</h2>
-                <p>Move from the public website to the details behind it without juggling separate systems or waiting on a developer for every update.</p>
+                <p>Your website, your season, your people. Explore the everyday tools that keep your club moving, all from the same place.</p>
               </div>
             </div>
             <ProductTour />
