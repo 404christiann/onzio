@@ -1,4 +1,5 @@
 import styles from "./pricing-section.module.css";
+import { CentralIcon } from "@/components/icons/central/icon";
 
 const inclusions = [
   "Professional club website",
@@ -32,14 +33,14 @@ export function PricingSection() {
             </p>
             <p className={styles.commitment}>Month-to-month. No annual commitment.</p>
             <a className={styles.action} href="#contact">
-              Get started <span className={`${styles.icon} ${styles.arrow}`} aria-hidden="true" />
+              Get started <CentralIcon name="arrow" className={`${styles.icon} ${styles.arrow}`} />
             </a>
             <div className={styles.included}>
               <p>Every subscription includes</p>
               <ul>
                 {inclusions.map((item) => (
                   <li key={item}>
-                    <span className={`${styles.icon} ${styles.check}`} aria-hidden="true" />
+                    <CentralIcon name="check" className={`${styles.icon} ${styles.check}`} />
                     <span>{item}</span>
                   </li>
                 ))}

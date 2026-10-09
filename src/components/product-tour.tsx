@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { CentralIcon, type CentralIconName } from "@/components/icons/central/icon";
 import { useId, useRef, useState, type CSSProperties, type KeyboardEvent, type ReactNode } from "react";
 
 const tabs = [
@@ -35,21 +36,10 @@ const tabs = [
 ] as const;
 
 type TabId = (typeof tabs)[number]["id"];
-type IconName = TabId | "grid" | "check" | "arrow" | "calendar" | "lock";
+type IconName = CentralIconName;
 
 function Icon({ name }: { name: IconName }) {
-  const paths: Record<IconName, ReactNode> = {
-    website: <><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c5 5 5 13 0 18M12 3c-5 5-5 13 0 18" /></>,
-    competition: <path d="M8 4h8v5a4 4 0 0 1-8 0V4ZM12 13v6M8 21h8M8 6H5v2a4 4 0 0 0 4 4M16 6h3v2a4 4 0 0 1-4 4" />,
-    staff: <><circle cx="9" cy="8" r="3" /><path d="M3 20c0-4 2-6 6-6s6 2 6 6M16 5a3 3 0 0 1 0 6M18 15c2 1 3 2 3 5" /></>,
-    analytics: <path d="M5 20V10M12 20V4M19 20v-7M3 20h18" />,
-    grid: <><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /></>,
-    check: <path d="m5 12 4 4L19 6" />,
-    arrow: <path d="M5 12h14m-5-5 5 5-5 5" />,
-    calendar: <><rect x="4" y="5" width="16" height="15" rx="2" /><path d="M8 3v4M16 3v4M4 10h16" /></>,
-    lock: <><rect x="5" y="10" width="14" height="11" rx="2" /><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3" /></>,
-  };
-  return <svg className="tour-icon" aria-hidden="true" viewBox="0 0 24 24">{paths[name]}</svg>;
+  return <CentralIcon name={name} className="tour-icon" />;
 }
 
 function PreviewFrame({ children, icon, footer }: { children: ReactNode; icon: IconName; footer: string }) {

@@ -1,11 +1,12 @@
 "use client";
 
 import Image from "next/image";
+import { CentralIcon } from "@/components/icons/central/icon";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 
 const links = [
-  { href: "#product", label: "Product" },
   { href: "#club-sites", label: "Club sites" },
+  { href: "#staff-tools", label: "Product" },
   { href: "#pricing", label: "Pricing" },
   { href: "#faq", label: "FAQ" },
 ];
@@ -130,7 +131,7 @@ export function SiteHeader() {
             aria-expanded={isMenuOpen}
             aria-label={isMenuOpen ? "Close navigation" : "Open navigation"}
           >
-            <span /><span />
+            <CentralIcon name={isMenuOpen ? "close" : "menu"} width={22} height={22} />
           </button>
         </div>
       </nav>

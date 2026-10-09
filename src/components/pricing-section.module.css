@@ -114,13 +114,9 @@
   width: 20px;
   height: 20px;
   flex: none;
-  background: currentColor;
-  mask-position: center;
-  mask-size: contain;
-  mask-repeat: no-repeat;
 }
-.arrow { width: 18px; height: 18px; mask-image: url('/icons/pricing/arrow-right.svg'); }
-.check { color: #127a36; mask-image: url('/icons/pricing/check-circle.svg'); }
+.arrow { width: 18px; height: 18px; }
+.check { color: #127a36; }
 
 .included { margin-top: 29px; }
 .included > p { margin: 0; color: #607066; font-size: 12px; }
