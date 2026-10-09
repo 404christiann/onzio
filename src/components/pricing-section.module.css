@@ -1,0 +1,165 @@
+.section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  place-items: center;
+  min-height: 1040px;
+  padding: 56px 50px;
+  scroll-margin-top: 16px;
+  color: var(--white);
+  background: var(--ink);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  width: min(1100px, 100%);
+  gap: 34px;
+}
+
+.intro { min-width: 0; text-align: center; }
+
+.title {
+  max-width: 860px;
+  margin: 0 auto;
+  font-family: var(--font-barlow-condensed), Impact, sans-serif;
+  font-size: 68px;
+  font-weight: 700;
+  line-height: .96;
+  letter-spacing: -.025em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.copy {
+  max-width: 620px;
+  margin: 20px auto 0;
+  color: #b0bcb3;
+  font-size: 16px;
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+
+.card {
+  width: min(470px, 100%);
+  min-width: 0;
+  overflow: hidden;
+  border-radius: 26px;
+  color: var(--ink);
+  background: var(--white);
+  box-shadow: 0 0 0 1px #ffffff0a, 0 4px 10px #00000018, 0 26px 60px #00000022;
+  text-align: left;
+  line-height: normal;
+}
+
+.band {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 20px 30px 32px;
+  color: var(--white);
+  background: #13813b;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.bandDetail { font-size: 12px; font-weight: 400; white-space: nowrap; }
+
+.body {
+  position: relative;
+  margin-top: -12px;
+  padding: 32px 30px 28px;
+  border-radius: 20px 20px 0 0;
+  background: var(--white);
+}
+
+.starting { margin: 0 0 6px; color: #607066; font-size: 12px; }
+
+.price { display: flex; align-items: baseline; gap: 13px; margin: 0; }
+.price strong {
+  font-size: 80px;
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -.075em;
+  font-variant-numeric: tabular-nums;
+}
+.price > span { color: #607066; font-size: 14px; }
+
+.commitment { margin: 12px 0 0; color: #607066; font-size: 12px; line-height: 1.55; }
+
+.action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 50px;
+  margin-top: 27px;
+  padding: 12px 20px;
+  border-radius: 11px;
+  color: var(--white);
+  background: #19271e;
+  box-shadow: 0 1px 2px #00000010, 0 5px 10px #00000015;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 150ms ease, transform 150ms ease;
+}
+.action:hover { background: #2b4031; }
+.action:active { transform: scale(.96); }
+.action:focus-visible { outline: 3px solid var(--green); outline-offset: 4px; }
+
+.icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  flex: none;
+  background: currentColor;
+  mask-position: center;
+  mask-size: contain;
+  mask-repeat: no-repeat;
+}
+.arrow { width: 18px; height: 18px; mask-image: url('/icons/pricing/arrow-right.svg'); }
+.check { color: #127a36; mask-image: url('/icons/pricing/check-circle.svg'); }
+
+.included { margin-top: 29px; }
+.included > p { margin: 0; color: #607066; font-size: 12px; }
+.included ul { display: grid; gap: 21px; margin: 19px 0 0; padding: 0; list-style: none; }
+.included li { display: flex; align-items: center; gap: 12px; font-size: 14px; line-height: 1.5; }
+
+.footer { padding: 20px 30px 22px; border-top: 1px solid #e8ede9; background: var(--paper); }
+.footer p { margin: 0; color: #607066; font-size: 12px; line-height: 1.65; text-wrap: pretty; }
+
+@media (max-width: 700px) {
+  .section { min-height: 100dvh; padding: 42px 20px 40px; }
+  .layout { gap: 28px; }
+  .title { font-size: 43px; line-height: .98; }
+  .copy { max-width: 450px; margin-top: 17px; font-size: 14px; line-height: 1.6; }
+}
+
+@media (max-width: 640px) {
+  .card { border-radius: 23px; }
+  .band { padding: 18px 23px 30px; gap: 12px; font-size: 12px; }
+  .bandDetail { font-size: 10px; }
+  .body { padding: 26px 24px 25px; }
+  .price strong { font-size: 69px; }
+  .price > span { font-size: 13px; }
+  .commitment { font-size: 11px; line-height: 1.6; }
+  .action { min-height: 49px; margin-top: 24px; font-size: 13px; }
+  .included { margin-top: 25px; }
+  .included ul { gap: 20px; margin-top: 18px; }
+  .included li { gap: 11px; font-size: 13px; }
+  .footer { padding: 18px 24px 20px; }
+  .footer p { font-size: 11px; line-height: 1.7; }
+}
+
+@media (max-width: 360px) {
+  .title { font-size: 39px; }
+  .band { padding-inline: 20px; }
+  .body { padding-inline: 21px; }
+  .price strong { font-size: 62px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .action { transition: none; }
+}

@@ -3,6 +3,7 @@ import { ContactForm } from "@/components/contact-form";
 import { Faq } from "@/components/faq";
 import { PlatformShowcase } from "@/components/platform-showcase";
 import { ProductTour } from "@/components/product-tour";
+import { PricingSection } from "@/components/pricing-section";
 import { SiteHeader } from "@/components/site-header";
 
 const diverseCityUrl = "https://diversecityfc.com/";
@@ -17,12 +18,6 @@ const ArrowRight = ({ diagonal = false }: { diagonal?: boolean }) => (
       strokeLinejoin="round"
       strokeWidth="1.6"
     />
-  </svg>
-);
-
-const Check = () => (
-  <svg aria-hidden="true" viewBox="0 0 18 18" width="18" height="18">
-    <path d="m4 9.5 3.1 3L14 5.8" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" />
   </svg>
 );
 
@@ -70,8 +65,6 @@ const features = [
     copy: "Turn match and player performance data into a clean view of how the club is progressing.",
   },
 ];
-
-const inclusions = ["Professional club website", "Hosting", "Admin portal", "Platform updates"];
 
 export default function Home() {
   return (
@@ -166,34 +159,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="pricing-section" id="pricing" aria-labelledby="pricing-title">
-          <div className="shell pricing-shell">
-            <div className="pricing-copy">
-              <h2 id="pricing-title">A professional platform without the agency overhead.</h2>
-              <p>Start with the essentials your club needs today, on a month-to-month subscription that can grow with you.</p>
-            </div>
-
-            <article className="pricing-card">
-              <div className="pricing-card-top">
-                <p className="pricing-label">Onzio managed platform</p>
-                <div className="price-row">
-                  <span className="price-prefix">Starting at</span>
-                  <span className="price">$65</span>
-                  <span className="price-period">/ month</span>
-                </div>
-                <p className="pricing-subline">Month-to-month. No annual commitment.</p>
-              </div>
-              <div className="pricing-inclusions">
-                <p>Every subscription includes:</p>
-                <ul>
-                  {inclusions.map((item) => <li key={item}><span><Check /></span>{item}</li>)}
-                </ul>
-              </div>
-              <p className="pricing-note">Initial website setup is quoted separately. Domain registration is not included.</p>
-              <a className="button button-primary pricing-button" href="#contact">Get started <ArrowRight /></a>
-            </article>
-          </div>
-        </section>
+        <PricingSection />
 
         <section className="faq-section shell" id="faq" aria-labelledby="faq-title">
           <div className="faq-heading">
