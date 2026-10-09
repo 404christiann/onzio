@@ -1,5 +1,6 @@
 "use client";
 
+import { CentralIcon } from "@/components/icons/central/icon";
 import { useLayoutEffect, useRef, useState } from "react";
 
 const items = [
@@ -60,7 +61,7 @@ export function Faq() {
             <h3>
               <button type="button" aria-expanded={isOpen} aria-controls={contentId} onClick={() => setOpenIndex(isOpen ? -1 : index)}>
                 <span>{item.question}</span>
-                <svg aria-hidden="true" viewBox="0 0 20 20" width="20" height="20"><path d="M4 10h12M10 4v12" /></svg>
+                <CentralIcon name="plus" width={20} height={20} />
               </button>
             </h3>
             <FaqAnswer contentId={contentId} isOpen={isOpen} answer={item.answer} />

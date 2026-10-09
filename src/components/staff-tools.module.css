@@ -1,0 +1,123 @@
+.section { padding-block: 128px 142px; background: var(--white); }
+.section-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 60px; margin-bottom: 58px; }
+.section-head h2 { margin: 0; font-family: var(--font-barlow-condensed), Impact, sans-serif; text-transform: uppercase; font-size: 76px; letter-spacing: -.027em; line-height: .94; font-weight: 650; text-wrap: balance; }
+.section-head > p { margin: 0; max-width: 300px; padding-bottom: 5px; color: var(--muted); font-size: 15px; line-height: 1.65; text-wrap: pretty; }
+.tool-layout { display: grid; grid-template-columns: minmax(0,.95fr) minmax(0,1.05fr); gap: 60px; align-items: start; }
+.tool-index { min-width: 0; }
+.tool-entry { border: 0; }
+.tool-entry h3 { margin: 0; }
+.tool-trigger { width: 100%; min-height: 80px; display: flex; align-items: center; gap: 16px; padding: 25px 0; border: 0; background: transparent; color: var(--ink); text-align: left; transition: color 150ms ease, transform 120ms ease; }
+.tool-trigger:active { transform: scale(.96); }
+.tool-trigger:focus-visible { outline: 3px solid var(--green); outline-offset: 4px; border-radius: 5px; }
+.icon { display: block; width: 24px; height: 24px; flex: none; }
+.tool-trigger .icon { color: #708076; }
+.tool-trigger > span:nth-child(2) { flex: 1; font-size: 22px; font-weight: var(--font-ui-weight); letter-spacing: var(--font-ui-tracking); }
+.toggle { display: block; flex: none; color: #87948b; }
+.is-open .tool-trigger, .is-open .tool-trigger .icon { color: var(--green-hover); }
+.tool-copy { padding: 0 38px 28px 40px; }
+.tool-copy p { max-width: 330px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.65; text-wrap: pretty; }
+.text-label { display: block; margin-top: 16px; font-size: 11px; color: #365940; }
+.tool-detail[hidden], .mobile-preview { display: none; }
+.desktop-preview { min-width: 0; }
+.stage { height: 500px; min-width: 0; padding: 22px; background: #eaf0e9; border-radius: 18px; }
+.workspace-card { height: 100%; min-width: 0; display: flex; flex-direction: column; background: var(--white); border-radius: 10px; overflow: hidden; box-shadow: 0 0 0 1px #00000006, 0 2px 3px #00000003, 0 10px 22px #00000005; }
+.workspace-chrome { height: 62px; min-height: 62px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 22px; border-bottom: 1px solid #e5ebe5; font-size: 10px; }
+.workspace-chrome > div { display: flex; align-items: center; gap: 9px; font-weight: 500; }
+.workspace-chrome img { width: 28px; height: 28px; object-fit: contain; }
+.chrome-context { color: var(--muted); font-size: 9px; }
+.workspace-body { flex: 1; min-height: 0; padding: 26px 22px 16px; }
+.workspace-footer { height: 45px; min-height: 45px; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 0 22px; border-top: 1px solid #e5ebe5; color: var(--muted); font-size: 9px; }
+.workspace-footer .icon { width: 16px; height: 16px; }
+.view-head { margin-bottom: 18px; }
+.view-head h4 { margin: 0; font-size: 25px; font-weight: var(--font-ui-weight); letter-spacing: var(--font-ui-tracking); line-height: 1.15; text-wrap: balance; }
+.view-head p { margin: 8px 0 0; color: var(--muted); font-size: 11px; line-height: 1.5; text-wrap: pretty; }
+.page-list, .staff-list { margin: 0; padding: 0; list-style: none; }
+.page-row, .staff-row { display: flex; align-items: center; gap: 12px; min-height: 56px; padding: 11px 0; border-bottom: 1px solid #e5ebe5; }
+.page-row:last-child, .staff-row:last-child { border: 0; }
+.page-row > .icon { width: 20px; height: 20px; color: #688370; }
+.page-row > div, .staff-row > div { flex: 1; min-width: 0; }
+.page-row strong, .staff-row strong { display: block; font-size: 12px; font-weight: 500; }
+.page-row small, .staff-row small { display: block; margin-top: 5px; color: var(--muted); font-size: 10px; line-height: 1.4; }
+.badge { padding: 5px 7px; color: #2b6740; background: #eaf5eb; border-radius: 4px; font-size: 9px; white-space: nowrap; }
+.metric-row { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 20px; padding-bottom: 18px; border-bottom: 1px solid #e5ebe5; }
+.metric-row span { font-size: 10px; color: var(--muted); }
+.metric-row strong { display: block; margin-top: 10px; font-size: 32px; font-weight: var(--font-ui-weight); letter-spacing: var(--font-ui-tracking); line-height: 1; font-variant-numeric: tabular-nums; }
+.standings { width: 100%; margin-top: 14px; border-collapse: collapse; font-size: 10px; text-align: left; font-variant-numeric: tabular-nums; }
+.standings caption { margin-bottom: 8px; text-align: left; font-size: 11px; font-weight: 500; }
+.standings td, .standings th { padding: 7px 5px; border-bottom: 1px solid #e5ebe5; font-weight: 400; }
+.standings thead th { font-size: 9px; color: var(--muted); }
+.standings th:first-child { padding-left: 0; }
+.standings tbody tr:first-child > * { font-weight: 500; color: #22713e; }
+.avatar { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 50%; font-size: 10px; background: #e7efe8; color: #546c5a; }
+.staff-row { min-height: 74px; padding: 14px 0; }
+.chart-title { margin: 18px 0 0; font-size: 11px; font-weight: 500; }
+.bars { height: 80px; display: flex; align-items: end; gap: 9px; margin-top: 12px; border-bottom: 1px solid var(--line); }
+.bars > span { width: 100%; height: var(--bar-height); background: #87b092; border-radius: 3px 3px 0 0; }
+.bars > span:last-child { background: var(--green-deep); }
+.bar-labels { display: flex; justify-content: space-between; margin-top: 9px; font-size: 9px; color: var(--muted); }
+.section-foot { display: flex; justify-content: space-between; gap: 24px; margin-top: 40px; padding-top: 22px; border-top: 1px solid var(--line); font-size: 11px; color: var(--muted); line-height: 1.5; }
+.section-foot > span:first-child { color: #36493c; }
+
+@media (max-width: 1100px) {
+  .section-head { gap: 35px; }
+  .section-head h2 { font-size: 63px; }
+  .section-head > p { max-width: 240px; font-size: 13px; }
+  .tool-layout { gap: 34px; }
+  .tool-trigger { gap: 12px; }
+  .tool-trigger > span:nth-child(2) { font-size: 20px; }
+  .tool-copy { padding-left: 36px; padding-right: 0; }
+  .stage { padding: 15px; }
+  .workspace-body { padding: 23px 18px 14px; }
+  .workspace-chrome, .workspace-footer { padding-inline: 18px; }
+  .view-head h4 { font-size: 23px; }
+  .view-head p { font-size: 10px; }
+  .page-row, .staff-row { gap: 9px; }
+  .page-row small { font-size: 9px; }
+  .page-row strong, .staff-row strong { font-size: 11px; }
+  .badge { font-size: 8px; }
+}
+
+@media (max-width: 720px) {
+  .section { padding-block: 86px 96px; }
+  .section-head { display: block; margin-bottom: 35px; }
+  .section-head h2 { max-width: 440px; font-size: 56px; }
+  .section-head > p { max-width: 320px; margin-top: 22px; font-size: 13px; }
+  .tool-layout { grid-template-columns: 1fr; gap: 0; }
+  .tool-trigger { min-height: 68px; padding: 20px 0; }
+  .tool-trigger > span:nth-child(2) { font-size: 19px; }
+  .tool-trigger .icon { width: 22px; height: 22px; }
+  .tool-copy { padding: 0 20px 22px 34px; }
+  .tool-copy p { font-size: 13px; }
+  .desktop-preview { display: none; }
+  .mobile-preview { display: block; margin-bottom: 24px; }
+  .stage { height: 480px; padding: 14px; border-radius: 14px; }
+  .workspace-chrome { height: 58px; min-height: 58px; padding-inline: 17px; }
+  .workspace-body { padding: 22px 17px 12px; }
+  .workspace-footer { padding-inline: 17px; }
+  .view-head h4 { font-size: 24px; }
+  .page-row small, .staff-row small { font-size: 9px; }
+  .section-foot { display: block; margin-top: 30px; font-size: 10px; }
+  .section-foot > span { display: block; }
+  .section-foot > span + span { margin-top: 7px; }
+}
+
+@media (max-width: 360px) {
+  .section-head h2 { font-size: 49px; }
+  .tool-trigger > span:nth-child(2) { font-size: 17px; }
+  .stage { padding: 10px; }
+  .workspace-chrome, .workspace-body { padding-inline: 12px; }
+  .workspace-chrome > div { gap: 6px; }
+  .workspace-chrome > div span { font-size: 9px; }
+  .workspace-chrome img { width: 23px; height: 23px; }
+  .chrome-context { font-size: 8px; }
+  .page-row small { font-size: 8px; }
+  .page-row > .icon { width: 17px; height: 17px; }
+  .page-row { gap: 8px; }
+  .badge { padding: 4px; font-size: 7px; }
+  .metric-row { gap: 10px; }
+  .metric-row strong { font-size: 28px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tool-trigger { transition: none; }
+}

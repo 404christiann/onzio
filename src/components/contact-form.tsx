@@ -1,5 +1,6 @@
 "use client";
 
+import { CentralIcon } from "@/components/icons/central/icon";
 import { FormEvent, useState } from "react";
 import { contactInterests } from "@/lib/contact";
 
@@ -49,7 +50,7 @@ export function ContactForm() {
     return (
       <div className="contact-form contact-success" role="status" aria-live="polite">
         <span className="success-mark" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="m5 12.5 4.2 4L19 7" /></svg>
+          <CentralIcon name="check" />
         </span>
         <p className="form-kicker">Inquiry received</p>
         <h3>Thanks! Your inquiry has been sent.</h3>
@@ -80,10 +81,13 @@ export function ContactForm() {
         </label>
         <label>
           <span>What are you interested in?</span>
-          <select name="interest" defaultValue="" required>
-            <option value="" disabled>Select one</option>
-            {contactInterests.map((interest) => <option value={interest.value} key={interest.value}>{interest.label}</option>)}
-          </select>
+          <span className="form-select">
+            <select name="interest" defaultValue="" required>
+              <option value="" disabled>Select one</option>
+              {contactInterests.map((interest) => <option value={interest.value} key={interest.value}>{interest.label}</option>)}
+            </select>
+            <CentralIcon name="chevron-down" width={20} height={20} className="form-select-icon" />
+          </span>
         </label>
       </div>
 
@@ -96,7 +100,7 @@ export function ContactForm() {
 
       <button className="button button-primary form-submit" type="submit" disabled={status === "sending"}>
         {status === "sending" ? "Sending inquiry…" : "Send inquiry"}
-        <svg aria-hidden="true" viewBox="0 0 18 18" width="18" height="18"><path d="M3.5 9h11m-4-4 4 4-4 4" /></svg>
+        <CentralIcon name="arrow" width={18} height={18} />
       </button>
       <p className="form-consent">By submitting, you agree that Onzio may contact you about your inquiry.</p>
     </form>
