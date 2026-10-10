@@ -44,28 +44,13 @@ export default function Home() {
 
         <PricingSection />
 
-        <section className="faq-section shell" id="faq" aria-labelledby="faq-title">
-          <div className="faq-heading">
-            <h2 id="faq-title">Common Questions</h2>
-            <p>What clubs usually want to know before starting with Onzio.</p>
-          </div>
-          <Faq />
-        </section>
+        <Faq />
 
         <section className="contact-section" id="contact" aria-labelledby="contact-title">
           <div className="shell contact-grid">
             <div className="contact-copy">
-              <p className="eyebrow"><span /> Start a conversation</p>
-              <h2 id="contact-title">Tell us about your club.</h2>
-              <p>Share a few details and your inquiry will go directly to Onzio.</p>
-              <ul className="contact-points" aria-label="What to expect">
-                <li className="contact-point">
-                  <div><strong>Keep it simple</strong><p>Four quick fields. No long questionnaire.</p></div>
-                </li>
-                <li className="contact-point">
-                  <div><strong>Talk to the builder</strong><p>Your inquiry goes directly to Christian.</p></div>
-                </li>
-              </ul>
+              <h2 id="contact-title">What&apos;s next for your club?</h2>
+              <p>Share a few details. We&apos;ll talk about how Onzio could help.</p>
             </div>
             <ContactForm />
           </div>
