@@ -1,10 +1,21 @@
 "use client";
 
-import { CentralIcon } from "@/components/icons/central/icon";
-import { FormEvent, useState } from "react";
-import { contactInterests } from "@/lib/contact";
+import { useState, type CSSProperties, type FormEvent } from "react";
+import { contactInterests, type ContactInterest } from "@/lib/contact";
 
 type FormStatus = "idle" | "sending" | "success" | "error";
+type ContactIconName = "user" | "mail" | "phone" | "globe" | "refresh" | "book-open" | "message-circle" | "arrow-right" | "check-circle";
+
+const interestIcons = {
+  "new-club-website": "globe",
+  "replace-club-website": "refresh",
+  "learn-about-onzio": "book-open",
+  "something-else": "message-circle",
+} satisfies Record<ContactInterest, ContactIconName>;
+
+function ContactIcon({ name }: { name: ContactIconName }) {
+  return <span className="contact-icon" aria-hidden="true" style={{ "--contact-icon": `url("/icons/contact/${name}.svg")` } as CSSProperties} />;
+}
 
 export function ContactForm() {
   const [status, setStatus] = useState<FormStatus>("idle");
@@ -50,46 +61,54 @@ export function ContactForm() {
     return (
       <div className="contact-form contact-success" role="status" aria-live="polite">
         <span className="success-mark" aria-hidden="true">
-          <CentralIcon name="check" />
+          <ContactIcon name="check-circle" />
         </span>
-        <p className="form-kicker">Inquiry received</p>
-        <h3>Thanks! Your inquiry has been sent.</h3>
-        <p>We&apos;ll be in contact soon.</p>
+        <h3>Thanks for reaching out.</h3>
+        <p>Your inquiry has been sent. We&apos;ll be in contact soon.</p>
       </div>
     );
   }
 
   return (
-    <form className="contact-form" onSubmit={handleSubmit}>
-      <div className="form-heading">
-        <p className="form-kicker">Club inquiry</p>
-        <h3>Get started with Onzio.</h3>
-        <p>All fields are required.</p>
-      </div>
+    <form className="contact-form" aria-label="Club inquiry" aria-busy={status === "sending"} onSubmit={handleSubmit}>
       <div className="form-grid">
         <label>
           <span>Name</span>
-          <input type="text" name="name" autoComplete="name" minLength={2} maxLength={80} placeholder="Your name" required />
+          <span className="form-control">
+            <ContactIcon name="user" />
+            <input type="text" name="name" autoComplete="name" minLength={2} maxLength={80} placeholder="Your name" required />
+          </span>
         </label>
         <label>
           <span>Email</span>
-          <input type="email" name="email" autoComplete="email" maxLength={254} placeholder="you@club.com" required />
+          <span className="form-control">
+            <ContactIcon name="mail" />
+            <input type="email" name="email" autoComplete="email" maxLength={254} placeholder="you@club.com" required />
+          </span>
         </label>
         <label>
           <span>Phone number</span>
-          <input type="tel" name="phone" autoComplete="tel" inputMode="tel" minLength={7} maxLength={30} placeholder="(555) 123-4567" required />
-        </label>
-        <label>
-          <span>What are you interested in?</span>
-          <span className="form-select">
-            <select name="interest" defaultValue="" required>
-              <option value="" disabled>Select one</option>
-              {contactInterests.map((interest) => <option value={interest.value} key={interest.value}>{interest.label}</option>)}
-            </select>
-            <CentralIcon name="chevron-down" width={20} height={20} className="form-select-icon" />
+          <span className="form-control">
+            <ContactIcon name="phone" />
+            <input type="tel" name="phone" autoComplete="tel" inputMode="tel" minLength={7} maxLength={30} placeholder="(555) 123-4567" required />
           </span>
         </label>
       </div>
+
+      <fieldset className="form-topics">
+        <legend>What are you interested in?</legend>
+        <div className="form-topic-grid">
+          {contactInterests.map((interest) => (
+            <label className="form-topic" key={interest.value}>
+              <input type="radio" name="interest" value={interest.value} required />
+              <span className="form-topic-content">
+                <ContactIcon name={interestIcons[interest.value]} />
+                <span>{interest.label}</span>
+              </span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
 
       <label className="form-honeypot" aria-hidden="true">
         Company website
@@ -100,9 +119,10 @@ export function ContactForm() {
 
       <button className="button button-primary form-submit" type="submit" disabled={status === "sending"}>
         {status === "sending" ? "Sending inquiry…" : "Send inquiry"}
-        <CentralIcon name="arrow" width={18} height={18} />
+        <ContactIcon name="arrow-right" />
       </button>
       <p className="form-consent">By submitting, you agree that Onzio may contact you about your inquiry.</p>
+      <p className="form-handoff"><ContactIcon name="message-circle" />Your inquiry goes directly to Christian.</p>
     </form>
   );
 }

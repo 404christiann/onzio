@@ -1,7 +1,7 @@
 "use client";
 
-import { CentralIcon } from "@/components/icons/central/icon";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useState, type CSSProperties } from "react";
+import styles from "./faq.module.css";
 
 const items = [
   {
@@ -30,44 +30,55 @@ const items = [
   },
 ];
 
-function FaqAnswer({ contentId, isOpen, answer }: { contentId: string; isOpen: boolean; answer: string }) {
-  const contentRef = useRef<HTMLDivElement>(null);
-  const [maxHeight, setMaxHeight] = useState(0);
-
-  // A CSS-only grid-template-rows 0fr->1fr collapse can get stuck at zero
-  // height in Chrome for this kind of nested-content structure. Measuring
-  // the content's natural height and animating max-height is reliable.
-  useLayoutEffect(() => {
-    if (contentRef.current) setMaxHeight(contentRef.current.scrollHeight);
-  }, [isOpen]);
-
-  return (
-    <div className="faq-answer-wrap" id={contentId} aria-hidden={!isOpen} style={{ maxHeight: isOpen ? maxHeight : 0 }}>
-      <div ref={contentRef}><p>{answer}</p></div>
-    </div>
-  );
-}
+const topics = [
+  { id: "costs", label: "Costs", title: "Costs & commitment", icon: "cash", indices: [0, 1, 2, 4] },
+  { id: "website", label: "Website", title: "Managing your website", icon: "desktop", indices: [3] },
+  { id: "registrations", label: "Registrations", title: "Player registrations", icon: "clipboard-text", indices: [5] },
+] as const;
 
 export function Faq() {
-  const [openIndex, setOpenIndex] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const selectedTopic = topics[selectedIndex];
 
   return (
-    <div className="faq-list">
-      {items.map((item, index) => {
-        const isOpen = index === openIndex;
-        const contentId = `faq-content-${index}`;
-        return (
-          <article className={`faq-item ${isOpen ? "is-open" : ""}`} key={item.question}>
-            <h3>
-              <button type="button" aria-expanded={isOpen} aria-controls={contentId} onClick={() => setOpenIndex(isOpen ? -1 : index)}>
-                <span>{item.question}</span>
-                <CentralIcon name="plus" width={20} height={20} />
+    <section className={styles.section} id="faq" aria-labelledby="faq-title">
+      <div className={styles.inner}>
+        <div className={styles.sidebar}>
+          <h2 id="faq-title">Common questions</h2>
+          <p>What clubs usually want to know before starting with Onzio.</p>
+          <div className={styles.topics} role="group" aria-label="FAQ topics">
+            {topics.map((topic, index) => (
+              <button
+                key={topic.id}
+                type="button"
+                aria-pressed={index === selectedIndex}
+                aria-controls="faq-topic-questions"
+                onClick={() => setSelectedIndex(index)}
+              >
+                <span
+                  className={styles.icon}
+                  aria-hidden="true"
+                  style={{ "--faq-icon": `url('/icons/faq/${topic.icon}.svg')` } as CSSProperties}
+                />
+                {topic.label}
               </button>
-            </h3>
-            <FaqAnswer contentId={contentId} isOpen={isOpen} answer={item.answer} />
-          </article>
-        );
-      })}
-    </div>
+            ))}
+          </div>
+        </div>
+        <div className={styles.content} id="faq-topic-questions" key={selectedTopic.id}>
+          <h3>{selectedTopic.title}</h3>
+          {selectedTopic.indices.map((itemIndex, index) => (
+            <details className={styles.question} name={`faq-${selectedTopic.id}`} open={index === 0} key={items[itemIndex].question}>
+              <summary>
+                <span>{items[itemIndex].question}</span>
+                <span className={styles.toggle} aria-hidden="true" />
+              </summary>
+              <p>{items[itemIndex].answer}</p>
+            </details>
+          ))}
+          <p className={styles.hint}>Choose another topic to explore more questions.</p>
+        </div>
+      </div>
+    </section>
   );
 }

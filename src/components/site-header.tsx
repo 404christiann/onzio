@@ -5,10 +5,12 @@ import { CentralIcon } from "@/components/icons/central/icon";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 
 const links = [
+  { href: "#top", label: "Home" },
   { href: "#club-sites", label: "Club sites" },
   { href: "#staff-tools", label: "Product" },
   { href: "#pricing", label: "Pricing" },
   { href: "#faq", label: "FAQ" },
+  { href: "#contact", label: "Contact" },
 ];
 
 export function SiteHeader() {
@@ -33,7 +35,7 @@ export function SiteHeader() {
   };
 
   useEffect(() => {
-    const sections = [...links.map((link) => link.href), "#contact"]
+    const sections = links.map((link) => link.href)
       .map((href) => ({ href, element: document.getElementById(href.slice(1)) }))
       .filter((section) => section.element !== null);
     let frame = 0;
@@ -46,7 +48,7 @@ export function SiteHeader() {
       for (const section of sections) {
         if (section.element!.getBoundingClientRect().top <= readingLine) current = section.href;
       }
-      setActiveHref(current === "#contact" ? null : current);
+      setActiveHref(current);
     };
 
     const scheduleUpdate = () => {
@@ -60,8 +62,8 @@ export function SiteHeader() {
     };
     const followHash = () => {
       const href = window.location.hash;
-      if ([...links.map((link) => link.href), "#contact", "#top"].includes(href)) {
-        selectDestination(href === "#top" ? links[0].href : href);
+      if (links.some((link) => link.href === href)) {
+        selectDestination(href);
       }
     };
 
@@ -106,7 +108,7 @@ export function SiteHeader() {
 
         <div
           className="nav-pill-links"
-          style={{ "--active-index": Math.max(activeIndex, 0) } as CSSProperties}
+          style={{ "--active-index": Math.max(activeIndex, 0), "--nav-link-count": links.length } as CSSProperties}
         >
           <span className={`nav-pill-indicator${activeIndex < 0 ? " is-hidden" : ""}`} aria-hidden="true" />
           {links.map((link) => (
