@@ -1,0 +1,50 @@
+/* Onzio's look for every Stageshow stage, mapped from :root in globals.css. */
+.onzio-look .ss-stage {
+  --ss-font: var(--font-ui);
+  --ss-accent: #12a140;
+  --ss-accent-2: #0d8c36;
+  --ss-accent-soft: #ddf5e5;
+  --ss-accent-text: #0d8c36;
+  --ss-success: #12a140;
+  --ss-success-soft: #ddf5e5;
+  --ss-success-text: #0d8c36;
+  --ss-canvas: #f5f7f4;
+  --ss-surface: #ffffff;
+  --ss-chrome: #f5f7f4;
+  --ss-well: #eaf0e9;
+  --ss-line: #dce4de;
+  --ss-line-faint: #e5ebe5;
+  --ss-text-strong: #101712;
+  --ss-text: #566259;
+  --ss-text-faint: #7d8981;
+  --ss-icon: #566259;
+  --ss-icon-faint: #7d8981;
+  --ss-radius-md: 10px;
+  --ss-radius-lg: 12px;
+  letter-spacing: -0.012em;
+}
+
+/* A panel on the page: the same ground and corner as the site's other figures. */
+.onzio-look.onzio-panel .ss-stage {
+  overflow: hidden;
+  border-radius: 18px;
+  background: var(--ss-well);
+}
+
+/* A workspace window's crest and name, in the bar's lead slot. */
+.onzio-crest {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-left: 8px;
+  color: var(--ss-text-strong);
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.onzio-crest img {
+  display: block;
+  width: 20px;
+  height: 20px;
+}

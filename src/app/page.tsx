@@ -2,6 +2,8 @@ import Image from "next/image";
 import { CentralIcon } from "@/components/icons/central/icon";
 import { ContactForm } from "@/components/contact-form";
 import { Faq } from "@/components/faq";
+import { HeroDemo } from "@/components/stageshow/hero-demo";
+import { InquiryPhone } from "@/components/stageshow/section-demos";
 import { PlatformShowcase } from "@/components/platform-showcase";
 import { PricingSection } from "@/components/pricing-section";
 import { SiteHeader } from "@/components/site-header";
@@ -24,15 +26,7 @@ export default function Home() {
               <a className="hero-text-link" href="#contact">Start a conversation</a>
             </div>
             <figure className="hero-product">
-              <Image
-                src="/onzio-diverse-city-product-mockup-white-v4.png"
-                alt="Illustrative phones showing the Diverse City FC public website and the Onzio club admin portal"
-                width={1448}
-                height={1086}
-                sizes="(max-width: 640px) 130vw, (max-width: 1000px) 95vw, 940px"
-                loading="eager"
-                unoptimized
-              />
+              <HeroDemo />
               <figcaption><span>What your community sees</span><span>What your staff controls</span></figcaption>
             </figure>
           </div>
@@ -53,6 +47,7 @@ export default function Home() {
               <p>Share a few details. We&apos;ll talk about how Onzio could help.</p>
             </div>
             <ContactForm />
+            <div className="contact-picture"><InquiryPhone /></div>
           </div>
         </section>
       </main>

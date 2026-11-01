@@ -1,5 +1,6 @@
 import styles from "./pricing-section.module.css";
 import { CentralIcon } from "@/components/icons/central/icon";
+import { InvoiceStack } from "@/components/stageshow/section-demos";
 
 const inclusions = [
   "Professional club website",
@@ -21,6 +22,8 @@ export function PricingSection() {
           </p>
         </div>
 
+        <div className={styles.offer}>
+        <div className={styles.picture}><InvoiceStack /></div>
         <article className={styles.card} aria-label="Onzio managed platform pricing">
           <div className={styles.band}>
             <span>Onzio managed platform</span>
@@ -51,6 +54,7 @@ export function PricingSection() {
             <p>Initial website setup is quoted separately.<br />Domain registration is not included.</p>
           </footer>
         </article>
+        </div>
       </div>
     </section>
   );

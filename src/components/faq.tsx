@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type CSSProperties } from "react";
+import { CostsPicture, RegistrationPicture, WebsitePicture } from "@/components/stageshow/section-demos";
 import styles from "./faq.module.css";
 
 const items = [
@@ -36,9 +37,12 @@ const topics = [
   { id: "registrations", label: "Registrations", title: "Player registrations", icon: "clipboard-text", indices: [5] },
 ] as const;
 
+const pictures = { costs: CostsPicture, website: WebsitePicture, registrations: RegistrationPicture };
+
 export function Faq() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const selectedTopic = topics[selectedIndex];
+  const Picture = pictures[selectedTopic.id];
 
   return (
     <section className={styles.section} id="faq" aria-labelledby="faq-title">
@@ -64,6 +68,7 @@ export function Faq() {
               </button>
             ))}
           </div>
+          <Picture key={selectedTopic.id} />
         </div>
         <div className={styles.content} id="faq-topic-questions" key={selectedTopic.id}>
           <h3>{selectedTopic.title}</h3>
