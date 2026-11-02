@@ -4,6 +4,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ClubSiteCapture } from "./club-site-capture";
 import { CentralIcon } from "@/components/icons/central/icon";
+import { LiveChip } from "@/components/stageshow/section-demos";
 import { chapters, createClubTour, type TourController, type TourState } from "./club-site-tour";
 import styles from "./platform-showcase.module.css";
 
@@ -104,6 +105,7 @@ export function PlatformShowcase() {
         </div>
         <img className={cn("hardware-frame")} src="/images/club-showcase/iphone-16-pro.png" width={1508} height={3279} loading="lazy" alt="" draggable={false} />
         </div>
+        <div className={cn("live-chip")}><LiveChip chapter={chapters[chapter].label} /></div>
         <div className={cn("stage-copy")}>
         <h3>One identity.<br />Every screen.</h3>
         <p>The club comes through on a laptop, in the stands, and on the way to training.</p>

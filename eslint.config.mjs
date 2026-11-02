@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Vendored from the Stageshow skill; kept as shipped.
+    "src/stageshow/**",
   ]),
 ]);
 

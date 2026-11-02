@@ -40,6 +40,17 @@
   text-wrap: pretty;
 }
 
+.offer {
+  display: grid;
+  grid-template-columns: minmax(0, 440px) minmax(0, 470px);
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  width: 100%;
+}
+
+.picture { min-width: 0; }
+
 .card {
   width: min(470px, 100%);
   min-width: 0;
@@ -125,6 +136,10 @@
 
 .footer { padding: 20px 30px 22px; border-top: 1px solid #e8ede9; background: var(--paper); }
 .footer p { margin: 0; color: #607066; font-size: 12px; line-height: 1.65; text-wrap: pretty; }
+
+@media (max-width: 1000px) {
+  .offer { grid-template-columns: minmax(0, 470px); gap: 8px; }
+}
 
 @media (max-width: 700px) {
   .section { min-height: 100dvh; padding: 42px 20px 40px; }

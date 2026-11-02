@@ -49,6 +49,9 @@
 .mac-art { position:absolute;width:76%;left:4%;top:40px }
 .phone-art { position:absolute;width:19%;right:5%;top:142px }
 .stage-copy { position:absolute;left:7%;bottom:39px;max-width:320px }
+.live-chip { position:absolute;right:5%;bottom:39px;width:280px }
+.stage[data-mode='desktop'] .live-chip, .stage[data-mode='phone'] .live-chip { display:none }
+@media (max-width:1000px) { .live-chip { display:none } }
 .stage-copy h3 { font-size:31px }
 .stage-copy p { max-width:310px }
 .stage[data-mode='desktop'] .phone-art { opacity:0;visibility:hidden;transform:translateX(25px) }
