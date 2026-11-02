@@ -4,7 +4,6 @@ import { ContactForm } from "@/components/contact-form";
 import { Faq } from "@/components/faq";
 import { HeroDemo } from "@/components/stageshow/hero-demo";
 import { InquiryPhone } from "@/components/stageshow/section-demos";
-import { PlatformShowcase } from "@/components/platform-showcase";
 import { PricingSection } from "@/components/pricing-section";
 import { SiteHeader } from "@/components/site-header";
 import { StaffTools } from "@/components/staff-tools";
@@ -22,17 +21,14 @@ export default function Home() {
               A professional website for your community. A simple place for your staff to keep it all moving.
             </p>
             <div className="hero-actions">
-              <a className="button button-primary" href="#staff-tools"><CentralIcon name="grid" width={18} height={18} /> Explore the platform</a>
-              <a className="hero-text-link" href="#contact">Start a conversation</a>
+              <a className="button button-primary" href="#staff-tools">Explore the platform <CentralIcon name="arrow" width={18} height={18} /></a>
+              <a className="button button-secondary" href="#contact">Start a conversation</a>
             </div>
-            <figure className="hero-product">
+            <figure className="hero-product" id="club-sites">
               <HeroDemo />
-              <figcaption><span>What your community sees</span><span>What your staff controls</span></figcaption>
             </figure>
           </div>
         </section>
-
-        <PlatformShowcase />
 
         <StaffTools />
 
