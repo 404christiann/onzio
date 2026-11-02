@@ -5,27 +5,6 @@ import { Badge, Bar, Check, Collapse, Connector, Icon, LockScreen, Notification,
 import "./onzio-look.css";
 import "./section-demos.css";
 
-/* ---- Club sites: a live marker over the real footage, following the tour ---- */
-
-export function LiveChip({ chapter }: { chapter: string }) {
-  return (
-    <div role="img" aria-label={`The Diverse City FC website is live. Now showing: ${chapter}.`}>
-      <Stage width={280} height={84} unframed className="onzio-look lc">
-        {() => (
-          <div className="lc-card">
-            <img src="/diverse-city-fc-logo.png" alt="" />
-            <div className="lc-text">
-              <strong>diversecityfc.com</strong>
-              <span><Roll variant="fade">{chapter}</Roll></span>
-            </div>
-            <Badge tone="success" dot>Live</Badge>
-          </div>
-        )}
-      </Stage>
-    </div>
-  );
-}
-
 /* ---- Pricing: month-to-month, as a pile of paper ---- */
 
 type BillState = { paid: boolean };
