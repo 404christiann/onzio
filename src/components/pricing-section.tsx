@@ -1,60 +1,37 @@
 import styles from "./pricing-section.module.css";
 import { CentralIcon } from "@/components/icons/central/icon";
-import { InvoiceStack } from "@/components/stageshow/section-demos";
+import { ClubPlans } from "@/components/stageshow/pricing-demos";
 
-const inclusions = [
-  "Professional club website",
-  "Hosting",
-  "Admin portal",
-  "Platform updates",
-];
+// No monthly figure: plans are scoped to each club, league or tournament.
+// The picture shows three organizations on one platform with different plans.
 
 export function PricingSection() {
   return (
     <section className={styles.section} id="pricing" aria-labelledby="pricing-title">
       <div className={styles.layout}>
         <div className={styles.intro}>
-          <h2 className={styles.title} id="pricing-title">
-            A professional platform without the agency overhead.
-          </h2>
+          <p className={styles.kicker}>Pricing</p>
+          <h2 className={styles.title} id="pricing-title">One platform. A plan for each.</h2>
           <p className={styles.copy}>
-            Start with the essentials your club needs today, on a month-to-month subscription that can grow with you.
+            A community club, an academy and a league don&rsquo;t need the same tools, so they shouldn&rsquo;t pay for the same plan.
           </p>
         </div>
-
-        <div className={styles.offer}>
-        <div className={styles.picture}><InvoiceStack /></div>
-        <article className={styles.card} aria-label="Onzio managed platform pricing">
-          <div className={styles.band}>
-            <span>Onzio managed platform</span>
-            <span className={styles.bandDetail}>Month-to-month</span>
+        <div className={styles.picture}><ClubPlans /></div>
+        <aside className={styles.strip} aria-label="Get a plan for your organization">
+          <div className={styles.stripCopy}>
+            <p className={styles.stripTitle}>What do you run?</p>
+            <p className={styles.stripText}>Tell us about your club, league or tournament and we&rsquo;ll scope a monthly plan in one conversation.</p>
           </div>
-          <div className={styles.body}>
-            <p className={styles.starting}>Starting at</p>
-            <p className={styles.price}>
-              <strong>$65</strong><span>/ month</span>
-            </p>
-            <p className={styles.commitment}>Month-to-month. No annual commitment.</p>
-            <a className={styles.action} href="#contact">
-              Get started <CentralIcon name="arrow" className={`${styles.icon} ${styles.arrow}`} />
-            </a>
-            <div className={styles.included}>
-              <p>Every subscription includes</p>
-              <ul>
-                {inclusions.map((item) => (
-                  <li key={item}>
-                    <CentralIcon name="check" className={`${styles.icon} ${styles.check}`} />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-          <footer className={styles.footer}>
-            <p>Initial website setup is quoted separately.<br />Domain registration is not included.</p>
-          </footer>
-        </article>
-        </div>
+          <dl className={styles.terms}>
+            <div><dt>Billing</dt><dd>Month-to-month</dd></div>
+            <div><dt>Website setup</dt><dd>Quoted separately</dd></div>
+            <div><dt>Domain</dt><dd>Not included</dd></div>
+          </dl>
+          <a className={styles.cta} href="#contact">
+            Scope my plan
+            <CentralIcon name="arrow" className={styles.ctaIcon} />
+          </a>
+        </aside>
       </div>
     </section>
   );

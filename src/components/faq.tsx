@@ -6,8 +6,8 @@ import styles from "./faq.module.css";
 
 const items = [
   {
-    question: "What is included in the $65 monthly price?",
-    answer: "Plans start at $65 per month and include your professional club website, hosting, the Onzio admin portal, and platform updates. Your final monthly price depends on the scope of your club's website and platform needs.",
+    question: "How much does Onzio cost?",
+    answer: "Every plan includes your professional website, hosting, the Onzio admin portal, and platform updates. Your monthly price depends on what your club, league, or tournament needs, and we scope it with you in one conversation.",
   },
   {
     question: "Is the initial website setup included?",
