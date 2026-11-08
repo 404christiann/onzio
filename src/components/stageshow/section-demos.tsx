@@ -1,44 +1,9 @@
 "use client";
 
 /* eslint-disable @next/next/no-img-element -- The stage scales these with the scene; next/image would fight its transform. */
-import { Badge, Bar, Check, Collapse, Connector, Icon, LockScreen, Notification, Phone, Roll, Stage, type Act } from "@/stageshow/kit";
+import { Badge, Check, Collapse, Connector, Icon, LockScreen, Notification, Phone, Roll, Stage, type Act } from "@/stageshow/kit";
 import "./onzio-look.css";
 import "./section-demos.css";
-
-/* ---- Pricing: month-to-month, as a pile of paper ---- */
-
-type BillState = { paid: boolean };
-
-async function billScript(a: Act<BillState>) {
-  await a.wait(1100);
-  a.put({ paid: true });
-  await a.wait(1500);
-}
-
-export function InvoiceStack() {
-  return (
-    <div role="img" aria-label="Illustration: a stack of monthly Onzio invoices, the newest paid.">
-      <Stage<BillState> width={440} height={420} compact={{ below: 400, width: 342, height: 330 }} initial={{ paid: false }} poster={{ paid: true }} script={billScript} play="once" className="onzio-look ib">
-        {s => (
-          <div className="ib-pile">
-            <section className="ib-paper ib-back" />
-            <section className="ib-paper ib-mid"><Bar w={96} h={7} tone={3} /><Bar w={60} h={7} tone={2} /></section>
-            <section className="ib-paper ib-top">
-              <div className="ib-head">
-                <span className="ib-logo" data-crop><img src="/onzio-logo.png" alt="Onzio" /></span>
-                <Badge tone={s.paid ? "success" : "neutral"}><Roll variant="fade">{s.paid ? "Paid" : "Due"}</Roll></Badge>
-              </div>
-              <div className="ib-month">November</div>
-              <div className="ib-line"><span>Onzio managed platform</span><span>$65.00</span></div>
-              <div className="ib-line ib-faint"><span>Billing</span><span>Month-to-month</span></div>
-              <div className="ib-total"><span>This month</span><strong>$65.00</strong></div>
-            </section>
-          </div>
-        )}
-      </Stage>
-    </div>
-  );
-}
 
 /* ---- FAQ: one picture for each topic ---- */
 
@@ -54,9 +19,9 @@ function FaqPicture({ label, children }: { label: string; children: React.ReactN
 
 export function CostsPicture() {
   return (
-    <FaqPicture label="The monthly subscription includes the website, hosting, admin portal, and updates. Setup and the domain are separate.">
+    <FaqPicture label="Every plan includes the website, hosting, admin portal, and updates, and is scoped to what you need. Setup and the domain are separate.">
       <div className="fp-card">
-        <div className="fp-line"><span>Subscription</span><span>From $65 / month</span></div>
+        <div className="fp-line"><span>Monthly plan</span><span>Scoped to you</span></div>
         <div className="fp-line fp-faint"><span>Website setup</span><span>Quoted separately</span></div>
         <div className="fp-line fp-faint"><span>Domain</span><span>Not included</span></div>
       </div>

@@ -9,7 +9,7 @@ Filmed with the Stageshow skill's `film.mjs --gate` on the production build. Wid
 | `SeasonDemo` | Staff tools | `table-edit` | Enter 3-1, save, Diverse City FC moves to first |
 | `StaffDemo` | Staff tools | `share` | Type an email, it becomes a chip, Invite, the person lands at the top of the list |
 | `AnalyticsDemo` | Staff tools | `chart-scrub` | Scrub the season, the headline reads out each match |
-| `InvoiceStack` | Pricing | `tilted-stack` | Due becomes Paid |
+| `ClubPlans` | Pricing | `stacked-cards` | Three plans; the academy's and league's add-ons fill in, counts roll |
 | FAQ pictures | FAQ | `static-card` | Stills |
 | `InquiryPhone` | Contact | `device-pair` | Sent card, connector, notification |
 

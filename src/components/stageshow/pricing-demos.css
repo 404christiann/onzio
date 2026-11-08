@@ -1,0 +1,273 @@
+/* Pricing pictures on the dark section: white surfaces, no plate behind them. */
+
+/* ---- 1. Plan builder: two cards at one width, whole, as the section's
+   other figures sit on the dark ground ---- */
+
+.pb .ss-stage { overflow: hidden; background: transparent; }
+
+.pb .pb-stack {
+  position: absolute;
+  top: 24px;
+  left: 40px;
+  display: grid;
+  gap: 12px;
+  width: 440px;
+}
+
+.pb .ss-stage[data-layout="compact"] .pb-stack { top: 16px; left: 16px; width: 326px; }
+
+.pb .pb-card {
+  padding: 18px;
+  border-radius: 16px;
+  background: var(--ss-surface);
+  color: var(--ss-text-strong);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04), 0 18px 44px rgba(0, 0, 0, 0.32);
+}
+
+.pb .pb-kind {
+  --ss-row: 32px;
+  margin-bottom: 16px;
+  border-radius: 10px;
+  background: var(--ss-well);
+}
+
+.pb .pb-kind .ss-seg__thumb { border-radius: 8px; background: var(--ss-surface); }
+.pb .pb-kind .ss-seg__option { font-size: 13px; line-height: 1.3; }
+.pb .pb-kind .ss-seg__option[data-hover] { color: var(--ss-text-strong); }
+
+.pb .pb-who {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+}
+
+.pb .pb-who > div { display: grid; gap: 3px; min-width: 0; }
+.pb .pb-who strong { font-size: 15px; font-weight: 500; line-height: 1.3; }
+.pb .pb-who > div > span { color: var(--ss-text); font-size: 13px; line-height: 1.3; white-space: nowrap; }
+
+.pb .ss-stage[data-layout="compact"] .pb-term { display: none; }
+.pb .ss-stage[data-layout="compact"] .pb-who { grid-template-columns: minmax(0, 1fr); }
+
+.pb .pb-quote {
+  display: grid;
+  height: 44px;
+  margin-top: 16px;
+  place-items: center;
+  border-radius: 11px;
+  background: #19271e;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 200ms ease, transform 160ms ease-out;
+}
+
+.pb .pb-quote[data-hover] { background: #2b4031; }
+.pb .pb-quote[data-pressed] { transform: scale(0.97); }
+.pb .pb-quote[data-done] { background: var(--ss-accent-2); }
+
+.pb .pb-quote-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.pb .pb-quote .ss-check__ring,
+.pb .pb-quote .ss-check__arc { stroke: #fff; }
+.pb .pb-quote .ss-check__fill { fill: #fff; }
+.pb .pb-quote .ss-check__tick { stroke: var(--ss-accent-2); }
+
+.pb .pb-label { color: var(--ss-text); font-size: 12px; line-height: 1.3; }
+.pb .pb-label-gap { margin-top: 18px; }
+
+.pb .pb-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.pb .pb-chips span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding: 0 10px 0 8px;
+  border-radius: 8px;
+  background: var(--ss-well);
+  font-size: 12px;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.pb .pb-chips svg { color: var(--ss-accent-2); }
+
+.pb .pb-list { display: grid; margin: 6px -10px 0; }
+.pb .pb-row { --ss-row-title: 13px; --ss-row-line: 18px; }
+.pb .pb-row + .pb-row { border-top: 1px solid var(--ss-line-faint); border-radius: 0; }
+
+/* ---- 2. Two clubs: two plan cards at one width, top-aligned ---- */
+
+.cp .ss-stage { overflow: hidden; background: transparent; }
+
+.cp .cp-row {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  right: 24px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: 16px;
+}
+
+.cp .ss-stage[data-layout="compact"] .cp-row {
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+}
+
+.cp .cp-card {
+  overflow: hidden;
+  border-radius: 16px;
+  background: var(--ss-surface);
+  color: var(--ss-text-strong);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04), 0 18px 44px rgba(0, 0, 0, 0.32);
+}
+
+.cp .cp-head {
+  display: grid;
+  gap: 3px;
+  padding: 18px 18px 14px;
+}
+
+.cp .cp-head strong { font-size: 17px; font-weight: 500; line-height: 1.3; letter-spacing: -0.02em; }
+.cp .cp-head span { color: var(--ss-text); font-size: 12px; line-height: 1.3; }
+
+.cp .cp-list { padding: 0 18px; }
+
+.cp .cp-line {
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr);
+  align-items: start;
+  gap: 10px;
+  padding: 10px 0;
+  border-top: 1px solid var(--ss-line-faint);
+  font-size: 13px;
+  line-height: 1.3;
+}
+
+.cp .cp-line .ss-check { margin-top: 0.5px; }
+.cp .cp-line > div { display: grid; gap: 3px; }
+.cp .cp-line strong { font-weight: 500; }
+.cp .cp-line > div > span { color: var(--ss-text); font-size: 12px; }
+
+.cp .cp-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px;
+  border-top: 1px solid var(--ss-line);
+  background: var(--ss-canvas);
+  font-size: 13px;
+  line-height: 1.3;
+}
+
+.cp .cp-foot span { color: var(--ss-text); }
+.cp .cp-foot strong { font-weight: 500; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* ---- 3. Proposal: a quiet browser page, whole ---- */
+
+.pp .ss-stage { overflow: hidden; background: transparent; }
+
+.pp .pp-window {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  width: 512px;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.05), 0 18px 44px rgba(0, 0, 0, 0.32);
+}
+
+.pp .ss-stage[data-layout="compact"] .pp-window { top: 16px; left: 16px; width: 326px; }
+
+.pp .pp-doc {
+  padding: 22px;
+  background: var(--ss-surface);
+  color: var(--ss-text-strong);
+}
+
+.pp .pp-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.pp .pp-title { display: grid; justify-items: start; gap: 8px; }
+.pp .pp-title strong { font-size: 20px; font-weight: 500; line-height: 1.2; letter-spacing: -0.03em; }
+
+.pp .pp-accept {
+  display: grid;
+  flex: none;
+  height: 38px;
+  padding: 0 16px;
+  place-items: center;
+  border-radius: 10px;
+  background: var(--ss-accent);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  transition: background 200ms ease, transform 160ms ease-out;
+}
+
+.pp .pp-accept[data-hover] { background: var(--ss-accent-2); }
+.pp .pp-accept[data-pressed] { transform: scale(0.97); }
+.pp .pp-accept[data-done] { background: var(--ss-accent-2); }
+.pp .pp-accept .ss-check__ring,
+.pp .pp-accept .ss-check__arc { stroke: #fff; }
+.pp .pp-accept .ss-check__fill { fill: #fff; }
+.pp .pp-accept .ss-check__tick { stroke: var(--ss-accent-2); }
+
+.pp .pp-accept-label { display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; }
+
+.pp .pp-label { margin-top: 24px; color: var(--ss-text); font-size: 12px; line-height: 1.3; }
+
+.pp .pp-list { margin-top: 8px; }
+
+.pp .pp-line {
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr);
+  align-items: start;
+  gap: 10px;
+  padding: 11px 0;
+  border-top: 1px solid var(--ss-line-faint);
+  font-size: 13px;
+  line-height: 1.3;
+}
+
+.pp .pp-line > div { display: grid; gap: 3px; }
+.pp .pp-line strong { font-weight: 500; }
+.pp .pp-line span { color: var(--ss-text); font-size: 12px; }
+
+.pp .pp-terms {
+  display: grid;
+  gap: 10px;
+  margin-top: 6px;
+  padding: 14px;
+  border-radius: 12px;
+  background: var(--ss-canvas);
+  font-size: 13px;
+  line-height: 1.3;
+}
+
+.pp .pp-terms div { display: flex; justify-content: space-between; gap: 12px; }
+.pp .pp-terms span { color: var(--ss-text); }
+.pp .pp-terms strong { font-weight: 500; }
+
+/* Narrow: the badge drops under the title, the button stays whole. */
+.pp .ss-stage[data-layout="compact"] .pp-doc { padding: 18px 16px; }
+.pp .ss-stage[data-layout="compact"] .pp-title strong { font-size: 17px; }
