@@ -11,7 +11,6 @@ Filmed with the Stageshow skill's `film.mjs --gate` on the production build. Wid
 | `AnalyticsDemo` | Staff tools | `chart-scrub` | Scrub the season, the headline reads out each match |
 | `ClubPlans` | Pricing | `stacked-cards` | Three plans; the academy's and league's add-ons fill in, counts roll |
 | FAQ pictures | FAQ | `static-card` | Stills |
-| `InquiryPhone` | Contact | `device-pair` | Sent card, connector, notification |
 
 All play once and hold their result; no loops, so nothing competes on a long page. `HeroDemo` is one stage per chapter, so film reports up to four stages for one tour.
 
@@ -23,8 +22,6 @@ All play once and hold their result; no loops, so nothing competes on a long pag
 - `HeroDemo` wide, window `off center` and phone `14px from the right edge`: deliberate. Window and phone share one 14px gutter as a device pair; film reads the window alone.
 - `HeroDemo`, `jump` on Field text at a page tap: the field changes with its page; the kit's Field takes a string, so it cannot roll.
 - `HeroDemo`, `hard edge` on the capture: a page scrolling inside its window, cut by the window as a real page is.
-- `InquiryPhone` wide, phone off center: deliberate. Card and phone are two columns on one gutter, and centering the phone would put the card over it.
-- `InquiryPhone` compact, notification time at 8.2px: iOS's true proportion on a phone sized to fit the column.
 - `jump`, `settle snap`, `steps in its box` on Field text: per-character typing and the chip commit, both kit behavior.
 
 ## Review

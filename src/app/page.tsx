@@ -3,7 +3,6 @@ import { CentralIcon } from "@/components/icons/central/icon";
 import { ContactForm } from "@/components/contact-form";
 import { Faq } from "@/components/faq";
 import { HeroDemo } from "@/components/stageshow/hero-demo";
-import { InquiryPhone } from "@/components/stageshow/section-demos";
 import { PricingSection } from "@/components/pricing-section";
 import { SiteHeader } from "@/components/site-header";
 import { StaffTools } from "@/components/staff-tools";
@@ -43,7 +42,6 @@ export default function Home() {
               <p>Share a few details. We&apos;ll talk about how Onzio could help.</p>
             </div>
             <ContactForm />
-            <div className="contact-picture"><InquiryPhone /></div>
           </div>
         </section>
       </main>
