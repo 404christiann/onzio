@@ -280,7 +280,6 @@ svg { flex: none; }
 .contact-section { padding-block: 65px; color: var(--ink); background: var(--white); scroll-margin-top: 16px; }
 .contact-grid { display: block; max-width: 680px; }
 .contact-copy { text-align: center; }
-.contact-picture { margin-top: 40px; }
 .contact-copy h2 { margin: 0; font-family: var(--font-ui); font-size: 51px; font-weight: 500; line-height: 1.07; letter-spacing: -2.2px; text-transform: none; }
 .contact-copy > p { max-width: 440px; margin: 18px auto 0; color: var(--muted); font-size: 15px; line-height: 1.65; text-wrap: pretty; }
 .contact-form { position: relative; min-width: 0; margin-top: 30px; padding: 0; color: var(--ink); }
