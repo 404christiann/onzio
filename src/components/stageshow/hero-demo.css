@@ -143,7 +143,7 @@
 }
 
 .hd .hd-publish[data-hover], .hd .hd-publish[data-pressed] { background: var(--ss-accent-2); }
-.hd .hd-publish[data-done] { background: #0b4d2c; }
+.hd .hd-publish[data-done] { background: hsl(var(--primary-hover)); }
 
 .hd .hd-publish-label { display: inline-flex; align-items: center; gap: 8px; line-height: 1.3; }
 
@@ -171,7 +171,7 @@
   padding-inline: 10px;
   border: 0;
   border-radius: 10px;
-  color: #59665e;
+  color: hsl(var(--muted-foreground));
   background: transparent;
   font: inherit;
   font-size: 14px;
@@ -181,7 +181,7 @@
   transition: color 180ms ease, background 180ms ease;
 }
 
-.hd-tabs button:hover { background: #f1f4f1; }
+.hd-tabs button:hover { background: hsl(var(--accent)); }
 .hd-tabs button[aria-pressed="true"] { color: var(--green-hover); }
 .hd-tabs button:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
 

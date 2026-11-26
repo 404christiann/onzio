@@ -17,7 +17,7 @@
 
 .title {
   margin: 0;
-  font-family: var(--font-barlow-condensed), Impact, sans-serif;
+  font-family: var(--font-ui);
   font-size: 64px;
   font-weight: 700;
   line-height: .96;
@@ -58,7 +58,7 @@
 
 .ctaIcon { width: 18px; height: 18px; }
 
-.fine { margin: 16px 0 0; color: #8d9a91; font-size: 12px; line-height: 1.6; }
+.fine { margin: 16px 0 0; color: hsl(var(--muted-foreground) / 0.8); font-size: 12px; line-height: 1.6; }
 
 .check { width: 18px; height: 18px; flex: none; margin-top: 2px; color: #7fd39b; }
 
@@ -125,7 +125,7 @@
 
 .audiences li {
   padding: 6px 12px;
-  border: 1px solid #2a3a2f;
+  border: 1px solid hsl(var(--secondary-foreground));
   border-radius: 999px;
   color: #d6ded8;
   font-size: 13px;
