@@ -6,7 +6,7 @@ Filmed with the Stageshow skill's `film.mjs --gate` on the production build. Wid
 |---|---|---|---|
 | `HeroDemo` | Hero (and the Club sites nav link) | `device-pair` | Type an announcement, Publish confirms on itself, the bar opens on the real site capture; then tap About and Programs and the site scrolls to each; comes home and holds |
 | `WebsiteDemo` | Staff tools | `form-error` | Publish in the row, the badge settles, a toast names the result |
-| `SeasonDemo` | Staff tools | `table-edit` | Enter 3-1, save, Diverse City FC moves to first |
+| `SeasonDemo` | Staff tools | `table-edit` | Enter 3-1, save, Rose City FC moves to first |
 | `StaffDemo` | Staff tools | `share` | Type an email, it becomes a chip, Invite, the person lands at the top of the list |
 | `AnalyticsDemo` | Staff tools | `chart-scrub` | Scrub the season, the headline reads out each match |
 | `ClubPlans` | Pricing | `stacked-cards` | Three plans; the academy's and league's add-ons fill in, counts roll |
@@ -36,7 +36,7 @@ An independent reviewer's findings, all acted on except:
 
 ## Assumptions
 
-Season data is illustrative and the clubs other than Diverse City FC are invented. The section footer already labels these as illustrative product views.
+Season data is illustrative and the clubs other than Rose City FC are invented. The section footer already labels these as illustrative product views.
 
 ## Not checked
 

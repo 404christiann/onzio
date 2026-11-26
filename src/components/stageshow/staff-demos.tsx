@@ -14,7 +14,7 @@ import "./staff-demos.css";
 const STAGE = { width: 560, height: 500, compact: { below: 460, width: 358, height: 490 } };
 
 function Workspace({ label, children }: { label: string; children: ReactNode }) {
-  const crest = <span className="onzio-crest"><img src="/diverse-city-fc-logo.png" alt="" />Diverse City FC</span>;
+  const crest = <span className="onzio-crest"><img src="/images/rose-city/crest.webp" alt="" />Rose City FC</span>;
   const context = <span className="sd-context">{label}</span>;
   // On a phone column this is the workspace's mobile view, not a squeezed desktop window.
   if (useLook().layout === "compact") {
@@ -81,7 +81,7 @@ export function WebsiteDemo() {
               ))}
             </div>
           </Workspace>
-          <Toast show={s.toast} icon={<Check on={s.toast} size={15} />} className="sd-toast">Tryouts is live on diversecityfc.com</Toast>
+          <Toast show={s.toast} icon={<Check on={s.toast} size={15} />} className="sd-toast">Tryouts is live on rosecityfutbolclub.com</Toast>
         </>
       )}
     </Stage>
@@ -94,7 +94,7 @@ type SeasonState = { home: string; away: string; field: "none" | "home" | "away"
 const seasonInitial: SeasonState = { home: "", away: "", field: "none", saved: false };
 
 const table = (saved: boolean) => [
-  { club: "Diverse City FC", w: saved ? 8 : 7, d: 2, l: 1, pts: saved ? 26 : 23, rank: saved ? 0 : 1 },
+  { club: "Rose City FC", w: saved ? 8 : 7, d: 2, l: 1, pts: saved ? 26 : 23, rank: saved ? 0 : 1 },
   { club: "Lakeshore United", w: 7, d: 2, l: saved ? 2 : 1, pts: 23, rank: saved ? 1 : 0 },
   { club: "Northside SC", w: 6, d: 3, l: 2, pts: 21, rank: 2 },
   { club: "Harbor City", w: 5, d: 3, l: 3, pts: 18, rank: 3 },
@@ -129,7 +129,7 @@ export function SeasonDemo() {
       {s => (
         <Workspace label="Competition">
           <div className="sd-match">
-            <span className="sd-club">Diverse City FC</span>
+            <span className="sd-club">Rose City FC</span>
             <span className="sd-score" data-target="home" data-cursor="ibeam" data-on={s.field === "home" || undefined}>{s.home}</span>
             <span className="sd-dash" />
             <span className="sd-score" data-target="away" data-cursor="ibeam" data-on={s.field === "away" || undefined}>{s.away}</span>
@@ -148,7 +148,7 @@ export function SeasonDemo() {
             <div className="sd-table-row sd-table-head"><span>League standings</span><span>W</span><span>D</span><span>L</span><span>Pts</span></div>
             <div className="sd-table-rows">
               {table(s.saved).map(row => (
-                <div key={row.club} className="sd-table-row sd-table-body" data-us={row.club === "Diverse City FC" || undefined} style={{ transform: `translateY(${row.rank * 44}px)` }}>
+                <div key={row.club} className="sd-table-row sd-table-body" data-us={row.club === "Rose City FC" || undefined} style={{ transform: `translateY(${row.rank * 44}px)` }}>
                   <span>{row.club}</span>
                   <span><Count value={row.w} /></span>
                   <span>{row.d}</span>
@@ -167,7 +167,7 @@ export function SeasonDemo() {
 /* ---- Staff access: a colleague is invited ---- */
 
 type StaffState = { email: string; typing: boolean; chip: boolean; added: boolean };
-const EMAIL = "alex@diversecityfc.com";
+const EMAIL = "coach@example.com";
 
 async function staffScript(a: Act<StaffState>) {
   await a.wait(700);

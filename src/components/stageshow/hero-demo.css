@@ -54,12 +54,14 @@
   container-type: inline-size;
 }
 
+.hd .hd-capture img:first-child { margin-top: 0; }
+
 .hd .hd-capture img {
   display: block;
   width: 100%;
   height: auto;
   max-width: none;
-  transform: translateY(calc(var(--top, 0) * -100cqw / 1395));
+  transform: translateY(calc(var(--top, 0) * -100cqw / 1280));
   transition: transform 1100ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 

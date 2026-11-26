@@ -17,11 +17,11 @@ const ANNOUNCEMENT = "Spring tryouts are open";
 
 const CHAPTERS: { label: string; page: string; field: string; value: string; top: number; icon: CentralIconName }[] = [
   { label: "First impression", page: "Homepage", field: "Announcement", value: ANNOUNCEMENT, top: 0, icon: "website" },
-  { label: "Club story", page: "About", field: "Headline", value: "Developing the next generation", top: 2145, icon: "staff" },
-  { label: "Player pathways", page: "Programs", field: "Headline", value: "A pathway for every player", top: 3927, icon: "competition" },
+  { label: "Next home match", page: "Tickets", field: "Heading", value: "Pack the stands", top: 715, icon: "staff" },
+  { label: "Match day", page: "Schedule", field: "Heading", value: "Replay the match", top: 2102, icon: "competition" },
 ];
 
-const PAGES = [...CHAPTERS.map(chapter => chapter.page), "Roster", "Schedule", "Store", "Contact"];
+const PAGES = [...CHAPTERS.map(chapter => chapter.page), "Roster", "Shop", "Contact"];
 
 type S = { text: string; focus: boolean; publish: "idle" | "busy" | "done"; live: boolean; page: number };
 type Scene = { chapter: number; from: number; published: boolean };
@@ -111,7 +111,7 @@ export function HeroDemo() {
 
   return (
     <div ref={frame} className="hd-frame">
-      <div role="img" aria-label={`Illustration: from a phone, staff manage the Diverse City FC website shown in a browser. Now showing: ${CHAPTERS[shown].label}.`}>
+      <div role="img" aria-label={`Illustration: from a phone, staff manage the Rose City FC website shown in a browser. Now showing: ${CHAPTERS[shown].label}.`}>
         <Stage<S>
           key={chapter}
           width={1000}
@@ -127,7 +127,7 @@ export function HeroDemo() {
         >
           {(s, _rect, layout) => (
             <>
-              <Window url="diversecityfc.com" className="hd-window" body={{ className: "hd-site", "data-crop": true }}>
+              <Window url="rosecityfutbolclub.com" className="hd-window" body={{ className: "hd-site", "data-crop": true }}>
                 <Collapse open={s.live}>
                   <div className="hd-bar">
                     <span>{ANNOUNCEMENT}</span>
@@ -135,15 +135,16 @@ export function HeroDemo() {
                   </div>
                 </Collapse>
                 <div className="hd-capture" data-crop style={{ "--top": CHAPTERS[s.page].top } as React.CSSProperties}>
-                  <img src="/images/club-showcase/homepage-desktop.jpg" alt="" fetchPriority="high" />
+                  <img src="/images/rose-city/home-desktop-top.webp" width={1280} height={715} alt="" />
+                  <img src="/images/rose-city/home-desktop-rest.webp" width={1280} height={2918} alt="" loading="lazy" />
                 </div>
               </Window>
 
               <Phone width={SIZE[layout].phone} frame="pro" className="hd-phone">
                 <div className="hd-app">
                   <div className="hd-app-head">
-                    <img src="/diverse-city-fc-logo.png" alt="" />
-                    <div><strong>Diverse City FC</strong><small>Club administration</small></div>
+                    <img src="/images/rose-city/crest.webp" alt="" />
+                    <div><strong>Rose City FC</strong><small>Club administration</small></div>
                   </div>
                   <div className="hd-app-title">
                     <strong><Roll variant="fade">{CHAPTERS[s.page].page}</Roll></strong>
