@@ -40,8 +40,8 @@ export function StaffTools() {
   return <section className={styles.section} id="staff-tools" aria-labelledby={`${id}-title`}>
     <div className="shell">
     <header className={styles["section-head"]}>
-      <h2 id={`${id}-title`}>The tools your staff<br />will actually use.</h2>
-      <p>The everyday work behind a great club.<br />All in one place. Easy to keep moving.</p>
+      <h2 id={`${id}-title`}>What your staff do in the admin.</h2>
+      <p>Publish pages, enter results, invite coaches and read the season back.</p>
     </header>
     <div className={styles["tool-layout"]}>
       <div className={styles["tool-index"]}>{tools.map(tool => {
@@ -59,7 +59,7 @@ export function StaffTools() {
       })}</div>
       <div className={styles["desktop-preview"]}><Preview active={active} labelId={`${id}-${active}-button`} /></div>
     </div>
-    <footer className={styles["section-foot"]}><span>Built for the work behind the club.</span><span>Illustrative product views · Rose City FC</span></footer>
+    <footer className={styles["section-foot"]}><span>Illustrative data.</span><span>Illustrative product views · Rose City FC</span></footer>
     </div>
   </section>;
 }

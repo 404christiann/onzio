@@ -1,9 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
-const title = "Onzio — A better digital home for your soccer club";
+const title = "Onzio — Club websites and admin for soccer clubs";
 const description =
-  "A professional soccer club website and simple tools for managing content, rosters, schedules, match stats, and programs.";
+  "Onzio builds your soccer club's website and gives staff one admin for registration and payments, rosters, schedules and results, match video, and every page on the site.";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://onziofutbol.com";
 
 export const metadata: Metadata = {

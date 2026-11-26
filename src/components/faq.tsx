@@ -48,8 +48,8 @@ export function Faq() {
     <section className={styles.section} id="faq" aria-labelledby="faq-title">
       <div className={styles.inner}>
         <div className={styles.sidebar}>
-          <h2 id="faq-title">Common questions</h2>
-          <p>What clubs usually want to know before starting with Onzio.</p>
+          <h2 id="faq-title">Questions clubs ask</h2>
+          <p>Costs, what&apos;s included, and what your staff can change themselves.</p>
           <div className={styles.topics} role="group" aria-label="FAQ topics">
             {topics.map((topic, index) => (
               <button

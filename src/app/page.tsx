@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { CentralIcon } from "@/components/icons/central/icon";
+import { ClubShowcase } from "@/components/club-showcase";
 import { ContactForm } from "@/components/contact-form";
 import { Faq } from "@/components/faq";
 import { HeroDemo } from "@/components/stageshow/hero-demo";
@@ -15,19 +15,23 @@ export default function Home() {
       <main id="top">
         <section className="hero" aria-labelledby="hero-title">
           <div className="hero-inner shell">
-            <h1 id="hero-title"><span>Your club deserves</span>{" "}<em>a better home.</em></h1>
+            <p className="hero-breadcrumb">For soccer clubs, academies and leagues</p>
+            <h1 id="hero-title">Your club&apos;s website, and the admin that runs it.</h1>
             <p className="hero-copy">
-              A professional website for your community. A simple place for your staff to keep it all moving.
+              Onzio builds your public site and gives your staff one admin for player registration and payments,
+              rosters, schedules and results, match video, and every page on the site.
             </p>
             <div className="hero-actions">
-              <a className="button button-primary" href="#staff-tools">Explore the platform <CentralIcon name="arrow" width={18} height={18} /></a>
-              <a className="button button-secondary" href="#contact">Start a conversation</a>
+              <a className="button button-primary" href="#tour">See the admin</a>
+              <a className="button button-secondary" href="#contact">Talk to us</a>
             </div>
-            <figure className="hero-product" id="club-sites">
-              <HeroDemo />
-            </figure>
           </div>
+          <figure className="hero-product shell" id="tour">
+            <HeroDemo />
+          </figure>
         </section>
+
+        <ClubShowcase />
 
         <StaffTools />
 
@@ -38,8 +42,8 @@ export default function Home() {
         <section className="contact-section" id="contact" aria-labelledby="contact-title">
           <div className="shell contact-grid">
             <div className="contact-copy">
-              <h2 id="contact-title">What&apos;s next for your club?</h2>
-              <p>Share a few details. We&apos;ll talk about how Onzio could help.</p>
+              <h2 id="contact-title">Talk to us about your club</h2>
+              <p>Tell us what you run and what you use today. We&apos;ll set up a call and walk you through the admin.</p>
             </div>
             <ContactForm />
           </div>
@@ -51,7 +55,7 @@ export default function Home() {
           <a className="footer-brand" href="#top" aria-label="Onzio home">
             <Image src="/onzio-logo.png" alt="Onzio" width={500} height={500} unoptimized />
           </a>
-          <p>Built for the world&apos;s game.</p>
+          <p>Websites and admin for soccer clubs.</p>
           <p>© {new Date().getFullYear()} Onzio</p>
         </div>
       </footer>

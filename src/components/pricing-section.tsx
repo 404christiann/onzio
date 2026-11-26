@@ -11,16 +11,16 @@ export function PricingSection() {
       <div className={styles.layout}>
         <div className={styles.intro}>
           <p className={styles.kicker}>Pricing</p>
-          <h2 className={styles.title} id="pricing-title">One platform. A plan for each.</h2>
+          <h2 className={styles.title} id="pricing-title">A monthly plan scoped to what you run.</h2>
           <p className={styles.copy}>
-            A community club, an academy and a league don&rsquo;t need the same tools, so they shouldn&rsquo;t pay for the same plan.
+            A community club, an academy and a league use different parts of the admin. We price the parts you use, month to month.
           </p>
         </div>
         <div className={styles.picture}><ClubPlans /></div>
         <aside className={styles.strip} aria-label="Get a plan for your organization">
           <div className={styles.stripCopy}>
-            <p className={styles.stripTitle}>What do you run?</p>
-            <p className={styles.stripText}>Tell us about your club, league or tournament and we&rsquo;ll scope a monthly plan in one conversation.</p>
+            <p className={styles.stripTitle}>Get a price for your club</p>
+            <p className={styles.stripText}>Tell us about your club, league or tournament and we&rsquo;ll quote a monthly plan on one call.</p>
           </div>
           <dl className={styles.terms}>
             <div><dt>Billing</dt><dd>Month-to-month</dd></div>
@@ -28,7 +28,7 @@ export function PricingSection() {
             <div><dt>Domain</dt><dd>Not included</dd></div>
           </dl>
           <a className={styles.cta} href="#contact">
-            Scope my plan
+            Get a quote
             <CentralIcon name="arrow" className={styles.ctaIcon} />
           </a>
         </aside>
