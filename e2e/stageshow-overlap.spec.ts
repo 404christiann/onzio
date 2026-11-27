@@ -130,4 +130,21 @@ for (const width of WIDTHS) {
     expect([...new Set(problems)]).toEqual([]);
   });
 
+  test(`club showcase has no overlaps at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/?tour-test");
+    await page.waitForFunction(() => "__showcase" in window);
+    await page.locator("#club-sites").scrollIntoViewIfNeeded();
+    const pages = await page.evaluate(() => (window as unknown as { __showcase: { pages: number } }).__showcase.pages);
+    const start = await anchors(page);
+    const problems: string[] = [];
+    for (let i = 0; i < pages; i++) {
+      for (const progress of [0, 0.5, 1]) {
+        await page.evaluate(([index, at]) => (window as unknown as { __showcase: { seek(i: number, p: number): Promise<void> } }).__showcase.seek(index, at), [i, progress]);
+        for (const p of await audit(page, null)) problems.push(`page ${i + 1} @${progress}: ${p}`);
+        expect(await anchors(page), `page moved at showcase page ${i + 1}`).toBe(start);
+      }
+    }
+    expect([...new Set(problems)]).toEqual([]);
+  });
 }
