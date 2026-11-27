@@ -1,22 +1,50 @@
-/* Pricing: one left-aligned block in the admin's page-header rhythm, and
-   the plan picture below it. The button is the admin's primary button. */
+/* Pricing: a left-aligned block in the admin's page-header rhythm, three plan
+   cards in the admin's card style (rounded-xl, 1px border, shadow-sm) at one
+   height with their footers on one line, then the one button. */
 
-.section { padding-block: 88px; background: hsl(var(--card)); border-block: 1px solid hsl(var(--border)); scroll-margin-top: 16px; }
-.layout { display: grid; gap: 32px; width: min(1180px, calc(100% - 48px)); margin-inline: auto; }
+.section { padding-block: 88px; background: hsl(var(--background)); border-block: 1px solid hsl(var(--border)); scroll-margin-top: 16px; }
+.layout { display: grid; justify-items: start; gap: 32px; width: min(1180px, calc(100% - 48px)); margin-inline: auto; }
 
-.intro { display: flex; flex-direction: column; align-items: flex-start; max-width: 640px; }
+.intro { max-width: 640px; }
 .title { margin: 0; font-size: var(--text-section); font-weight: 600; line-height: 1.15; letter-spacing: var(--tracking-title); }
 .copy { max-width: 56ch; margin: 12px 0 0; color: hsl(var(--muted-foreground)); font-size: var(--text-description); line-height: 1.5; text-wrap: pretty; }
 
+.cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: stretch; gap: 16px; width: 100%; margin: 0; padding: 0; list-style: none; }
+.card { display: flex; flex-direction: column; overflow: hidden; border: 1px solid hsl(var(--border)); border-radius: var(--radius-xl); background: hsl(var(--card)); box-shadow: var(--shadow-card); }
+
+.head { padding: 20px 20px 16px; }
+.head h3 { margin: 0; font-size: 17px; font-weight: 600; line-height: 1.3; letter-spacing: -0.01em; }
+.head p { margin: 2px 0 0; color: hsl(var(--muted-foreground)); font-size: 13px; line-height: 1.4; }
+
+.included { display: grid; gap: 2px; margin: 0 20px; padding: 12px 14px; border-radius: var(--radius-lg); background: hsl(var(--secondary)); font-size: 13px; line-height: 1.4; }
+.included strong { font-weight: 600; }
+.included span { color: hsl(var(--muted-foreground)); }
+
+.features { padding: 18px 20px 8px; }
+.label { margin: 0 0 4px; color: hsl(var(--muted-foreground)); font-size: 12px; font-weight: 500; line-height: 16px; }
+.features ul { margin: 0; padding: 0; list-style: none; }
+.features li { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-top: 1px solid hsl(var(--border) / .7); font-size: var(--text-sm); line-height: 20px; }
+.features li:first-child { border-top: 0; }
+.check { flex: none; color: hsl(var(--primary)); }
+
+/* The footer sits on the card's bottom edge, so all three line up. */
+.foot { margin: auto 0 0; padding: 14px 20px; border-top: 1px solid hsl(var(--border)); background: hsl(var(--background)); color: hsl(var(--muted-foreground)); font-size: 13px; line-height: 1.4; }
+
 /* button.tsx, size lg: h-10 px-6 rounded-md text-sm font-medium, bg-primary hover:bg-primary/90 */
-.cta { display: inline-flex; align-items: center; justify-content: center; height: 40px; margin-top: 20px; padding: 0 24px; border-radius: var(--radius-md); background: hsl(var(--primary)); color: hsl(var(--primary-foreground)); font-size: var(--text-sm); font-weight: 500; white-space: nowrap; transition: background-color 150ms var(--ease-standard), transform 160ms var(--ease-out); }
+.cta { display: inline-flex; align-items: center; justify-content: center; height: 40px; padding: 0 24px; border-radius: var(--radius-md); background: hsl(var(--primary)); color: hsl(var(--primary-foreground)); font-size: var(--text-sm); font-weight: 500; white-space: nowrap; transition: background-color 150ms var(--ease-standard), transform 160ms var(--ease-out); }
 .cta:active { transform: scale(.97); }
 
-.picture { width: 100%; min-width: 0; }
+@media (max-width: 900px) {
+  .cards { grid-template-columns: minmax(0, 1fr); max-width: 560px; }
+}
 
 @media (max-width: 560px) {
   .section { padding-block: 64px; }
-  .layout { width: calc(100% - 32px); }
+  .layout { width: calc(100% - 32px); gap: 24px; }
+  .head { padding: 18px 16px 14px; }
+  .included { margin-inline: 16px; }
+  .features { padding-inline: 16px; }
+  .foot { padding-inline: 16px; }
 }
 
 @media (hover: hover) and (pointer: fine) {

@@ -10,8 +10,8 @@ const items = [
     answer: "Every plan includes your professional website, hosting, the Onzio admin portal, and platform updates. Your monthly price depends on what your club, league, or tournament needs, and we scope it with you in one conversation.",
   },
   {
-    question: "Is domain registration included?",
-    answer: "No. Domain registration is separate from the monthly subscription. If your club already owns a domain, it can be connected to the website.",
+    question: "Do I need my own domain?",
+    answer: "Bring your own, or we'll help you get one.",
   },
   {
     question: "Can our club update the website?",

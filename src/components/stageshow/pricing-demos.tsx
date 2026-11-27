@@ -1,6 +1,6 @@
 "use client";
 
-import { Badge, Check, Collapse, Count, Roll, Row, Segmented, Stage, States, Toggle, Window, type Act } from "@/stageshow/kit";
+import { Badge, Check, Roll, Row, Segmented, Stage, States, Toggle, Window, type Act } from "@/stageshow/kit";
 import { CentralIcon } from "@/components/icons/central/icon";
 import "./onzio-look.css";
 import "./pricing-demos.css";
@@ -109,82 +109,6 @@ export function PlanBuilder() {
             </div>
           );
         }}
-      </Stage>
-    </div>
-  );
-}
-
-/* ---- 2. Three organizations: the same platform, three different plans ---- */
-
-const ORGS = [
-  { name: "Community club", kind: "A few teams, one season", addons: ["Tryout sign-ups"] },
-  { name: "Multi-program academy", kind: "Several programs, year-round", addons: ["Registration & waivers", "Online payments", "Season results"] },
-  {
-    name: "League or tournament",
-    kind: "Many clubs, one schedule",
-    addons: ["Team registration & waivers", "Online payments", "Schedules & standings", "Tournament brackets", "Club accounts", "Staff accounts"],
-  },
-];
-
-const MOST = Math.max(...ORGS.map(org => org.addons.length));
-
-type OrgsState = { shown: number };
-
-async function orgsScript(a: Act<OrgsState>) {
-  await a.wait(900);
-  for (let i = 3; i <= MOST; i++) {
-    a.put({ shown: i });
-    await a.wait(300);
-  }
-  await a.wait(2400);
-}
-
-function PlanCard({ org, shown }: { org: (typeof ORGS)[number]; shown: number }) {
-  const count = Math.min(shown, org.addons.length);
-  const plural = org.addons.length > 1;
-  return (
-    <section className="cp-card">
-      <header className="cp-head">
-        <strong>{org.name}</strong>
-        <span>{org.kind}</span>
-      </header>
-      <div className="cp-list">
-        <div className="cp-line cp-essentials">
-          <Check on size={16} />
-          <div><strong>Essentials</strong><span>{ESSENTIALS.join(" · ")}</span></div>
-        </div>
-        {org.addons.map((item, i) => (
-          <Collapse key={item} open={i < shown}>
-            <div className="cp-line"><Check on size={16} /><span>{item}</span></div>
-          </Collapse>
-        ))}
-      </div>
-      <footer className="cp-foot">
-        <span>Monthly plan</span>
-        <strong>{plural ? <Count value={count} /> : count} add-on{plural ? "s" : ""}</strong>
-      </footer>
-    </section>
-  );
-}
-
-export function ClubPlans() {
-  return (
-    <div role="img" aria-label="Illustration: a community club's plan has the essentials and one add-on, an academy's has three, and a league or tournament's has six.">
-      <Stage<OrgsState>
-        width={1052}
-        height={468}
-        compact={{ below: 900, width: 358, height: 990 }}
-        initial={{ shown: 2 }}
-        poster={{ shown: MOST }}
-        script={orgsScript}
-        play="once"
-        className="onzio-look cp"
-      >
-        {s => (
-          <div className="cp-row">
-            {ORGS.map(org => <PlanCard key={org.name} org={org} shown={s.shown} />)}
-          </div>
-        )}
       </Stage>
     </div>
   );
