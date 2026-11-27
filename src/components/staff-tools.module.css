@@ -2,51 +2,86 @@
 .section-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 60px; margin-bottom: 58px; }
 .section-head h2 { margin: 0; font-family: var(--font-barlow-condensed), Impact, sans-serif; text-transform: uppercase; font-size: 76px; letter-spacing: -.027em; line-height: .94; font-weight: 650; text-wrap: balance; }
 .section-head > p { margin: 0; max-width: 300px; padding-bottom: 5px; color: var(--muted); font-size: 15px; line-height: 1.65; text-wrap: pretty; }
-.tool-layout { display: grid; grid-template-columns: minmax(0,.95fr) minmax(0,1.05fr); gap: 60px; align-items: start; }
-.tool-index { min-width: 0; }
-.tool-entry { border: 0; }
+.tool-layout { display: grid; grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr); gap: 56px; align-items: start; }
+
+/* The tools: every title and its one-line promise visible at once, so the list
+   reads without opening anything. The open tool is a quiet card; while the
+   tour runs, a hairline fills along its foot until the next tool opens. */
+.tool-index { display: grid; gap: 6px; min-width: 0; }
+.tool-entry { position: relative; border: 1px solid transparent; border-radius: 16px; transition: background-color 200ms ease, border-color 200ms ease; }
+.tool-entry[data-open] { border-color: hsl(var(--border) / .8); background: hsl(var(--background)); }
 .tool-entry h3 { margin: 0; }
-.tool-trigger { width: 100%; min-height: 80px; display: flex; align-items: center; gap: 16px; padding: 25px 0; border: 0; background: transparent; color: var(--ink); text-align: left; transition: color 150ms ease, transform 120ms ease; }
-.tool-trigger:active { transform: scale(.96); }
-.tool-trigger:focus-visible { outline: 3px solid var(--green); outline-offset: 4px; border-radius: 5px; }
-.icon { display: block; width: 24px; height: 24px; flex: none; }
-.tool-trigger .icon { color: #708076; }
-.tool-trigger > span:nth-child(2) { flex: 1; font-size: 22px; font-weight: var(--font-ui-weight); letter-spacing: var(--font-ui-tracking); }
-.toggle { display: block; flex: none; color: #87948b; }
-.is-open .tool-trigger, .is-open .tool-trigger .icon { color: var(--green-hover); }
-.tool-copy { padding: 0 38px 28px 40px; }
-.tool-copy p { max-width: 330px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.65; text-wrap: pretty; }
-.text-label { display: block; margin-top: 16px; font-size: 11px; color: #365940; }
-.tool-detail[hidden], .mobile-preview { display: none; }
-.desktop-preview { min-width: 0; }
-.stage { min-width: 0; background: #eaf0e9; border-radius: 18px; overflow: hidden; }
-.demo { animation: demo-in 200ms ease both; }
-@keyframes demo-in { from { opacity: 0; transform: translateY(8px); } }
-@media (prefers-reduced-motion: reduce) { .demo { animation: none; } }
+.tool-trigger { width: 100%; display: flex; align-items: center; gap: 16px; padding: 16px 18px; border: 0; border-radius: 16px; background: transparent; color: var(--ink); text-align: left; transition: transform var(--motion-press) var(--ease-out); }
+.tool-trigger:active { transform: scale(.98); }
+.tool-trigger:focus-visible { outline: 2px solid hsl(var(--ring)); outline-offset: -2px; }
+
+.tile { display: grid; place-items: center; flex: none; width: 40px; height: 40px; border-radius: var(--radius-xl); background: hsl(var(--muted)); color: hsl(var(--muted-foreground)); transition: background-color 200ms ease, color 200ms ease; }
+[data-open] .tile { background: hsl(var(--primary)); color: hsl(var(--primary-foreground)); }
+.icon { display: block; width: 22px; height: 22px; }
+
+.trigger-text { display: grid; flex: 1; min-width: 0; gap: 2px; }
+.trigger-title { font-size: 20px; font-weight: var(--font-ui-weight); letter-spacing: var(--font-ui-tracking); line-height: 1.25; }
+.trigger-sub { color: hsl(var(--muted-foreground)); font-size: 14px; line-height: 1.4; }
+.toggle { display: none; flex: none; color: hsl(var(--muted-foreground)); }
+
+.tool-detail[hidden] { display: none; }
+.tool-copy { max-width: 360px; margin: 0; padding: 0 18px 20px 74px; color: var(--muted); font-size: 14px; line-height: 1.65; text-wrap: pretty; }
+
+.progress { position: absolute; right: 18px; bottom: -1px; left: 18px; height: 2px; overflow: hidden; border-radius: 2px; background: hsl(var(--border)); }
+.progress::after { content: ""; position: absolute; inset: 0; background: hsl(var(--primary)); transform: scaleX(0); transform-origin: left; animation: tour-fill var(--tour-ms) linear forwards; }
+@keyframes tour-fill { to { transform: scaleX(1); } }
+/* Reading or pointing at the section holds the tour where it is. The pseudo
+   element runs the animation; the bar listens for its end (it bubbles). */
+.tool-layout:hover .progress::after, .tool-layout:has(:focus-visible) .progress::after { animation-play-state: paused; }
+
+.mobile-preview { display: none; }
+.desktop-preview { position: sticky; top: 96px; min-width: 0; }
+.stage { min-width: 0; background: hsl(var(--muted)); border-radius: 18px; overflow: hidden; }
+.demo { animation: demo-in 240ms var(--ease-out) both; }
+@keyframes demo-in { from { opacity: 0; transform: translateY(6px); } }
+
+.controls { display: flex; justify-content: flex-end; margin-top: 12px; }
+.control-buttons { display: flex; gap: 8px; }
+.control { display: inline-flex; align-items: center; gap: 6px; min-height: 32px; padding: 0 12px; border: 1px solid hsl(var(--border)); border-radius: var(--radius-md); background: hsl(var(--card)); color: hsl(var(--foreground)); font-size: 13px; font-weight: 500; line-height: 1; touch-action: manipulation; transition: background-color 150ms var(--ease-standard), transform var(--motion-press) var(--ease-out); }
+.control:active { transform: scale(.97); }
+.control:focus-visible { outline: 2px solid hsl(var(--ring)); outline-offset: 2px; }
+
 .section-foot { display: flex; justify-content: space-between; gap: 24px; margin-top: 40px; padding-top: 22px; border-top: 1px solid var(--line); font-size: 11px; color: var(--muted); line-height: 1.5; }
-.section-foot > span:first-child { color: #36493c; }
+.section-foot > span:first-child { color: hsl(var(--foreground)); }
+
+@media (hover: hover) and (pointer: fine) {
+  .tool-entry:not([data-open]):hover { background: hsl(var(--muted) / .6); }
+  .control:hover { background: hsl(var(--accent)); }
+}
 
 @media (max-width: 1100px) {
   .section-head { gap: 35px; }
   .section-head h2 { font-size: 63px; }
   .section-head > p { max-width: 240px; font-size: 13px; }
-  .tool-layout { gap: 34px; }
-  .tool-trigger { gap: 12px; }
-  .tool-trigger > span:nth-child(2) { font-size: 20px; }
-  .tool-copy { padding-left: 36px; padding-right: 0; }
+  .tool-layout { gap: 32px; }
+  .tool-trigger { gap: 14px; padding-inline: 14px; }
+  .trigger-title { font-size: 18px; }
+  .trigger-sub { font-size: 13px; }
+  .tool-copy { padding: 0 14px 18px 68px; font-size: 13px; }
+  .progress { right: 14px; left: 14px; }
 }
 
+/* A phone: an accordion. The open tool shows its copy and its demo inline;
+   no tour, since opening tools on its own would move the page. */
 @media (max-width: 720px) {
   .section { padding-block: 86px 96px; }
   .section-head { display: block; margin-bottom: 35px; }
   .section-head h2 { max-width: 440px; font-size: 56px; }
   .section-head > p { max-width: 320px; margin-top: 22px; font-size: 13px; }
   .tool-layout { grid-template-columns: 1fr; gap: 0; }
-  .tool-trigger { min-height: 68px; padding: 20px 0; }
-  .tool-trigger > span:nth-child(2) { font-size: 19px; }
-  .tool-trigger .icon { width: 22px; height: 22px; }
-  .tool-copy { padding: 0 20px 22px 34px; }
-  .tool-copy p { font-size: 13px; }
+  .tool-index { gap: 0; }
+  .tool-entry, .tool-entry[data-open] { border: 0; border-bottom: 1px solid var(--line); border-radius: 0; background: transparent; }
+  .tool-trigger { gap: 14px; padding: 18px 0; border-radius: 0; }
+  .tile { width: 36px; height: 36px; border-radius: 10px; }
+  .icon { width: 20px; height: 20px; }
+  .trigger-title { font-size: 18px; }
+  .toggle { display: block; }
+  .tool-copy { padding: 0 0 18px 50px; font-size: 13px; }
   .desktop-preview { display: none; }
   .mobile-preview { display: block; margin-bottom: 24px; }
   .stage { border-radius: 14px; }
@@ -57,9 +92,11 @@
 
 @media (max-width: 360px) {
   .section-head h2 { font-size: 49px; }
-  .tool-trigger > span:nth-child(2) { font-size: 17px; }
+  .trigger-title { font-size: 17px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .tool-trigger { transition: none; }
+  .demo { animation: none; }
+  .tool-trigger, .control { transition: none; }
+  .control[data-replay] { display: none; }
 }

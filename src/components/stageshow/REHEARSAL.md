@@ -14,6 +14,15 @@ Filmed with the Stageshow skill's `film.mjs --gate` on the production build. Wid
 
 All play once and hold their result; no loops, so nothing competes on a long page. `HeroDemo` is one stage per chapter, so film reports up to four stages for one tour.
 
+## Staff tools tour (second pass)
+
+Filmed with puppeteer screencasts on the production build at 1440 and 390 (`film.mjs` cannot click the tool list).
+
+- **Section:** every tool's title and one-line promise is visible without opening anything. On wide screens the tools play in turn, with a hairline under the open tool that fills until the next opens. Pointing at the section or keyboard focus holds it; Pause tour / Play tour and Replay sit under the demo; choosing a tool hands control to the visitor. No tour on phones (opening tools would move the page) or with reduced motion (posters only, no Replay).
+- **Stage:** design size 640 × 520 so it only ever scales down; at 560 the stage was upscaled to fill its column and text blurred while it animated.
+- **Payoffs that read in a still:** the published Tryouts row and the invited coach keep a soft primary wash; Shop stays a Draft so Published means something; Rose City FC gets a "1st" pill once it moves up.
+- **Timing:** each tool holds 8 to 10 s; every script and its result hold finish before the tour moves on (checked at 1440).
+
 ## Film lines that stand
 
 - `kit override` (six on every stage): false positive. The check reads every stylesheet, and Next bundles the kit's own CSS, so it flags the kit's phone rules as the demo's. No demo CSS touches those selectors. This alone keeps `--gate` from reporting `rehearsal passed`.

@@ -5,8 +5,8 @@
   position: absolute;
   top: 28px;
   left: 28px;
-  width: 504px;
-  height: 540px;
+  width: 584px;
+  height: 560px;
   background: var(--ss-surface);
   box-shadow: var(--ss-shadow-hero);
 }
@@ -52,7 +52,9 @@
 .sd .sd-sub { margin: 4px 0 0; color: hsl(var(--muted-foreground)); font-size: 13px; line-height: 1.45; }
 
 .sd .sd-list { display: grid; margin: 0 -12px; }
-.sd .sd-row { font-size: 13px; }
+.sd .sd-row { font-size: 13px; border-radius: 12px; transition: background-color 400ms ease; }
+/* What just changed keeps a soft primary wash, so the result reads in a still. */
+.sd .sd-row[data-fresh] { background: hsl(var(--primary) / .07); }
 
 .sd .ss-stage[data-layout="compact"] .sd-title { font-size: 20px; }
 
@@ -191,6 +193,9 @@
 }
 
 .sd .sd-pts { font-weight: 500; }
+.sd .sd-club-cell { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.sd .sd-first { padding: 2px 8px; border-radius: 999px; background: hsl(var(--primary)); color: #fff; font-size: 11px; font-weight: 600; line-height: 14px; opacity: 0; transform: scale(.9); transition: opacity 240ms var(--ease-out) 520ms, transform 240ms var(--ease-out) 520ms; }
+.sd .sd-first[data-on] { opacity: 1; transform: none; }
 
 /* ---- Inviting a colleague ---- */
 
