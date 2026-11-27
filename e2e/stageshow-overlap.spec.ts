@@ -108,6 +108,11 @@ for (const width of WIDTHS) {
     await page.goto("/?tour-test");
     await page.waitForFunction(() => "__tour" in window);
     await page.locator("#tour").scrollIntoViewIfNeeded();
+    // Entrance animations (the hero's rise) settle before anything is measured.
+    await page.evaluate(() => Promise.race([
+      Promise.all(document.getAnimations().filter(a => a.playState === "running" && a.effect?.getTiming().iterations !== Infinity).map(a => a.finished.catch(() => undefined))),
+      new Promise(resolve => setTimeout(resolve, 2000)),
+    ]));
     const chapters = await page.evaluate(() => (window as unknown as { __tour: { chapters: { duration: number; beats: { at: number; kind: string; target: string | null }[] }[] } }).__tour.chapters);
     const start = await anchors(page);
     const problems: string[] = [];
