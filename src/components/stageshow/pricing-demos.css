@@ -55,14 +55,14 @@
   margin-top: 16px;
   place-items: center;
   border-radius: 11px;
-  background: #19271e;
+  background: hsl(var(--foreground));
   color: #fff;
   font-size: 14px;
   font-weight: 500;
   transition: background 200ms ease, transform 160ms ease-out;
 }
 
-.pb .pb-quote[data-hover] { background: #2b4031; }
+.pb .pb-quote[data-hover] { background: hsl(var(--secondary-foreground)); }
 .pb .pb-quote[data-pressed] { transform: scale(0.97); }
 .pb .pb-quote[data-done] { background: var(--ss-accent-2); }
 

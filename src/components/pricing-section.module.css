@@ -22,7 +22,6 @@
 .terms dd { margin: 0; font-size: var(--text-sm); font-weight: 600; line-height: 20px; white-space: nowrap; }
 
 .cta { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 40px; padding: 0 24px; border-radius: var(--radius-md); background: hsl(var(--primary)); color: hsl(var(--primary-foreground)); font-size: var(--text-sm); font-weight: 500; white-space: nowrap; transition: background-color 150ms var(--ease-standard), transform var(--motion-press) var(--ease-out); }
-.cta:hover { background: hsl(var(--primary) / 0.9); }
 .cta:active { transform: scale(.98); }
 .ctaIcon { width: 16px; height: 16px; }
 
@@ -41,4 +40,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   .cta { transition: none; }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .cta:hover { background: hsl(var(--primary) / 0.9); }
 }

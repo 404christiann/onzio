@@ -9,8 +9,9 @@
      (rounded-md/lg/xl, .panel 18px, shadow-sm, .panel's hairline shadow)
    - motion: styles/globals.css .admin-portal --admin-motion-*
 
-   One change from the admin: the admin's primary is blue. Here the primary
-   and the brand are Onzio green, the site's only accent. */
+   One change from the admin: its primary blue (211 100% 42%) becomes the
+   site's accent, #1D4ED8, used as the primary, the brand and the focus ring.
+   --ios-green stays: it is the admin's success color (Saved, switches), not the accent. */
 
 :root {
   /* Color */
@@ -18,10 +19,10 @@
   --foreground: 220 9% 14%;
   --card: 0 0% 100%;
   --card-foreground: 220 9% 14%;
-  --primary: 139 80% 35%;
-  --primary-hover: 139 83% 30%;
+  --primary: 224 76% 48%;       /* #1D4ED8 */
+  --primary-hover: 226 71% 40%; /* #1E40AF */
   --primary-foreground: 0 0% 100%;
-  --brand: 139 80% 35%;
+  --brand: 224 76% 48%;
   --secondary: 240 8% 94%;
   --secondary-foreground: 220 9% 18%;
   --muted: 240 8% 94%;
@@ -34,7 +35,7 @@
   --warning-ink: 44 100% 28%;
   --border: 220 10% 88%;
   --input: 220 10% 88%;
-  --ring: 139 80% 35%;
+  --ring: 224 76% 48%;
   --sidebar: 220 14% 94%;
   --sidebar-accent: 220 10% 90%;
   --ios-green: #34c759;
