@@ -2,10 +2,9 @@ import Image from "next/image";
 import { ClubShowcase } from "@/components/club-showcase";
 import { ContactForm } from "@/components/contact-form";
 import { Faq } from "@/components/faq";
-import { HeroDemo } from "@/components/stageshow/hero-demo";
 import { PricingSection } from "@/components/pricing-section";
 import { SiteHeader } from "@/components/site-header";
-import { StaffTools } from "@/components/staff-tools";
+import { AdminTour } from "@/components/stageshow/admin-tour";
 
 export default function Home() {
   return (
@@ -27,13 +26,11 @@ export default function Home() {
             </div>
           </div>
           <figure className="hero-product shell" id="tour">
-            <HeroDemo />
+            <AdminTour />
           </figure>
         </section>
 
         <ClubShowcase />
-
-        <StaffTools />
 
         <PricingSection />
 
