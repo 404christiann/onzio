@@ -18,10 +18,9 @@ function FaqPicture({ label, children }: { label: string; children: React.ReactN
 
 export function CostsPicture() {
   return (
-    <FaqPicture label="Every plan includes the website, hosting, admin portal, and updates, and is scoped to what you need. Setup and the domain are separate.">
+    <FaqPicture label="Every plan includes the website, hosting, admin portal, and updates, and is scoped to what you need. The domain is separate.">
       <div className="fp-card">
         <div className="fp-line"><span>Monthly plan</span><span>Scoped to you</span></div>
-        <div className="fp-line fp-faint"><span>Website setup</span><span>Quoted separately</span></div>
         <div className="fp-line fp-faint"><span>Domain</span><span>Not included</span></div>
       </div>
     </FaqPicture>

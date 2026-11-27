@@ -10,10 +10,6 @@ const items = [
     answer: "Every plan includes your professional website, hosting, the Onzio admin portal, and platform updates. Your monthly price depends on what your club, league, or tournament needs, and we scope it with you in one conversation.",
   },
   {
-    question: "Is the initial website setup included?",
-    answer: "No. Initial website setup is quoted separately after we understand your club, content, and design needs. The monthly subscription begins with the managed platform itself.",
-  },
-  {
     question: "Is domain registration included?",
     answer: "No. Domain registration is separate from the monthly subscription. If your club already owns a domain, it can be connected to the website.",
   },
@@ -32,9 +28,9 @@ const items = [
 ];
 
 const topics = [
-  { id: "costs", label: "Costs", title: "Costs & commitment", icon: "cash", indices: [0, 1, 2, 4] },
-  { id: "website", label: "Website", title: "Managing your website", icon: "desktop", indices: [3] },
-  { id: "registrations", label: "Registrations", title: "Player registrations", icon: "clipboard-text", indices: [5] },
+  { id: "costs", label: "Costs", title: "Costs & commitment", icon: "cash", indices: [0, 1, 3] },
+  { id: "website", label: "Website", title: "Managing your website", icon: "desktop", indices: [2] },
+  { id: "registrations", label: "Registrations", title: "Player registrations", icon: "clipboard-text", indices: [4] },
 ] as const;
 
 const pictures = { costs: CostsPicture, website: WebsitePicture, registrations: RegistrationPicture };
@@ -48,8 +44,8 @@ export function Faq() {
     <section className={styles.section} id="faq" aria-labelledby="faq-title">
       <div className={styles.inner}>
         <div className={styles.sidebar}>
-          <h2 id="faq-title">Common questions</h2>
-          <p>What clubs usually want to know before starting with Onzio.</p>
+          <h2 id="faq-title">Questions clubs ask</h2>
+          <p>Costs, what&apos;s included, and what your staff can change themselves.</p>
           <div className={styles.topics} role="group" aria-label="FAQ topics">
             {topics.map((topic, index) => (
               <button
