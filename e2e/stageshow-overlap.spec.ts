@@ -1,6 +1,6 @@
 import { expect, test, type Page } from "@playwright/test";
 
-// Steps through every beat of the homepage stageshows at five widths and fails
+// Steps through every beat of the homepage admin tour at five widths and fails
 // on overlapping parts, text that overflows its box, a cursor that presses off
 // its target, popups that escape their window, actions hidden under the
 // stage's edge fade, and anything that moves the page around the stage.
@@ -31,13 +31,10 @@ const PAIRS: [string, string][] = [
   [".at-admin", ".at-phone"],
   [".at-fit", ".at-tabs"],
   [".at-tab", ".at-tab"],
-  [".cs-fit", ".cs-tabs"],
-  [".cs-tab", ".cs-tab"],
-  [".cs-fit", ".cs-caption"],
 ];
 
 // Text that must fit its own box.
-const FITS = [".pf-title", ".ap-title", ".ed-title", ".ps-button", ".btn", ".ns-select", ".ed-done", ".ed-cancel", ".sb-item", ".sh-search", ".at-tab", ".in-title", ".mc-label", ".cs-tab", ".cs-caption p"];
+const FITS = [".pf-title", ".ap-title", ".ed-title", ".ps-button", ".btn", ".ns-select", ".ed-done", ".ed-cancel", ".sb-item", ".sh-search", ".at-tab", ".in-title", ".mc-label"];
 
 // Popups that must stay inside a container.
 const INSIDE: [string, string][] = [
@@ -102,7 +99,7 @@ async function audit(page: Page, pressTarget: string | null): Promise<Problem[]>
 
 const anchors = (page: Page) => page.evaluate(() => {
   const r = (sel: string) => { const b = document.querySelector(sel)?.getBoundingClientRect(); return b ? [Math.round(b.top + scrollY), Math.round(b.height)] : null; };
-  return JSON.stringify({ fit: r(".at-fit"), tabs: r(".at-tabs"), clubs: r("#club-sites"), csFit: r(".cs-fit"), pricing: r("#pricing") });
+  return JSON.stringify({ fit: r(".at-fit"), tabs: r(".at-tabs"), clubs: r("#club-sites"), pricing: r("#pricing") });
 });
 
 for (const width of WIDTHS) {
@@ -130,21 +127,4 @@ for (const width of WIDTHS) {
     expect([...new Set(problems)]).toEqual([]);
   });
 
-  test(`club showcase has no overlaps at ${width}px`, async ({ page }) => {
-    await page.setViewportSize({ width, height: 900 });
-    await page.goto("/?tour-test");
-    await page.waitForFunction(() => "__showcase" in window);
-    await page.locator("#club-sites").scrollIntoViewIfNeeded();
-    const pages = await page.evaluate(() => (window as unknown as { __showcase: { pages: number } }).__showcase.pages);
-    const start = await anchors(page);
-    const problems: string[] = [];
-    for (let i = 0; i < pages; i++) {
-      for (const progress of [0, 0.5, 1]) {
-        await page.evaluate(([index, at]) => (window as unknown as { __showcase: { seek(i: number, p: number): Promise<void> } }).__showcase.seek(index, at), [i, progress]);
-        for (const p of await audit(page, null)) problems.push(`page ${i + 1} @${progress}: ${p}`);
-        expect(await anchors(page), `page moved at showcase page ${i + 1}`).toBe(start);
-      }
-    }
-    expect([...new Set(problems)]).toEqual([]);
-  });
 }
