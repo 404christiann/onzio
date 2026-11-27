@@ -321,7 +321,6 @@ svg { flex: none; }
 .form-submit-ring { width: 14px; height: 14px; border: 2px solid currentColor; border-inline-end-color: transparent; border-radius: 50%; animation: form-spin 700ms linear infinite; }
 @keyframes form-spin { to { transform: rotate(360deg); } }
 .form-consent { margin: 12px 0 0; color: var(--muted); font-size: var(--text-xs); line-height: 16px; text-align: center; }
-.form-handoff { margin: 8px 0 0; color: var(--muted); font-size: var(--text-xs); line-height: 16px; text-align: center; }
 
 /* Success replaces the form with a short fade and rise. */
 .contact-success { display: flex; min-height: 360px; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center; transition: opacity 300ms var(--ease-out), transform 300ms var(--ease-out); }

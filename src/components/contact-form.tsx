@@ -103,7 +103,6 @@ export function ContactForm() {
         <span className="form-submit-label" aria-hidden={status !== "sending"}><span className="form-submit-ring" />Sending inquiry…</span>
       </button>
       <p className="form-consent">By submitting, you agree that Onzio may contact you about your inquiry.</p>
-      <p className="form-handoff">Your inquiry goes directly to Christian.</p>
     </form>
   );
 }
