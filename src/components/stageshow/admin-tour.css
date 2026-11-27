@@ -348,7 +348,6 @@
 .at-progress { position: absolute; left: 14px; right: 14px; bottom: 4px; height: 2px; border-radius: 1px; background: hsl(var(--primary)); transform: scaleX(0); transform-origin: left; animation: at-progress var(--d) linear forwards paused; }
 .at-progress[data-running] { animation-play-state: running; }
 @keyframes at-progress { to { transform: scaleX(1); } }
-.at-note { margin: 8px 0 0; color: hsl(var(--muted-foreground)); font-size: 12px; line-height: 16px; text-align: center; }
 
 @media (max-width: 680px) {
   .at-tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }

@@ -241,7 +241,6 @@ export function AdminTour() {
           </button>
         ))}
       </div>
-      <p className="at-note">Rose City FC&apos;s public site. Names, emails and numbers in the admin are made up for illustration.</p>
     </div>
   );
 }
