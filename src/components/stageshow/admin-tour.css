@@ -10,7 +10,7 @@
 .at-fit { position: relative; width: 100%; aspect-ratio: 1120 / 640; overflow: hidden; mask-image: linear-gradient(to bottom, #000 calc(100% - 100% * 40 / 640), transparent); }
 @media (max-width: 680px) { .at-fit { aspect-ratio: 380 / 720; mask-image: linear-gradient(to bottom, #000 calc(100% - 100% * 40 / 720), transparent); } }
 
-.at-stage { font-family: var(--font-ui); color: hsl(var(--foreground)); }
+.at-stage { font-family: var(--font-admin); color: hsl(var(--foreground)); }
 .at-stage * { box-sizing: border-box; }
 /* Until the first measurement picks the layout, nothing animates, so a phone never sees the wide layout fade out. */
 .at-stage:not([data-ready]), .at-stage:not([data-ready]) * { transition: none !important; }

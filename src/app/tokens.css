@@ -3,7 +3,7 @@
 
    Source (onzio-platform, light theme):
    - colors: styles/globals.css :root (HSL triples, used as hsl(var(--x)))
-   - font: components/admin/AdminGuided.module.css .portal
+   - admin font (--font-admin): components/admin/AdminGuided.module.css .portal
    - type: components/admin/AdminPage.module.css, components/admin/form-styles.ts
    - radius and shadows: the Tailwind 3 classes the admin uses
      (rounded-md/lg/xl, .panel 18px, shadow-sm, .panel's hairline shadow)
@@ -40,8 +40,11 @@
   --sidebar-accent: 220 10% 90%;
   --ios-green: #34c759;
 
-  /* Type: the admin renders in the system UI font, never a web font. */
-  --font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  /* Type: the site is set in DM Sans. The admin itself renders in the system
+     UI font, so the admin replica in the tour keeps --font-admin; DM Sans has
+     no tabular figures, and the admin's number columns rely on them. */
+  --font-ui: var(--font-dm-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-admin: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
   --tracking-heading: -0.015em;
   --tracking-title: -0.01em;
