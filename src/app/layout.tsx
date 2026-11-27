@@ -4,7 +4,7 @@ import "./globals.css";
 
 const title = "Onzio — A better digital home for your soccer club";
 const description =
-  "A professional soccer club website and simple tools for managing content, rosters, schedules, match stats, and programs.";
+  "Onzio hosts your site and gives staff one admin for pages, schedules, rosters, and registration, whether you run one club or a whole league.";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://onziofutbol.com";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"], display: "swap" });

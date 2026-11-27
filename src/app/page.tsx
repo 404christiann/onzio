@@ -16,7 +16,7 @@ export default function Home() {
           <div className="hero-inner shell">
             <h1 id="hero-title" className="hero-title"><span>Your club deserves</span>{" "}<em>a better home.</em></h1>
             <p className="hero-copy">
-              A professional website for your community. A simple place for your staff to keep it all moving.
+              Onzio hosts your site and gives staff one admin for pages, schedules, rosters, and registration, whether you run one club or a whole league.
             </p>
             <div className="hero-actions">
               <a className="button button-primary" href="#tour">See the admin</a>
