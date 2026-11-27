@@ -1,18 +1,28 @@
-/* Pricing: one left-aligned block in the admin's page-header rhythm, and
-   the plan picture below it. The button is the admin's primary button. */
+/* Pricing: a left-aligned block in the admin's page-header rhythm, the plan
+   picture (PlanFeatures in pricing-demos.tsx), then one line and the one button. */
 
-.section { padding-block: 88px; background: hsl(var(--card)); border-block: 1px solid hsl(var(--border)); scroll-margin-top: 16px; }
-.layout { display: grid; gap: 32px; width: min(1180px, calc(100% - 48px)); margin-inline: auto; }
+.section { padding-block: 88px; background: hsl(var(--background)); border-block: 1px solid hsl(var(--border)); scroll-margin-top: 16px; }
+.layout { display: grid; justify-items: start; gap: 16px; width: min(1180px, calc(100% - 48px)); margin-inline: auto; }
 
-.intro { display: flex; flex-direction: column; align-items: flex-start; max-width: 640px; }
+.intro { max-width: 640px; margin-bottom: 16px; }
 .title { margin: 0; font-size: var(--text-section); font-weight: 600; line-height: 1.15; letter-spacing: var(--tracking-title); }
 .copy { max-width: 56ch; margin: 12px 0 0; color: hsl(var(--muted-foreground)); font-size: var(--text-description); line-height: 1.5; text-wrap: pretty; }
 
+.picture { width: 100%; min-width: 0; }
+.phone { display: none; }
+
+.close { display: grid; justify-items: start; gap: 16px; margin-top: 16px; }
+.close p { max-width: 72ch; margin: 0; color: hsl(var(--muted-foreground)); font-size: var(--text-description); line-height: 1.5; text-wrap: pretty; }
+
 /* button.tsx, size lg: h-10 px-6 rounded-md text-sm font-medium, bg-primary hover:bg-primary/90 */
-.cta { display: inline-flex; align-items: center; justify-content: center; height: 40px; margin-top: 20px; padding: 0 24px; border-radius: var(--radius-md); background: hsl(var(--primary)); color: hsl(var(--primary-foreground)); font-size: var(--text-sm); font-weight: 500; white-space: nowrap; transition: background-color 150ms var(--ease-standard), transform 160ms var(--ease-out); }
+.cta { display: inline-flex; align-items: center; justify-content: center; height: 40px; padding: 0 24px; border-radius: var(--radius-md); background: hsl(var(--primary)); color: hsl(var(--primary-foreground)); font-size: var(--text-sm); font-weight: 500; white-space: nowrap; transition: background-color 150ms var(--ease-standard), transform 160ms var(--ease-out); }
 .cta:active { transform: scale(.97); }
 
-.picture { width: 100%; min-width: 0; }
+/* A phone gets its own stacked design, clubs first. */
+@media (max-width: 600px) {
+  .wide { display: none; }
+  .phone { display: block; }
+}
 
 @media (max-width: 560px) {
   .section { padding-block: 64px; }

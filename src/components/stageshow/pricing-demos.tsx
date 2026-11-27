@@ -1,6 +1,6 @@
 "use client";
 
-import { Badge, Check, Collapse, Count, Roll, Row, Segmented, Stage, States, Toggle, Window, type Act } from "@/stageshow/kit";
+import { Badge, Check, Roll, Row, Segmented, Stage, States, Toggle, Window, type Act } from "@/stageshow/kit";
 import { CentralIcon } from "@/components/icons/central/icon";
 import "./onzio-look.css";
 import "./pricing-demos.css";
@@ -114,82 +114,6 @@ export function PlanBuilder() {
   );
 }
 
-/* ---- 2. Three organizations: the same platform, three different plans ---- */
-
-const ORGS = [
-  { name: "Community club", kind: "A few teams, one season", addons: ["Tryout sign-ups"] },
-  { name: "Multi-program academy", kind: "Several programs, year-round", addons: ["Registration & waivers", "Online payments", "Season results"] },
-  {
-    name: "League or tournament",
-    kind: "Many clubs, one schedule",
-    addons: ["Team registration & waivers", "Online payments", "Schedules & standings", "Tournament brackets", "Club accounts", "Staff accounts"],
-  },
-];
-
-const MOST = Math.max(...ORGS.map(org => org.addons.length));
-
-type OrgsState = { shown: number };
-
-async function orgsScript(a: Act<OrgsState>) {
-  await a.wait(900);
-  for (let i = 3; i <= MOST; i++) {
-    a.put({ shown: i });
-    await a.wait(300);
-  }
-  await a.wait(2400);
-}
-
-function PlanCard({ org, shown }: { org: (typeof ORGS)[number]; shown: number }) {
-  const count = Math.min(shown, org.addons.length);
-  const plural = org.addons.length > 1;
-  return (
-    <section className="cp-card">
-      <header className="cp-head">
-        <strong>{org.name}</strong>
-        <span>{org.kind}</span>
-      </header>
-      <div className="cp-list">
-        <div className="cp-line cp-essentials">
-          <Check on size={16} />
-          <div><strong>Essentials</strong><span>{ESSENTIALS.join(" · ")}</span></div>
-        </div>
-        {org.addons.map((item, i) => (
-          <Collapse key={item} open={i < shown}>
-            <div className="cp-line"><Check on size={16} /><span>{item}</span></div>
-          </Collapse>
-        ))}
-      </div>
-      <footer className="cp-foot">
-        <span>Monthly plan</span>
-        <strong>{plural ? <Count value={count} /> : count} add-on{plural ? "s" : ""}</strong>
-      </footer>
-    </section>
-  );
-}
-
-export function ClubPlans() {
-  return (
-    <div role="img" aria-label="Illustration: a community club's plan has the essentials and one add-on, an academy's has three, and a league or tournament's has six.">
-      <Stage<OrgsState>
-        width={1052}
-        height={468}
-        compact={{ below: 900, width: 358, height: 990 }}
-        initial={{ shown: 2 }}
-        poster={{ shown: MOST }}
-        script={orgsScript}
-        play="once"
-        className="onzio-look cp"
-      >
-        {s => (
-          <div className="cp-row">
-            {ORGS.map(org => <PlanCard key={org.name} org={org} shown={s.shown} />)}
-          </div>
-        )}
-      </Stage>
-    </div>
-  );
-}
-
 /* ---- 3. Proposal: the scoped plan, accepted from the page ---- */
 
 const PROPOSAL = ["Team registration & waivers", "Online payments", "Schedules & standings", "Tournament brackets"];
@@ -257,5 +181,85 @@ function ProposalScene({ accept }: { accept: ProposalState["accept"] }) {
         <div><span>Website setup</span><strong>Quoted in this plan</strong></div>
       </div>
     </Window>
+  );
+}
+
+/* ---- Homepage: what every plan includes, then what clubs and leagues add ---- */
+
+// No cursor and no prices: the plan's parts tick on, the base first, then
+// both kinds of organization's features together, and the full plan holds.
+// Three designs so the text never shrinks far or grows: desktop, tablet, and
+// a phone stack with clubs first.
+
+const PLAN_INCLUDES = ["Website", "Hosting", "Admin", "Updates"];
+const PLAN_GROUPS = [
+  {
+    title: "For clubs and academies",
+    description: "Run your teams, players, and families.",
+    features: ["Tryout sign-ups", "Registration & waivers", "Online payments", "Rosters", "Schedules", "Season results"],
+  },
+  {
+    title: "For leagues and tournaments",
+    description: "Run many clubs on one schedule.",
+    features: ["Team registration & waivers", "Schedules & standings", "Tournament brackets", "Club accounts", "Staff accounts", "Online payments"],
+  },
+];
+
+const ROWS = Math.max(...PLAN_GROUPS.map(group => group.features.length));
+// Steps 1-4 tick the base, then each step ticks one row in both columns.
+const LAST_STEP = PLAN_INCLUDES.length + ROWS;
+
+type PlanState = { step: number };
+
+async function planScript(a: Act<PlanState>) {
+  await a.wait(500);
+  for (let step = 1; step <= LAST_STEP; step++) {
+    a.put({ step });
+    await a.wait(step <= PLAN_INCLUDES.length ? 110 : 170);
+  }
+  await a.wait(1200);
+}
+
+function PlanParts({ step }: PlanState) {
+  return (
+    <div className="pl-plan">
+      <div className="pl-card pl-includes">
+        <strong>Every plan includes</strong>
+        <ul>
+          {PLAN_INCLUDES.map((item, i) => (
+            <li key={item}><Check on={step > i} size={16} />{item}</li>
+          ))}
+        </ul>
+      </div>
+      <div className="pl-groups">
+        {PLAN_GROUPS.map(group => (
+          <div key={group.title} className="pl-card pl-group">
+            <strong>{group.title}</strong>
+            <span>{group.description}</span>
+            <ul>
+              {group.features.map((feature, i) => (
+                <li key={feature}><Check on={step > PLAN_INCLUDES.length + i} size={16} />{feature}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+const PLAN_LABEL = `Every plan includes ${PLAN_INCLUDES.join(", ")}. For clubs and academies: ${PLAN_GROUPS[0]!.features.join(", ")}. For leagues and tournaments: ${PLAN_GROUPS[1]!.features.join(", ")}.`;
+
+/** "desktop" is 1180 wide, with a 720 tablet design below 1000px of column; "phone" is the 358 stack. */
+export function PlanFeatures({ size }: { size: "desktop" | "phone" }) {
+  const dims = size === "desktop"
+    ? { width: 1180, height: 392, compact: { below: 1000, width: 720, height: 412 } }
+    : { width: 358, height: 788 };
+  return (
+    <div role="img" aria-label={PLAN_LABEL}>
+      <Stage<PlanState> {...dims} initial={{ step: 0 }} poster={{ step: LAST_STEP }} script={planScript} play="once" className={`onzio-look pl pl-${size}`}>
+        {s => <PlanParts step={s.step} />}
+      </Stage>
+    </div>
   );
 }
