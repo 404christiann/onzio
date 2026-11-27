@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { CentralIcon } from "@/components/icons/central/icon";
 import { ContactForm } from "@/components/contact-form";
 import { Faq } from "@/components/faq";
 import { PricingSection } from "@/components/pricing-section";
@@ -20,8 +19,8 @@ export default function Home() {
               A professional website for your community. A simple place for your staff to keep it all moving.
             </p>
             <div className="hero-actions">
-              <a className="button button-primary" href="#staff-tools">Explore the platform <CentralIcon name="arrow" width={18} height={18} /></a>
-              <a className="button button-secondary" href="#contact">Start a conversation</a>
+              <a className="button button-primary" href="#tour">See the admin</a>
+              <a className="button button-secondary" href="#contact">Talk to us</a>
             </div>
             <figure className="hero-product" id="tour">
               <AdminTour />
