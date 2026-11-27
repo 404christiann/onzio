@@ -1,4 +1,6 @@
-/* One workspace window, a gutter from the top and sides, running off the bottom. */
+/* Rose City FC's classic admin, one window per tool: a gutter from the top and
+   sides, running off the bottom. The admin renders in its system font; values
+   follow onzio-platform (AdminPage header, status pills, save button). */
 .sd .sd-window {
   position: absolute;
   top: 28px;
@@ -36,20 +38,23 @@
 .sd .sd-context { color: var(--ss-text); font-size: 12px; white-space: nowrap; }
 
 .sd .sd-body {
-  padding: 26px 30px 0;
-  background: var(--ss-surface);
-  color: var(--ss-text-strong);
+  padding: 24px 28px 0;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: var(--font-admin);
 }
 
 .sd .ss-stage[data-layout="compact"] .sd-body { padding: 20px 16px 0; }
 
-.sd .sd-title { font-size: 26px; font-weight: 500; line-height: 1.15; letter-spacing: -0.035em; }
-.sd .sd-sub { margin-top: 6px; color: var(--ss-text); font-size: 13px; line-height: 1.4; }
+.sd .sd-head { margin-bottom: 18px; }
+.sd .sd-crumb { margin: 0 0 4px; color: hsl(var(--muted-foreground)); font-size: 12px; line-height: 16px; }
+.sd .sd-title { margin: 0; font-size: 22px; font-weight: 600; line-height: 1.15; letter-spacing: -0.01em; }
+.sd .sd-sub { margin: 4px 0 0; color: hsl(var(--muted-foreground)); font-size: 13px; line-height: 1.45; }
 
-.sd .sd-list { display: grid; margin: 18px -12px 0; }
+.sd .sd-list { display: grid; margin: 0 -12px; }
 .sd .sd-row { font-size: 13px; }
 
-.sd .ss-stage[data-layout="compact"] .sd-title { font-size: 22px; }
+.sd .ss-stage[data-layout="compact"] .sd-title { font-size: 20px; }
 
 .sd .sd-tile {
   display: grid;
@@ -57,32 +62,40 @@
   width: 34px;
   height: 34px;
   border-radius: 10px;
-  background: var(--ss-canvas);
-  color: var(--ss-icon);
+  background: hsl(var(--secondary));
+  color: hsl(var(--muted-foreground));
 }
+
+/* The admin's status pill (RegistrationPaymentAccount, roster flags). */
+.sd .sd-pill { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; line-height: 16px; white-space: nowrap; }
+.sd .sd-pill[data-tone="success"] { background: hsl(var(--success) / .1); color: hsl(var(--success)); }
+.sd .sd-pill[data-tone="muted"] { background: hsl(var(--secondary)); color: hsl(var(--muted-foreground)); }
 
 /* ---- Publish in place ---- */
 
 .sd .sd-publish { display: inline-grid; justify-items: end; flex: none; }
 
-.sd .sd-publish-label {
+/* PageSaveButton, small: the primary fill, radius 10, semibold. */
+.sd .sd-publish-go {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  line-height: 1.3;
-}
-
-.sd .sd-publish-go {
-  padding: 6px 13px;
-  border-radius: 8px;
-  background: var(--ss-accent);
+  min-height: 30px;
+  padding: 0 12px;
+  border-radius: 10px;
+  background: hsl(var(--primary));
   color: #fff;
   font-size: 12px;
-  font-weight: 500;
-  transition: background 160ms ease;
+  font-weight: 600;
+  line-height: 1.3;
+  transition: background-color 150ms ease, transform var(--motion-press) var(--ease-out);
 }
 
-.sd .sd-publish[data-hover] .sd-publish-go { background: var(--ss-accent-2); }
+.sd .sd-publish[data-pressed] .sd-publish-go { transform: scale(.97); }
+.sd .sd-ring { width: 11px; height: 11px; border: 2px solid currentColor; border-inline-end-color: transparent; border-radius: 50%; animation: sd-spin 700ms linear infinite; }
+@keyframes sd-spin { to { transform: rotate(360deg); } }
+
+.sd .sd-publish[data-hover] .sd-publish-go { background: hsl(var(--primary) / .9); }
 
 .sd .sd-toast {
   position: absolute;
@@ -126,21 +139,23 @@
 .sd .sd-save {
   display: grid;
   place-items: center;
-  height: 42px;
+  height: 40px;
   margin-top: 14px;
   border-radius: 10px;
-  background: var(--ss-accent);
+  background: hsl(var(--primary));
   color: #fff;
   font-size: 14px;
-  font-weight: 500;
-  transition: background 200ms ease;
+  font-weight: 600;
+  transition: background-color var(--motion-save-color) ease, transform var(--motion-press) var(--ease-out);
 }
 
-.sd .sd-save[data-hover], .sd .sd-save[data-pressed] { background: var(--ss-accent-2); }
-.sd .sd-save[data-done] { background: hsl(var(--primary-hover)); }
+.sd .sd-save[data-pressed] { transform: scale(.97); }
+
+.sd .sd-save[data-hover] { background: hsl(var(--primary) / .9); }
+.sd .sd-save[data-done] { --ss-accent: currentColor; --ss-success: currentColor; background: var(--ios-green); color: hsl(144 82% 7%); }
 .sd .sd-save-label { display: inline-flex; align-items: center; gap: 7px; line-height: 1.3; }
 
-.sd .sd-table { margin-top: 26px; font-size: 13px; }
+.sd .sd-table { margin-top: 22px; font-size: 13px; }
 
 .sd .sd-table-row {
   display: grid;
@@ -154,8 +169,8 @@
 }
 
 .sd .sd-table-row > :first-child { overflow: hidden; text-align: left; text-overflow: ellipsis; white-space: nowrap; }
-.sd .sd-table-head { height: 32px; color: var(--ss-text); font-size: 12px; }
-.sd .sd-table-rows { position: relative; height: 264px; }
+.sd .sd-table-head { height: 32px; color: hsl(var(--muted-foreground)); font-size: 12px; font-weight: 500; }
+.sd .sd-table-rows { position: relative; height: 220px; }
 
 .sd .sd-table-body {
   position: absolute;
@@ -170,16 +185,16 @@
 
 .sd .sd-table-body[data-us] {
   z-index: 1;
-  background: var(--ss-accent-soft);
-  color: var(--ss-text-strong);
-  font-weight: 500;
+  background: hsl(var(--primary) / .1);
+  color: hsl(var(--foreground));
+  font-weight: 600;
 }
 
 .sd .sd-pts { font-weight: 500; }
 
 /* ---- Inviting a colleague ---- */
 
-.sd .sd-invite { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; margin-top: 18px; }
+.sd .sd-invite { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; margin-bottom: 12px; }
 
 .sd .sd-invite-go {
   display: grid;
@@ -194,15 +209,23 @@
   transition: background 200ms ease, color 200ms ease, box-shadow 200ms ease;
 }
 
-.sd .sd-invite-go[data-ready] { background: var(--ss-accent); box-shadow: none; color: #fff; }
-.sd .sd-invite-go[data-ready][data-hover] { background: var(--ss-accent-2); }
+.sd .sd-invite-go[data-ready] { background: hsl(var(--primary)); box-shadow: none; color: #fff; }
+.sd .sd-invite-go[data-ready][data-hover] { background: hsl(var(--primary) / .9); }
 
 /* ---- Reading the season ---- */
 
-.sd .sd-readout-label { color: var(--ss-text); font-size: 13px; line-height: 1.4; }
-.sd .sd-readout-value { margin-top: 4px; font-size: 52px; font-weight: 500; line-height: 1.05; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
+/* AdminPanel stat cards: label, value, delta. */
+.sd .sd-kpis { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.sd .sd-kpis div { display: grid; gap: 4px; padding: 12px 14px; border: 1px solid hsl(var(--border)); border-radius: 14px; background: hsl(var(--card)); }
+.sd .sd-kpis span { color: hsl(var(--muted-foreground)); font-size: 11px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+.sd .sd-kpis strong { font-size: 22px; font-weight: 600; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.sd .sd-kpis em { color: hsl(var(--success)); font-size: 12px; font-style: normal; }
 
-.sd .sd-plot { position: relative; margin-top: 16px; }
+.sd .sd-readout { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-top: 18px; }
+.sd .sd-readout-label { color: hsl(var(--foreground)); font-size: 13px; font-weight: 600; line-height: 1.4; }
+.sd .sd-readout-value { font-size: 28px; font-weight: 600; line-height: 1.05; font-variant-numeric: tabular-nums; }
+
+.sd .sd-plot { position: relative; margin-top: 10px; }
 
 .sd .sd-hair {
   position: absolute;
@@ -229,8 +252,3 @@
 .sd .sd-hair[data-on], .sd .sd-dot[data-on] { opacity: 1; }
 
 .sd .sd-axis { display: flex; justify-content: space-between; margin-top: 8px; color: var(--ss-text-faint); font-size: 11px; line-height: 1.3; }
-
-.sd .sd-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 18px; }
-.sd .sd-stats div { display: grid; gap: 4px; padding: 12px 14px; border-radius: 10px; background: var(--ss-canvas); }
-.sd .sd-stats span { color: var(--ss-text); font-size: 12px; line-height: 1.3; }
-.sd .sd-stats strong { font-size: 22px; font-weight: 500; line-height: 1.15; letter-spacing: -0.03em; }

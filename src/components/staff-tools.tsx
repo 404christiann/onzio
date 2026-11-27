@@ -21,10 +21,10 @@ function Icon({ name }: { name: CentralIconName }) {
 const demos = { website: WebsiteDemo, competition: SeasonDemo, staff: StaffDemo, analytics: AnalyticsDemo };
 
 const descriptions: Record<ToolId, string> = {
-  website: "Illustration: a staff member publishes the Tryouts page, and it goes live on the club website.",
-  competition: "Illustration: a staff member enters a 3-1 result, and Diverse City FC moves to the top of the league standings.",
-  staff: "Illustration: a club administrator invites a new staff member by email, and they join the staff list.",
-  analytics: "Illustration: a chart of goals across the season, read back match by match up to 26 goals.",
+  website: "Illustration: in Rose City FC's admin, a staff member publishes the Tryouts page, and it goes live on the club website.",
+  competition: "Illustration: a staff member enters a 3-1 result, and Rose City FC moves to the top of the standings.",
+  staff: "Illustration: in Team Access, a club administrator invites a coach by email, and they join the list as invited.",
+  analytics: "Illustration: a player's goal contributions per match, read back match by match. Names and numbers are made up.",
 };
 
 function Preview({ active, labelId }: { active: ToolId; labelId: string }) {
@@ -59,7 +59,7 @@ export function StaffTools() {
       })}</div>
       <div className={styles["desktop-preview"]}><Preview active={active} labelId={`${id}-${active}-button`} /></div>
     </div>
-    <footer className={styles["section-foot"]}><span>Built for the work behind the club.</span><span>Illustrative product views · Diverse City FC</span></footer>
+    <footer className={styles["section-foot"]}><span>Built for the work behind the club.</span><span>Illustrative product views · Rose City FC · names and numbers made up</span></footer>
     </div>
   </section>;
 }
