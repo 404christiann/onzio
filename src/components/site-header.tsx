@@ -6,7 +6,7 @@ import { useEffect, useRef, useState, type CSSProperties } from "react";
 
 const links = [
   { href: "#top", label: "Home" },
-  { href: "#club-sites", label: "Club sites" },
+  { href: "#tour", label: "Admin" },
   { href: "#staff-tools", label: "Product" },
   { href: "#pricing", label: "Pricing" },
   { href: "#faq", label: "FAQ" },

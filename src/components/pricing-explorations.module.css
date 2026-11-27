@@ -8,7 +8,7 @@
 
 .kicker {
   margin: 0 0 16px;
-  color: #7fd39b;
+  color: #93c5fd;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: .12em;
@@ -54,13 +54,13 @@
 
 .cta:hover { background: var(--green-hover); }
 .cta:active { transform: scale(.97); }
-.cta:focus-visible { outline: 3px solid #7fd39b; outline-offset: 4px; }
+.cta:focus-visible { outline: 3px solid #93c5fd; outline-offset: 4px; }
 
 .ctaIcon { width: 18px; height: 18px; }
 
 .fine { margin: 16px 0 0; color: #8d9a91; font-size: 12px; line-height: 1.6; }
 
-.check { width: 18px; height: 18px; flex: none; margin-top: 2px; color: #7fd39b; }
+.check { width: 18px; height: 18px; flex: none; margin-top: 2px; color: #93c5fd; }
 
 /* ---- Copy beside a picture (1 and 3) ---- */
 
@@ -104,7 +104,7 @@
   height: 32px;
   place-items: center;
   border-radius: 50%;
-  color: #7fd39b;
+  color: #93c5fd;
   background: #1b2b20;
   font-size: 14px;
   font-weight: 600;

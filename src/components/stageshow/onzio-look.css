@@ -1,27 +1,27 @@
 /* Onzio's look for every Stageshow stage, mapped from :root in globals.css. */
 .onzio-look .ss-stage {
   --ss-font: var(--font-ui);
-  --ss-accent: #12a140;
-  --ss-accent-2: #0d8c36;
-  --ss-accent-soft: #ddf5e5;
-  --ss-accent-text: #0d8c36;
-  --ss-success: #12a140;
-  --ss-success-soft: #ddf5e5;
-  --ss-success-text: #0d8c36;
-  --ss-canvas: #f5f7f4;
+  --ss-accent: hsl(var(--primary));
+  --ss-accent-2: hsl(var(--primary-hover));
+  --ss-accent-soft: hsl(var(--primary) / 0.1);
+  --ss-accent-text: hsl(var(--primary-hover));
+  --ss-success: hsl(var(--primary));
+  --ss-success-soft: hsl(var(--primary) / 0.1);
+  --ss-success-text: hsl(var(--primary-hover));
+  --ss-canvas: hsl(var(--background));
   --ss-surface: #ffffff;
-  --ss-chrome: #f5f7f4;
-  --ss-well: #eaf0e9;
-  --ss-line: #dce4de;
-  --ss-line-faint: #e5ebe5;
-  --ss-text-strong: #101712;
-  --ss-text: #566259;
-  --ss-text-faint: #7d8981;
-  --ss-icon: #566259;
-  --ss-icon-faint: #7d8981;
-  --ss-radius-md: 10px;
-  --ss-radius-lg: 12px;
-  letter-spacing: -0.012em;
+  --ss-chrome: hsl(var(--background));
+  --ss-well: hsl(var(--muted));
+  --ss-line: hsl(var(--border));
+  --ss-line-faint: hsl(var(--border));
+  --ss-text-strong: hsl(var(--foreground));
+  --ss-text: hsl(var(--muted-foreground));
+  --ss-text-faint: hsl(var(--muted-foreground) / 0.8);
+  --ss-icon: hsl(var(--muted-foreground));
+  --ss-icon-faint: hsl(var(--muted-foreground) / 0.8);
+  --ss-radius-md: var(--radius-lg);
+  --ss-radius-lg: var(--radius-xl);
+  letter-spacing: 0;
 }
 
 /* A panel on the page: the same ground and corner as the site's other figures. */

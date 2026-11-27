@@ -30,7 +30,7 @@ export default function PricingExplorations() {
       <nav style={{ position: "sticky", top: 0, zIndex: 10, display: "flex", flexWrap: "wrap", gap: 8, padding: "12px 24px", background: "rgba(255,255,255,.94)", backdropFilter: "blur(12px)", borderBottom: "1px solid #dce4de", fontSize: 14 }}>
         <strong style={{ marginRight: 8, fontWeight: 600 }}>Pricing explorations</strong>
         {DIRECTIONS.map(d => (
-          <a key={d.id} href={`#${d.id}`} style={{ color: "#0d8c36" }}>{d.label}</a>
+          <a key={d.id} href={`#${d.id}`} style={{ color: "#1d4ed8" }}>{d.label}</a>
         ))}
       </nav>
       {DIRECTIONS.map(d => (
