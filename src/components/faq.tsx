@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type CSSProperties } from "react";
+import { useEffect, useId, useRef, useState, type CSSProperties } from "react";
 import { CostsPicture, RegistrationPicture, WebsitePicture } from "@/components/stageshow/section-demos";
 import styles from "./faq.module.css";
 
@@ -68,18 +68,64 @@ export function Faq() {
         </div>
         <div className={styles.content} id="faq-topic-questions" key={selectedTopic.id}>
           <h3>{selectedTopic.title}</h3>
-          {selectedTopic.indices.map((itemIndex, index) => (
-            <details className={styles.question} name={`faq-${selectedTopic.id}`} open={index === 0} key={items[itemIndex].question}>
-              <summary>
-                <span>{items[itemIndex].question}</span>
-                <span className={styles.toggle} aria-hidden="true" />
-              </summary>
-              <p>{items[itemIndex].answer}</p>
-            </details>
-          ))}
+          <Accordion indices={selectedTopic.indices} />
           <p className={styles.hint}>Choose another topic to explore more questions.</p>
         </div>
       </div>
     </section>
+  );
+}
+
+/**
+ * One question open at a time. The list flows in once it is in view (and again
+ * on each topic, since a topic mounts a fresh list): pills arrive from
+ * alternating sides, blurred, and settle. Opening grows the pill, fades the
+ * answer in and turns the + into an x.
+ */
+function Accordion({ indices }: { indices: readonly number[] }) {
+  const [open, setOpen] = useState<number | null>(0);
+  const [entered, setEntered] = useState(false);
+  const list = useRef<HTMLUListElement>(null);
+  const id = useId();
+
+  useEffect(() => {
+    let frame = 0;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      // A frame after mount, so the starting positions paint before they move.
+      frame = requestAnimationFrame(() => setEntered(true));
+      observer.disconnect();
+    }, { threshold: 0.2 });
+    observer.observe(list.current!);
+    return () => { observer.disconnect(); cancelAnimationFrame(frame); };
+  }, []);
+
+  return (
+    <ul className={styles.list} ref={list} data-in={entered || undefined}>
+      {indices.map((itemIndex, i) => {
+        const item = items[itemIndex];
+        const isOpen = open === i;
+        return (
+          <li key={item.question} className={styles.item} data-open={isOpen || undefined} style={{ "--i": i } as CSSProperties}>
+            <h4 className={styles.heading}>
+              <button
+                type="button"
+                id={`${id}-q${i}`}
+                className={styles.trigger}
+                aria-expanded={isOpen}
+                aria-controls={`${id}-a${i}`}
+                onClick={() => setOpen(isOpen ? null : i)}
+              >
+                <span>{item.question}</span>
+                <span className={styles.plus} aria-hidden="true" />
+              </button>
+            </h4>
+            <div id={`${id}-a${i}`} role="region" aria-labelledby={`${id}-q${i}`} className={styles.panel} inert={!isOpen}>
+              <div className={styles.panelInner}><p>{item.answer}</p></div>
+            </div>
+          </li>
+        );
+      })}
+    </ul>
   );
 }

@@ -2,7 +2,7 @@
   --faq-ink: hsl(var(--foreground));
   min-height: 680px;
   padding-block: 70px 76px;
-  background: var(--white);
+  background: hsl(var(--background));
   scroll-margin-top: 16px;
 }
 .inner {
@@ -24,17 +24,44 @@
 .icon { display: inline-block; flex: none; width: 20px; height: 20px; background: currentColor; mask: var(--faq-icon) center / contain no-repeat; -webkit-mask: var(--faq-icon) center / contain no-repeat; }
 .content { min-height: 400px; padding-top: 4px; }
 .content h3 { margin: 0 0 24px; font-size: 18px; font-weight: 550; line-height: 1.4; text-wrap: balance; }
-.question { margin-top: 12px; padding-inline: 20px; border: 1px solid var(--line); border-radius: var(--radius-xl); }
-.question summary { display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 64px; padding-block: 18px; list-style: none; cursor: pointer; font-size: 15px; font-weight: 500; line-height: 1.4; touch-action: manipulation; }
-.question summary::-webkit-details-marker { display: none; }
-.question[open] summary { color: var(--faq-ink); }
-.question[open] { background: hsl(var(--background)); }
-.question > p { max-width: 650px; margin: 0; padding: 0 20px 24px 0; color: var(--muted); font-size: 14px; line-height: 1.75; text-wrap: pretty; }
-.toggle { position: relative; display: grid; place-items: center; flex: none; width: 28px; height: 28px; border-radius: 50%; color: var(--muted); }
-.toggle::before, .toggle::after { content: ""; position: absolute; width: 12px; height: 1.5px; border-radius: 2px; background: currentColor; }
-.toggle::after { transform: rotate(90deg); }
-.question[open] .toggle { color: var(--faq-ink); background: hsl(var(--primary) / 0.1); }
-.question[open] .toggle::after { display: none; }
+/* The questions: white pills on the gray section, 8px apart. */
+.list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.item {
+  overflow: hidden;
+  border: 1px solid hsl(var(--border) / 0.7);
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 1px 2px hsl(var(--foreground) / 0.04);
+  transition: border-color 150ms ease, box-shadow 200ms ease, transform 160ms var(--ease-out);
+}
+.item[data-open] { border-color: hsl(var(--border)); box-shadow: 0 6px 20px hsl(var(--foreground) / 0.06); }
+.item:has(.trigger:active) { transform: scale(0.99); }
+
+/* Entrance: each pill comes in from an alternating side, blurred and faded,
+   and settles. Strong ease-out, a short stagger; it plays once per list. */
+.list .item { opacity: 0; transform: translateX(48px); filter: blur(6px); }
+.list .item:nth-child(even) { transform: translateX(-48px); }
+.list[data-in] .item { opacity: 1; transform: none; filter: blur(0); transition: opacity 500ms var(--ease-out), transform 600ms var(--ease-out), filter 500ms var(--ease-out), border-color 150ms ease, box-shadow 200ms ease; transition-delay: calc(var(--i) * 70ms); }
+.list[data-in] .item:has(.trigger:active) { transform: scale(0.99); transition-delay: 0ms; }
+
+.heading { margin: 0; }
+.trigger { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; min-height: 60px; padding: 16px 20px; border: 0; background: transparent; color: var(--faq-ink); font-size: 16px; font-weight: 500; line-height: 1.4; text-align: left; touch-action: manipulation; }
+.trigger:focus-visible { outline: 2px solid hsl(var(--ring)); outline-offset: -2px; border-radius: 16px; }
+
+/* The + turns into an x: one quarter-turn-and-a-half of the same two bars. */
+.plus { position: relative; flex: none; width: 16px; height: 16px; color: hsl(var(--muted-foreground)); transition: transform 300ms var(--ease-out), color 150ms ease; }
+.plus::before, .plus::after { content: ""; position: absolute; top: 50%; left: 50%; width: 14px; height: 1.5px; border-radius: 2px; background: currentColor; translate: -50% -50%; }
+.plus::after { rotate: 90deg; }
+.item[data-open] .plus { color: var(--faq-ink); transform: rotate(135deg); }
+
+/* The answer: the pill grows on the drawer curve, then the text fades in.
+   Closing is quicker than opening. */
+.panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 260ms var(--ease-out); }
+.item[data-open] .panel { grid-template-rows: 1fr; transition: grid-template-rows 380ms var(--ease-drawer); }
+.panelInner { min-height: 0; overflow: hidden; }
+.panelInner p { max-width: 640px; margin: 0; padding: 0 56px 20px 20px; color: var(--muted); font-size: 14px; line-height: 1.65; text-wrap: pretty; opacity: 0; transform: translateY(-6px); transition: opacity 140ms ease, transform 140ms ease; }
+.item[data-open] .panelInner p { opacity: 1; transform: none; transition: opacity 260ms var(--ease-out) 80ms, transform 320ms var(--ease-out) 80ms; }
+
 .hint { margin: 20px 0 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
 
 @media (max-width: 820px) {
@@ -46,11 +73,21 @@
   .icon { width: 18px; height: 18px; }
   .content { min-height: 0; margin-top: 24px; }
   .content h3 { margin-bottom: 18px; font-size: 16px; }
-  .question { padding-inline: 17px; }
-  .question summary { min-height: 80px; font-size: 14px; }
-  .question > p { padding-right: 0; }
+  .trigger { min-height: 56px; padding: 14px 16px; font-size: 15px; }
+  .panelInner p { padding: 0 16px 18px; }
 }
 
 @media (hover: hover) and (pointer: fine) {
   .topics button:hover { color: var(--faq-ink); }
+  .item:hover { border-color: hsl(var(--border)); }
+  .trigger:hover .plus { color: var(--faq-ink); }
+}
+
+/* Reduced motion: no slide or blur on entrance, no movement in the answer; fades stay. */
+@media (prefers-reduced-motion: reduce) {
+  .list .item, .list .item:nth-child(even) { transform: none; filter: none; }
+  .list[data-in] .item { transition: opacity 200ms ease; transition-delay: 0ms; }
+  .panel, .item[data-open] .panel { transition: none; }
+  .panelInner p, .item[data-open] .panelInner p { transform: none; transition: opacity 150ms ease; }
+  .plus { transition: color 150ms ease; }
 }
