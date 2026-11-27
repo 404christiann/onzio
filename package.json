@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:overlap": "playwright test"
   },
   "dependencies": {
     "lucide-react": "^0.468.0",
@@ -16,6 +17,7 @@
     "resend": "^6.19.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.56.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

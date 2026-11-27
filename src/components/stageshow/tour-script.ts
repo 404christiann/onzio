@@ -137,3 +137,16 @@ export function beatsFor(chapter: number): Beat[] {
   s.set(8200, { cursorShown: false });
   return s.end(9500);
 }
+
+/** The scene at `ms` into a chapter, with the last cursor move, for tests that step through every beat. */
+export function stateAt(chapter: number, ms: number) {
+  let state = initialState(chapter);
+  let move: { target: string; fx: number; fy: number } | null = null;
+  for (const beat of beatsFor(chapter)) {
+    if (beat.at > ms) break;
+    const { action } = beat;
+    if (action.kind === "set") state = { ...state, ...action.patch };
+    else if (action.kind === "move") move = { target: action.target, fx: action.fx ?? 0.5, fy: action.fy ?? 0.5 };
+  }
+  return { state, move };
+}

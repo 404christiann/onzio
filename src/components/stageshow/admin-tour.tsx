@@ -11,7 +11,7 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState, type CSSProp
 import { Phone } from "@/stageshow/kit/phone";
 import { AdminIcon } from "./admin-icons";
 import { AdminWindow, SiteScreen, type Layout } from "./admin-screens";
-import { beatsFor, CHAPTERS, initialState, posterState, type TourState } from "./tour-script";
+import { beatsFor, CHAPTERS, initialState, posterState, stateAt, type TourState } from "./tour-script";
 import "./onzio-look.css";
 import "./admin-tour.css";
 
@@ -35,6 +35,7 @@ export function AdminTour() {
   const [cursor, setCursor] = useState<Cursor>({ ...REST.wide, duration: 0, presses: 0 });
   const [running, setRunning] = useState(false);
   const [cycle, setCycle] = useState(0);
+  const [seeking, setSeeking] = useState(false);
 
   // Playback lives in refs so timers never read a stale render.
   const flags = useRef({ started: false, inView: false, hover: false, focus: false, hidden: false, manual: false, still: false });
@@ -157,6 +158,26 @@ export function AdminTour() {
     }, { threshold: [0, 0.25, 0.6] });
     observer.observe(fit);
 
+    // ?tour-test: no autoplay; tests step through beats with window.__tour.seek(chapter, ms).
+    if (new URLSearchParams(location.search).has("tour-test")) {
+      flags.current.still = true;
+      const frame = () => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+      (window as unknown as { __tour: unknown }).__tour = {
+        chapters: CHAPTERS.map((chapter, index) => ({ id: chapter.id, duration: chapter.duration, beats: beatsFor(index).map(beat => ({ at: beat.at, kind: beat.action.kind, target: beat.action.kind === "move" ? beat.action.target : null })) })),
+        async seek(chapter: number, ms: number) {
+          stop();
+          setSeeking(true);
+          clock.current.chapter = chapter;
+          const { state, move } = stateAt(chapter, ms);
+          setS(state);
+          await frame();
+          const to = move ? place(move.target, move.fx, move.fy) : REST[layoutRef.current];
+          setCursor(cur => ({ ...cur, ...to, duration: 0 }));
+          await frame();
+        },
+      };
+    }
+
     const visibility = () => { flags.current.hidden = document.hidden; reconcileRef.current(); };
     document.addEventListener("visibilitychange", visibility);
     const timers = clock.current;
@@ -166,7 +187,7 @@ export function AdminTour() {
       document.removeEventListener("visibilitychange", visibility);
       timers.timers.forEach(clearTimeout);
     };
-  }, [stop]);
+  }, [place, stop]);
 
   const select = (index: number) => {
     flags.current.started = true;
@@ -196,15 +217,16 @@ export function AdminTour() {
           data-view={s.view}
           data-still={still || undefined}
           data-ready={ready || undefined}
+          data-seeking={seeking || undefined}
           role="img"
           aria-label={`Illustration: Rose City FC's Onzio admin next to its public website. ${chapter.label}. Names and numbers are made up.`}
           style={{ width: size.w, height: size.h, transform: `scale(${scale || 1})`, visibility: scale ? "visible" : "hidden" }}
         >
-          <div className="at-admin"><AdminWindow s={s} layout={layout} still={still} /></div>
+          <div className="at-admin"><AdminWindow s={s} layout={layout} still={still || seeking} /></div>
           <div className="at-phone">
             <Phone width={size.phone} frame="pro"><SiteScreen s={s} /></Phone>
           </div>
-          <TourCursor cursor={cursor} shown={s.cursorShown && !still} />
+          <TourCursor cursor={cursor} shown={s.cursorShown && (!still || seeking)} />
         </div>
       </div>
 

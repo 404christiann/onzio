@@ -15,7 +15,7 @@ export default function Home() {
         <section className="hero" aria-labelledby="hero-title">
           <div className="hero-inner shell">
             <p className="hero-breadcrumb">For soccer clubs, academies and leagues</p>
-            <h1 id="hero-title">Your club&apos;s website, and the admin that runs it.</h1>
+            <h1 id="hero-title" className="hero-title">Your club&apos;s website, and the admin that runs it.</h1>
             <p className="hero-copy">
               Onzio builds your public site and gives your staff one admin for player registration and payments,
               rosters, schedules and results, match video, and every page on the site.

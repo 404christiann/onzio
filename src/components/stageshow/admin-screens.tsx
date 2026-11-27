@@ -7,7 +7,7 @@
 // copied from them. Names, emails and numbers are made up.
 import { useEffect, useState, type CSSProperties, type ReactNode } from "react";
 import { AdminIcon, type AdminIconName } from "./admin-icons";
-import { CHAPTERS, type Save, type TourState } from "./tour-script";
+import type { Save, TourState } from "./tour-script";
 
 export type Layout = "wide" | "compact";
 type Props = { s: TourState; layout: Layout; still: boolean };
@@ -386,7 +386,7 @@ export function AdminWindow(props: Props) {
     <div className="aw" data-layout={layout}>
       <div className="aw-bar" aria-hidden="true">
         <span className="aw-dots"><i /><i /><i /></span>
-        <span className="aw-url">rosecityfutbolclub.com/admin/{CHAPTERS[s.chapter].path}</span>
+        <span className="aw-url">Rose City FC · Onzio admin</span>
       </div>
       <div className="aw-shell admin-portal">
         {layout === "wide" ? <Sidebar chapter={s.chapter} /> : null}

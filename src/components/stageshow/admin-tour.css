@@ -7,8 +7,8 @@
 
 .at { --ease-in-out: cubic-bezier(.77, 0, .175, 1); --glide: cubic-bezier(.15, 0, .05, 1); }
 
-.at-fit { position: relative; width: 100%; aspect-ratio: 1120 / 640; overflow: hidden; mask-image: linear-gradient(to bottom, #000 calc(100% - 40px), transparent); }
-@media (max-width: 680px) { .at-fit { aspect-ratio: 380 / 720; } }
+.at-fit { position: relative; width: 100%; aspect-ratio: 1120 / 640; overflow: hidden; mask-image: linear-gradient(to bottom, #000 calc(100% - 100% * 40 / 640), transparent); }
+@media (max-width: 680px) { .at-fit { aspect-ratio: 380 / 720; mask-image: linear-gradient(to bottom, #000 calc(100% - 100% * 40 / 720), transparent); } }
 
 .at-stage { font-family: var(--font-ui); color: hsl(var(--foreground)); }
 .at-stage * { box-sizing: border-box; }
@@ -19,10 +19,12 @@
 .at-stage :where(ul, ol) { padding: 0; list-style: none; }
 .at-stage img { display: block; max-width: none; }
 
-.at-admin { position: absolute; left: 0; top: 16px; width: 820px; height: 700px; transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out); }
+/* --shown: how much of the admin window the stage shows above its bottom fade. */
+.at-stage { --fade: 40px; }
+.at-admin { --shown: calc(640px - 16px - var(--fade)); position: absolute; left: 0; top: 16px; width: 820px; height: 700px; transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out); }
 .at-phone { position: absolute; left: 836px; top: 44px; transition: opacity 300ms var(--ease-out), transform 300ms var(--ease-out); }
 
-.at-stage[data-layout="compact"] .at-admin { top: 0; width: 380px; height: 760px; }
+.at-stage[data-layout="compact"] .at-admin { --shown: calc(720px - var(--fade)); top: 0; width: 380px; height: var(--shown); }
 .at-stage[data-layout="compact"] .at-phone { left: 40px; top: 28px; visibility: hidden; opacity: 0; transform: translateY(16px); transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out), visibility 0s 200ms; }
 .at-stage[data-layout="compact"][data-view="site"] .at-admin { opacity: 0; transform: scale(.98); transition-duration: 200ms; }
 .at-stage[data-layout="compact"][data-view="site"] .at-phone { visibility: visible; opacity: 1; transform: none; transition: opacity 300ms var(--ease-out), transform 300ms var(--ease-out), visibility 0s; }
@@ -133,8 +135,9 @@
 .ho-part[data-hot] .ho-chip { opacity: 1; transform: none; }
 
 /* EditorDialog (EditorDialog.module.css) */
-.ed-layer { position: absolute; inset: 0; z-index: 20; pointer-events: none; }
-.ed-backdrop { position: absolute; inset: 0; background: rgb(0 0 0 / 52%); opacity: 0; transition: opacity 150ms var(--ease-out); }
+.ed-layer { position: absolute; top: 0; left: 0; right: 0; height: calc(var(--shown) - 34px); z-index: 20; pointer-events: none; }
+/* The dim covers the whole window, down past the stage edge; only the popup is centered in what shows. */
+.ed-backdrop { position: absolute; inset: 0 0 -200px; background: rgb(0 0 0 / 52%); opacity: 0; transition: opacity 150ms var(--ease-out); }
 .ed-popup { position: absolute; inset: 0; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; width: min(640px, calc(100% - 32px)); height: min(calc(100% - 32px), 500px); margin: auto; overflow: hidden; border-radius: 18px; background: hsl(var(--card)); box-shadow: 0 0 0 1px hsl(var(--border)), 0 24px 80px rgb(0 0 0 / 35%); opacity: 0; transform: scale(.96); transition: opacity 150ms var(--ease-out), transform 150ms var(--ease-out); }
 .ed-layer[data-open] .ed-backdrop { opacity: 1; transition-duration: 200ms; }
 .ed-layer[data-open] .ed-popup { opacity: 1; transform: none; transition-duration: 220ms; }
@@ -180,7 +183,9 @@
 .sw-track::after { content: ""; position: absolute; top: 4px; left: 4px; width: 20px; height: 20px; border-radius: 50%; background: #fff; transform: translateX(18px); box-shadow: 0 1px 2px rgb(0 0 0 / .2); }
 .ck-row2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
 .ck-row3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
-.ed-popup[data-phone] .ck-row2, .ed-popup[data-phone] .ck-row3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.ed-popup[data-phone] .ck-row2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+/* On the phone sheet the match fields stack, so the date popover opens under a full-width field. */
+.ed-popup[data-phone] .ck-row3 { grid-template-columns: minmax(0, 1fr); }
 .seg { display: flex; gap: 4px; padding: 4px; border-radius: 10px; background: hsl(var(--secondary)); }
 .seg span { display: grid; flex: 1; place-items: center; min-height: 36px; border-radius: 8px; color: hsl(var(--muted-foreground)); font-size: 14px; }
 .seg span[data-on] { background: hsl(var(--card)); color: hsl(var(--foreground)); box-shadow: 0 1px 2px rgb(0 0 0 / 12%); }
@@ -305,12 +310,12 @@
 .rs-number .roll { position: relative; z-index: 1; }
 .rs-name { display: block; margin: 4px 14px 0; font-size: 14px; font-weight: 600; line-height: 1.25; text-transform: uppercase; }
 .rs-town { display: block; margin: 2px 14px 12px; color: #444; font-size: 12px; font-style: italic; }
-.rs-schedule { --card: 214px; position: relative; }
-.rs-sched-top { height: 226px; overflow: hidden; }
-.rs-sched-list { position: absolute; top: 226px; left: 0; right: 0; height: 900px; overflow: hidden; transition: transform 300ms var(--ease-in-out); }
-.rs-sched-list img { transform: translateY(-226px); }
-.rs-schedule[data-added] .rs-sched-list { transform: translateY(var(--card)); }
-.rs-sched-card { position: absolute; top: 246px; left: 20px; right: 20px; height: 196px; padding: 18px; background: #fff; box-shadow: 0 2px 12px rgb(0 0 0 / .12); opacity: 0; transform: translateY(-10px); transition: opacity 150ms var(--ease-out), transform 150ms var(--ease-out); }
+.rs-schedule { --top: 226px; --card-h: 196px; --gap: 20px; position: relative; }
+.rs-sched-top { height: var(--top); overflow: hidden; }
+.rs-sched-list { position: absolute; top: var(--top); left: 0; right: 0; height: 900px; overflow: hidden; transition: transform 300ms var(--ease-in-out); }
+.rs-sched-list img { transform: translateY(calc(-1 * var(--top))); }
+.rs-schedule[data-added] .rs-sched-list { transform: translateY(calc(var(--card-h) + var(--gap))); }
+.rs-sched-card { position: absolute; top: calc(var(--top) + var(--gap) / 2); left: 20px; right: 20px; height: var(--card-h); padding: 18px; background: #fff; box-shadow: 0 2px 12px rgb(0 0 0 / .12); opacity: 0; transform: translateY(-10px); transition: opacity 150ms var(--ease-out), transform 150ms var(--ease-out); }
 .rs-schedule[data-added] .rs-sched-card { opacity: 1; transform: none; transition-duration: 300ms; transition-delay: 150ms; }
 .rs-sched-card .rs-wipe { inset: auto 0 0; height: 4px; opacity: 1; }
 .rs-sched-date { color: #666; font-size: 15px; }
@@ -349,6 +354,9 @@
   .at-tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .at-tab { justify-content: center; padding-inline: 8px; font-size: 13px; }
 }
+
+/* Test mode (?tour-test): every beat renders at its end state. */
+.at-stage[data-seeking] *, .at-stage[data-seeking] *::before, .at-stage[data-seeking] *::after { transition: none !important; animation: none !important; }
 
 /* Reduced motion: no movement, the stills cross-fade. */
 .at-stage[data-still] *, .at-stage[data-still] *::before, .at-stage[data-still] *::after { animation: none !important; transition-property: opacity !important; transition-delay: 0s !important; }

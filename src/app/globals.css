@@ -92,7 +92,7 @@ svg { flex: none; }
 .hero { position: relative; padding-block: 72px 56px; background: var(--white); }
 .hero-inner { display: flex; flex-direction: column; align-items: flex-start; }
 .hero-breadcrumb { margin: 0 0 12px; color: var(--muted); font-size: var(--text-breadcrumb); line-height: 18px; }
-.hero h1 { position: relative; max-width: 18ch; margin: 0; font-family: var(--font-ui); font-size: var(--text-display); font-weight: 600; line-height: 1.08; letter-spacing: var(--tracking-title); text-wrap: balance; }
+.hero-title { position: relative; max-width: 18ch; margin: 0; font-family: var(--font-ui); font-size: var(--text-display); font-weight: 600; line-height: 1.08; letter-spacing: var(--tracking-title); text-wrap: balance; }
 .hero-copy { position: relative; max-width: 58ch; margin: 16px 0 0; color: var(--muted); font-size: 17px; line-height: 1.55; text-wrap: pretty; }
 .hero-actions { position: relative; display: flex; align-items: center; gap: 8px; margin-top: 24px; }
 .hero-actions .button:focus-visible { outline: 2px solid var(--accent-color); outline-offset: 3px; }
