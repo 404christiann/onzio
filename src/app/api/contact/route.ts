@@ -88,7 +88,7 @@ export async function POST(request: Request) {
       html: `
         <div style="font-family:Arial,sans-serif;background:#f4f7f4;padding:32px;color:#122018">
           <div style="max-width:600px;margin:0 auto;background:#ffffff;border:1px solid #dce5de;border-radius:16px;overflow:hidden">
-            <div style="padding:24px 28px;background:#0b4d2c;color:#ffffff">
+            <div style="padding:24px 28px;background:#1d4ed8;color:#ffffff">
               <p style="margin:0 0 8px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#9fe7b7">Onzio website</p>
               <h1 style="margin:0;font-size:24px;line-height:1.25">New club inquiry</h1>
             </div>

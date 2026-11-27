@@ -55,14 +55,14 @@
   margin-top: 16px;
   place-items: center;
   border-radius: 11px;
-  background: #19271e;
+  background: hsl(var(--foreground));
   color: #fff;
   font-size: 14px;
   font-weight: 500;
   transition: background 200ms ease, transform 160ms ease-out;
 }
 
-.pb .pb-quote[data-hover] { background: #2b4031; }
+.pb .pb-quote[data-hover] { background: hsl(var(--secondary-foreground)); }
 .pb .pb-quote[data-pressed] { transform: scale(0.97); }
 .pb .pb-quote[data-done] { background: var(--ss-accent-2); }
 
@@ -106,79 +106,6 @@
 .pb .pb-list { display: grid; margin: 6px -10px 0; }
 .pb .pb-row { --ss-row-title: 13px; --ss-row-line: 18px; }
 .pb .pb-row + .pb-row { border-top: 1px solid var(--ss-line-faint); border-radius: 0; }
-
-/* ---- 2. Two clubs: two plan cards at one width, top-aligned ---- */
-
-.cp .ss-stage { overflow: hidden; background: transparent; }
-
-.cp .cp-row {
-  position: absolute;
-  top: 24px;
-  left: 24px;
-  right: 24px;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  align-items: start;
-  gap: 16px;
-}
-
-.cp .ss-stage[data-layout="compact"] .cp-row {
-  top: 16px;
-  left: 16px;
-  right: 16px;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 12px;
-}
-
-.cp .cp-card {
-  overflow: hidden;
-  border-radius: 16px;
-  background: var(--ss-surface);
-  color: var(--ss-text-strong);
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04), 0 18px 44px rgba(0, 0, 0, 0.32);
-}
-
-.cp .cp-head {
-  display: grid;
-  gap: 3px;
-  padding: 18px 18px 14px;
-}
-
-.cp .cp-head strong { font-size: 17px; font-weight: 500; line-height: 1.3; letter-spacing: -0.02em; }
-.cp .cp-head span { color: var(--ss-text); font-size: 12px; line-height: 1.3; }
-
-.cp .cp-list { padding: 0 18px; }
-
-.cp .cp-line {
-  display: grid;
-  grid-template-columns: 16px minmax(0, 1fr);
-  align-items: start;
-  gap: 10px;
-  padding: 10px 0;
-  border-top: 1px solid var(--ss-line-faint);
-  font-size: 13px;
-  line-height: 1.3;
-}
-
-.cp .cp-line .ss-check { margin-top: 0.5px; }
-.cp .cp-line > div { display: grid; gap: 3px; }
-.cp .cp-line strong { font-weight: 500; }
-.cp .cp-line > div > span { color: var(--ss-text); font-size: 12px; }
-
-.cp .cp-foot {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 14px 18px;
-  border-top: 1px solid var(--ss-line);
-  background: var(--ss-canvas);
-  font-size: 13px;
-  line-height: 1.3;
-}
-
-.cp .cp-foot span { color: var(--ss-text); }
-.cp .cp-foot strong { font-weight: 500; font-variant-numeric: tabular-nums; white-space: nowrap; }
 
 /* ---- 3. Proposal: a quiet browser page, whole ---- */
 
@@ -271,3 +198,31 @@
 /* Narrow: the badge drops under the title, the button stays whole. */
 .pp .ss-stage[data-layout="compact"] .pp-doc { padding: 18px 16px; }
 .pp .ss-stage[data-layout="compact"] .pp-title strong { font-size: 17px; }
+
+/* ---- Homepage plan: admin cards on the page, flush with the section's
+   left edge, no plate. Room for the cards' shadow-sm at the foot. ---- */
+
+.pl .ss-stage { overflow: visible; background: transparent; }
+
+.pl .pl-plan { position: absolute; inset: 0 0 3px; display: flex; flex-direction: column; gap: 16px; color: var(--ss-text-strong); }
+
+.pl .pl-card { border: 1px solid hsl(var(--border)); border-radius: var(--radius-xl); background: var(--ss-surface); box-shadow: var(--shadow-card); }
+.pl .pl-card ul { margin: 0; padding: 0; list-style: none; }
+.pl .pl-card li { display: flex; align-items: center; gap: 10px; font-size: 14px; line-height: 20px; }
+
+.pl .pl-includes { display: flex; align-items: center; gap: 24px; padding: 18px 20px; }
+.pl .pl-includes strong { flex: none; font-size: 15px; font-weight: 600; line-height: 20px; }
+.pl .pl-includes ul { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+
+.pl .pl-groups { display: grid; flex: 1; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; min-height: 0; }
+.pl .pl-group { display: flex; flex-direction: column; padding: 20px 20px 4px; }
+.pl .pl-group > strong { font-size: 17px; font-weight: 600; line-height: 22px; letter-spacing: -0.01em; }
+.pl .pl-group > span { margin: 2px 0 12px; color: var(--ss-text); font-size: 13px; line-height: 18px; }
+.pl .pl-group li { padding: 10px 0; border-top: 1px solid hsl(var(--border) / .7); }
+
+/* Phone: the base stacks over its items, the columns stack, clubs first. */
+.pl-phone .pl-plan { gap: 12px; }
+.pl-phone .pl-includes { flex-direction: column; align-items: flex-start; gap: 12px; padding: 16px; }
+.pl-phone .pl-includes ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 16px; width: 100%; }
+.pl-phone .pl-groups { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+.pl-phone .pl-group { padding: 18px 16px 4px; }

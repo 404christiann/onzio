@@ -1,37 +1,27 @@
 import styles from "./pricing-section.module.css";
-import { CentralIcon } from "@/components/icons/central/icon";
-import { ClubPlans } from "@/components/stageshow/pricing-demos";
+import { PlanFeatures } from "@/components/stageshow/pricing-demos";
 
-// No monthly figure: plans are scoped to each club, league or tournament.
-// The picture shows three organizations on one platform with different plans.
+// No prices: one monthly plan, quoted on a call. The picture shows what every
+// plan includes, then what clubs and leagues usually add.
 
 export function PricingSection() {
   return (
     <section className={styles.section} id="pricing" aria-labelledby="pricing-title">
       <div className={styles.layout}>
-        <div className={styles.intro}>
-          <p className={styles.kicker}>Pricing</p>
-          <h2 className={styles.title} id="pricing-title">One platform. A plan for each.</h2>
+        <header className={styles.intro}>
+          <h2 className={styles.title} id="pricing-title">Pricing</h2>
           <p className={styles.copy}>
-            A community club, an academy and a league don&rsquo;t need the same tools, so they shouldn&rsquo;t pay for the same plan.
+            One monthly plan, no contract. Every club starts with the website, hosting, admin, and updates. Add the features you need, for a single club or a whole league. We&apos;ll quote it on a short call, including the one-time website setup.
           </p>
+        </header>
+        <div className={styles.picture}>
+          <div className={styles.wide}><PlanFeatures size="desktop" /></div>
+          <div className={styles.phone}><PlanFeatures size="phone" /></div>
         </div>
-        <div className={styles.picture}><ClubPlans /></div>
-        <aside className={styles.strip} aria-label="Get a plan for your organization">
-          <div className={styles.stripCopy}>
-            <p className={styles.stripTitle}>What do you run?</p>
-            <p className={styles.stripText}>Tell us about your club, league or tournament and we&rsquo;ll scope a monthly plan in one conversation.</p>
-          </div>
-          <dl className={styles.terms}>
-            <div><dt>Billing</dt><dd>Month-to-month</dd></div>
-            <div><dt>Website setup</dt><dd>Quoted separately</dd></div>
-            <div><dt>Domain</dt><dd>Not included</dd></div>
-          </dl>
-          <a className={styles.cta} href="#contact">
-            Scope my plan
-            <CentralIcon name="arrow" className={styles.ctaIcon} />
-          </a>
-        </aside>
+        <div className={styles.close}>
+          <p>Not sure what you need? Tell us about your club or league and we&apos;ll put it together.</p>
+          <a className={styles.cta} href="#contact">Book a call</a>
+        </div>
       </div>
     </section>
   );

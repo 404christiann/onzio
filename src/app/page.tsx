@@ -1,10 +1,9 @@
 import Image from "next/image";
-import { CentralIcon } from "@/components/icons/central/icon";
 import { ContactForm } from "@/components/contact-form";
 import { Faq } from "@/components/faq";
-import { HeroDemo } from "@/components/stageshow/hero-demo";
 import { PricingSection } from "@/components/pricing-section";
 import { SiteHeader } from "@/components/site-header";
+import { AdminTour } from "@/components/stageshow/admin-tour";
 import { StaffTools } from "@/components/staff-tools";
 
 export default function Home() {
@@ -15,16 +14,16 @@ export default function Home() {
       <main id="top">
         <section className="hero" aria-labelledby="hero-title">
           <div className="hero-inner shell">
-            <h1 id="hero-title"><span>Your club deserves</span>{" "}<em>a better home.</em></h1>
+            <h1 id="hero-title" className="hero-title"><span>Your club deserves</span>{" "}<em>a better home.</em></h1>
             <p className="hero-copy">
-              A professional website for your community. A simple place for your staff to keep it all moving.
+              Onzio hosts your site and gives staff one admin for pages, schedules, rosters, and registration, whether you run one club or a whole league.
             </p>
             <div className="hero-actions">
-              <a className="button button-primary" href="#staff-tools">Explore the platform <CentralIcon name="arrow" width={18} height={18} /></a>
-              <a className="button button-secondary" href="#contact">Start a conversation</a>
+              <a className="button button-primary" href="#tour">See the admin</a>
+              <a className="button button-secondary" href="#contact">Talk to us</a>
             </div>
-            <figure className="hero-product" id="club-sites">
-              <HeroDemo />
+            <figure className="hero-product" id="tour">
+              <AdminTour />
             </figure>
           </div>
         </section>
